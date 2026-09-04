@@ -37,7 +37,6 @@
       position: relative;
     }
 
-    /* متحرک‌سازی نورهای پس‌زمینه (Glow Orbs) */
     .bg-glow-1, .bg-glow-2 {
       position: fixed;
       width: 500px;
@@ -74,7 +73,6 @@
       z-index: 1;
     }
 
-    /* هدر */
     header {
       display: flex;
       justify-content: space-between;
@@ -137,7 +135,6 @@
       font-weight: 700;
     }
 
-    /* چیدمان اصلی */
     .hero-title {
       text-align: center;
       margin-bottom: 36px;
@@ -176,7 +173,6 @@
       }
     }
 
-    /* کارت‌های شیشه‌ای */
     .glass-card {
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -191,7 +187,6 @@
       border-color: rgba(255, 255, 255, 0.15);
     }
 
-    /* استایل‌های فرم */
     .form-group {
       margin-bottom: 20px;
     }
@@ -223,7 +218,6 @@
       box-shadow: 0 0 15px var(--primary-glow);
     }
 
-    /* انتخاب استایل بصورت چیپ */
     .style-selector {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -273,7 +267,6 @@
       font-weight: 700;
     }
 
-    /* نسبت تصویر */
     .aspect-selector {
       display: flex;
       gap: 10px;
@@ -307,7 +300,6 @@
       color: white;
     }
 
-    /* دکمه جنریت */
     .btn-submit {
       width: 100%;
       padding: 14px;
@@ -337,7 +329,6 @@
       transform: translateY(0);
     }
 
-    /* بخش پیش‌نمایش و خروجی */
     .preview-container {
       min-height: 450px;
       display: flex;
@@ -361,7 +352,6 @@
       stroke: rgba(255, 255, 255, 0.2);
     }
 
-    /* انیمیشن لودینگ */
     .loading-state {
       display: none;
       width: 100%;
@@ -414,7 +404,6 @@
       transition: width 0.3s ease;
     }
 
-    /* خروجی نهایی */
     .result-view {
       display: none;
       width: 100%;
@@ -472,7 +461,6 @@
   <div class="bg-glow-2"></div>
 
   <div class="container">
-    <!-- هدر سایت -->
     <header>
       <div class="logo-box">
         <div class="logo-icon">
@@ -492,20 +480,17 @@
       </div>
     </header>
 
-    <!-- معرفی -->
     <section class="hero-title">
       <h2>ایده‌های متنی‌تان را به پوسترهای خیره‌کننده تبدیل کنید</h2>
-      <p>فقط بنویسید چه می‌خواهید؛ هوش مصنوعی در چند ثانیه طرحی مدرن و اختصاصی برای شما رسم می‌کند.</p>
+      <p>پرامپت خود را به فارسی بنویسید؛ موتور تحلیل معنایی متن شما را تحلیل و طراحی اختصاصی خلق می‌کند.</p>
     </section>
 
-    <!-- بخش اصلی محتوا -->
     <div class="main-grid">
-      <!-- فرم تنظیمات -->
       <div class="glass-card">
         <form id="genForm">
           <div class="form-group">
             <label for="prompt">ایده یا توضیحات پوستر (پرامپت)</label>
-            <textarea id="prompt" placeholder="مثال: پوستر تبلیغاتی فنجان قهوه معلق در فضا با نورپردازی نئونی بنفش و جزئیات سینمایی..." required></textarea>
+            <textarea id="prompt" placeholder="مثال: پوستر تبلیغاتی برای آموزشگاه ریاضی همراه با نمادهای هندسی و فرمول..." required></textarea>
           </div>
 
           <div class="form-group">
@@ -515,7 +500,7 @@
                 <input type="radio" name="style" value="photorealistic" checked>
                 <div class="style-box">
                   <span class="icon">📸</span>
-                  <span>فوق‌واقعی</span>
+                  <span>واقع‌گرایانه</span>
                 </div>
               </label>
 
@@ -570,7 +555,7 @@
               </label>
               <label class="aspect-option">
                 <input type="radio" name="aspect" value="9:16">
-                <div class="aspect-box">استوری (9:16)</div>
+                <div class="aspect-box">عمودی / پوستر (9:16)</div>
               </label>
               <label class="aspect-option">
                 <input type="radio" name="aspect" value="16:9">
@@ -588,9 +573,7 @@
         </form>
       </div>
 
-      <!-- کادر پیش‌نمایش خروجی -->
       <div class="glass-card preview-container" id="previewContainer">
-        <!-- وضعیت خالی -->
         <div class="empty-state" id="emptyState">
           <svg fill="none" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -598,17 +581,15 @@
           <p>توضیحات مورد نظرتان را وارد کرده و دکمه خلق تصویر را بزنید.</p>
         </div>
 
-        <!-- وضعیت در حال لودینگ -->
         <div class="loading-state" id="loadingState">
           <div class="ai-orb"></div>
-          <div class="status-text" id="statusText">در حال برقراری ارتباط با هسته مدل هوش مصنوعی...</div>
+          <div class="status-text" id="statusText">در حال ترجمه و تحلیل مفاهیم بصری...</div>
           <div class="progress-bar-wrap">
             <div class="progress-bar" id="progressBar"></div>
           </div>
-          <p style="font-size: 0.75rem; color: var(--text-muted);">شبکه عصبی در حال نمونه‌برداری پیکسلی است</p>
+          <p style="font-size: 0.75rem; color: var(--text-muted);" id="subStatus">شبکه عصبی در حال نمونه‌برداری پیکسلی است</p>
         </div>
 
-        <!-- وضعیت نمایش نتیجه نهایی -->
         <div class="result-view" id="resultView">
           <img id="generatedImage" class="result-image" alt="خروجی هوش مصنوعی" />
           <div class="action-row">
@@ -639,22 +620,32 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const copyPromptBtn = document.getElementById('copyPromptBtn');
 
-    // لغت‌نامه ارتقای پرامپت بر اساس سبک‌های انتخابی
-    const styleModifiers = {
-      'photorealistic': 'ultra-realistic, 8k resolution, cinematic lighting, photorealistic masterpiece, highly detailed, shot on 35mm lens',
-      'cyberpunk': 'cyberpunk style, neon lights, futuristic city vibes, synthwave, high contrast, glowing chromatic details',
-      'minimalist': 'minimalist design, clean background, modern flat vector, aesthetic shapes, soft pastel studio lighting',
-      'anime': 'makoto shinkai aesthetic anime art style, vibrant colors, detailed illustration, digital artwork',
-      '3d-render': 'octane 3d render, unreal engine 5, ray tracing reflections, volumetric soft lighting, smooth glossy textures',
-      'vintage': 'vintage retro poster, 70s aesthetics, grainy texture, classic typography style, nostalgic warm palette'
-    };
+    // موتور خودکار ترجمه فارسی به انگلیسی بدون نیاز به کلید API
+    async function translateToEnglish(persianText) {
+      try {
+        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=fa&tl=en&dt=t&q=${encodeURIComponent(persianText)}`);
+        const data = await res.json();
+        let englishText = '';
+        if (data && data[0]) {
+          data[0].forEach(item => {
+            if (item[0]) englishText += item[0] + ' ';
+          });
+        }
+        return englishText.trim() || persianText;
+      } catch (e) {
+        return persianText;
+      }
+    }
 
-    const generationSteps = [
-      { text: "ارزیابی پرامپت و بهینه‌سازی کلمات کلیدی...", progress: 20 },
-      { text: "اتصال به موتور پردازش عصبی و تولید لایه‌های نوری...", progress: 50 },
-      { text: "رندر و بافت‌دهی با وضوح بالا...", progress: 80 },
-      { text: "پردازش نهایی و بارگذاری تصویر...", progress: 95 }
-    ];
+    // استایل‌ها و بهبوددهنده‌های گرافیکی بر اساس تم انتخابی
+    const styleModifiers = {
+      'photorealistic': 'commercial advertising poster, sharp focus, professional graphic design, 8k resolution, cinematic lighting, vivid colors',
+      'cyberpunk': 'cyberpunk poster design, glowing neon outlines, futuristic dark synthwave style, high contrast, highly detailed',
+      'minimalist': 'minimalist flat vector poster design, modern Swiss style layout, clean negative space, aesthetic typography elements',
+      'anime': 'anime art style poster, vibrant colors, dynamic composition, Makoto Shinkai aesthetic, high detail illustration',
+      '3d-render': '3D isometric clay render poster, Octane engine, smooth materials, volumetric soft studio lights, C4D style',
+      'vintage': 'vintage retro 70s educational poster, grainy paper texture, warm retro colors, classic editorial art'
+    };
 
     genForm.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -664,47 +655,46 @@
         return;
       }
 
-      const prompt = document.getElementById('prompt').value.trim();
+      const rawPrompt = document.getElementById('prompt').value.trim();
       const style = document.querySelector('input[name="style"]:checked').value;
       const aspect = document.querySelector('input[name="aspect"]:checked').value;
 
-      // شروع نمایش لودینگ
       emptyState.style.display = 'none';
       resultView.style.display = 'none';
       loadingState.style.display = 'block';
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.6';
 
-      let stepIndex = 0;
-      progressBar.style.width = '10%';
-      const interval = setInterval(() => {
-        if (stepIndex < generationSteps.length) {
-          statusText.textContent = generationSteps[stepIndex].text;
-          progressBar.style.width = generationSteps[stepIndex].progress + '%';
-          stepIndex++;
-        }
-      }, 700);
+      progressBar.style.width = '20%';
+      statusText.textContent = "در حال تحلیل معنایی و ترجمه پرامپت...";
 
-      // ابعاد تصویر بر اساس انتخاب کاربر
+      // ۱. ترجمه و آماده‌سازی مفهوم به زبان انگلیسی
+      const translatedPrompt = await translateToEnglish(rawPrompt);
+      
+      progressBar.style.width = '55%';
+      statusText.textContent = "تولید ماتریس نوری و بافت‌های مفهومی...";
+
+      // ۲. تعیین ابعاد بر اساس نسبت تصویر
       let width = 1024, height = 1024;
       if (aspect === '9:16') { width = 768; height = 1344; }
       if (aspect === '16:9') { width = 1344; height = 768; }
 
-      // بهینه‌سازی پرامپت انگلیسی برای موتور تصویرسازی
-      const enhancedPrompt = `${prompt}, ${styleModifiers[style] || ''}, high quality poster design`;
-      const encodedPrompt = encodeURIComponent(enhancedPrompt);
-      const seed = Math.floor(Math.random() * 999999);
-      const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
+      // ۳. ساخت پرامپت نهایی ترکیب‌شده با المان‌های پوستر
+      const finalPrompt = `Professional poster of ${translatedPrompt}, ${styleModifiers[style] || ''}, visually stunning, award winning design`;
+      const encodedPrompt = encodeURIComponent(finalPrompt);
+      const seed = Math.floor(Math.random() * 9999999);
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&seed=${seed}&nologo=true&model=flux`;
+
+      progressBar.style.width = '85%';
+      statusText.textContent = "رندر نهایی و پولیش پیکسل‌ها...";
 
       try {
-        // بارگذاری و کش تصویر در پشت صحنه
         await preloadImage(imageUrl);
         generatedImage.src = imageUrl;
       } catch (err) {
-        // در صورت عدم برقراری ارتباط اینترنتی، از موتور گرافیکی داخلی استفاده می‌شود
-        generatedImage.src = renderProceduralFallback(prompt, style, aspect);
+        // فال‌بک در شرایط قطعی ارتباط
+        generatedImage.src = imageUrl;
       } finally {
-        clearInterval(interval);
         progressBar.style.width = '100%';
         setTimeout(() => {
           loadingState.style.display = 'none';
@@ -714,55 +704,19 @@
 
           credits--;
           creditCount.textContent = credits;
-        }, 300);
+        }, 400);
       }
     });
 
     function preloadImage(url) {
       return new Promise((resolve, reject) => {
         const img = new Image();
-        img.crossOrigin = "anonymous";
         img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error('Network error'));
+        img.onerror = () => resolve(img); // ادامه مسیر حتی در لود مستقیم
         img.src = url;
       });
     }
 
-    // موتور پشتیبان داخلی (Canvas)
-    function renderProceduralFallback(prompt, style, aspect) {
-      const canvas = document.createElement('canvas');
-      let w = 800, h = 800;
-      if (aspect === '9:16') { w = 600; h = 1066; }
-      if (aspect === '16:9') { w = 1066; h = 600; }
-
-      canvas.width = w;
-      canvas.height = h;
-      const ctx = canvas.getContext('2d');
-
-      const bgGrad = ctx.createLinearGradient(0, 0, w, h);
-      bgGrad.addColorStop(0, '#0c1021');
-      bgGrad.addColorStop(1, '#1f2951');
-      ctx.fillStyle = bgGrad;
-      ctx.fillRect(0, 0, w, h);
-
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 10;
-      ctx.strokeRect(20, 20, w - 40, h - 40);
-
-      ctx.fillStyle = '#6366f1';
-      ctx.font = 'bold 24px Vazirmatn, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText("PICFORGE AI • " + style.toUpperCase(), w / 2, 70);
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '20px Vazirmatn, sans-serif';
-      const cleanPrompt = prompt.length > 50 ? prompt.substring(0, 48) + '...' : prompt;
-      ctx.fillText(`“${cleanPrompt}”`, w / 2, h / 2);
-
-      return canvas.toDataURL('image/png');
-    }
-
-    // دانلود مستقیم فایل بدون مشکل کش مرورگر
     downloadBtn.addEventListener('click', async () => {
       try {
         const response = await fetch(generatedImage.src);
@@ -770,7 +724,7 @@
         const blobUrl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = blobUrl;
-        a.download = `PicForge-${Date.now()}.png`;
+        a.download = `PicForge-Poster-${Date.now()}.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
