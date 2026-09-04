@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>پوسترینو | ساخت تصویر با هوش مصنوعی</title>
+
+  <style>
+    :root {
+      --background: #0f172a;
+      --background-light: #111c35;
+      --card: rgba(30, 41, 59, 0.78);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #7c3aed;
+      --primary-light: #a78bfa;
+      --secondary: #06b6d4;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --input: rgba(15, 23, 42, 0.9);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(124, 58, 237, 0.25), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.14), transparent 30%),
+        var(--background);
+      line-height: 1.8;
+    }
+
+    button,
+    textarea,
+    select,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    min(1180px, min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center      height: 42px;
+      display: grid;
+      place-items: center linear-gradient(135deg, var(--primary), var(--secondary));
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      padding: 80px 0 42px;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border: 1px solid rgba border-radius: 999px;
+      color 0.28);
+      border-radius: 999px;
+      color: #ddd6fe;
+      background: rgba(124, 58, 237, 0.12);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 68px);
+      line-height: 1.25;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, #c4b5fd, #67e8f9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 690px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px;
+      align-items: stretch;
+      margin: 38px auto 80px;
+    }
+
+    .card {
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      backgroundpx var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .form-card {
+      padding: 26px;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .card-title h2 {
+      font-size: 20px;
+    }
+
+    .step {
+      color: var(--primary-light);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #e2e8f0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    textarea,
+    select,
+    input[type="text"] {
+      width: 100%;
+      color: white;
+      background: var(--input);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      outline: none;
+      border-radius: 14px;
+      padding: 13px 15px;
+      transition: border 0.2s, box-shadow 0.2s;
+    }
+
+    textarea {
+      min-height: 155px;
+      resize: vertical;
+    }
+
+    textarea:focus,
+    select:focus,
+    input[type="text"]:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+    }
+
+    select {
+      appearance: none;
+    }
+
+    select option {
+      color: black;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .upload-box {
+      min-height: 115px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      border: 1px dashed rgba(167, 139, 250, 0.55);
+      border-radius: 15px;
+      color: var(--muted);
+      background: rgba(124, 58, 237, 0.06);
+      transition: 0.2s;
+    }
+
+    .upload-box:hover {
+      background: rgba(124, 58, 237, 0.13);
+      border-color: var(--primary-light);
+    }
+
+    .upload-box strong {
+      display: block;
+      color: #ddd6fe;
+      margin-bottom: 5px;
+    }
+
+    .upload-box input {
+      display: none;
+    }
+
+    .upload-preview {
+      display: none;
+      max-width: 100%;
+      max-height: 150px;
+      border-radius: 12px;
+      object-fit: contain;
+      margin: auto;
+    }
+
+    .aspect-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .aspect-option {
+      position: relative;
+    }
+
+    .aspect-option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .aspect-option label {
+      padding: 9px 5px;
+      margin: 0;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .aspect-option input:checked + label {
+      border-color: var(--primary-light);
+      color: white;
+      background: rgba(124, 58, 237, 0.25);
+    }
+
+    .generate-button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: none;
+      border-radius: 14px;
+: 14px14px 18px;
+      color: white;
+      background: linear-gradient(100deg, var(--primary), #4f46e5);
+      font-weight: bold;
+      box-shadow: 0 13px 28px rgba(124, 58, 237, 0.28);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .generate-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 17px 34px rgba(124, 58, 237, 0.4);
+    }
+
+    .generate-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+      transform: none;
+    }
+
+    .result-card {
+      min-height: 650px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px 17px;
+    }
+
+    .result-header h2 {
+      font-size: 18px;
+    }
+
+    .result-status {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .result-area {
+      flex: 1;
+      min-height: 530px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        linear-gradient(45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.03) 75%),
+        #111827;
+      background-size: 28px 28px;
+      background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+    }
+
+    .empty-state {
+      max-width: 360px;
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      border-radius: 24px;
+      color: #c4b5fd;
+      background: rgba(124, 58, 237, 0.16);
+      font-size: 33px;
+    }
+
+    .empty-state h3 {
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .empty-state p {
+      font-size: 13px;
+    }
+
+    .result-image {
+      display: none;
+      width: 100%;
+      height: 100%;
+      max-height: 530px;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
+    .result-actions {
+      display: none;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .action-button {
+      flex: 1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 10px;
+      color: white;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .action-button:hover {
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 14px;
+      border: 4px solid rgba(255, 255, 255, 0.15);
+      border-top-color: var(--primary-light);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .feature {
+      padding: 22px;
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    .feature-icon {
+      font-size: 25px;
+      margin-bottom: 10px;
+    }
+
+    .feature h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 25px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      z-index: 30;
+      max-width: 330px;
+      padding: 13px 17px;
+      border-radius: 12px;
+      color: white;
+      background: #1e293b;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: 0.25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.error {
+      border-right: 4px solid var(--danger);
+    }
+
+    .toast.success {
+      border-right: 4px solid var(--success);
+    }
+
+    @media (max-width: 850px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .result-card {
+        min-height: 500px;
+      }
+
+      .result-area {
+        min-height: 400px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 22px, 1180px);
+      }
+
+      header {
+        padding: 15px 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+
+      .form-card {
+        padding: 18px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <span class="brand-icon">✦</span>
+        <span>پوسترینو</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#workspace">ساخت تصویر</a>
+        <a href="#features">امکانات</a>
+        <a href="#about">درباره ما</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="badge">نسخه آزمایشی فعال است</div>
+
+      <h1>
+        ایده‌ات را به
+        <span class="gradient-text">تصویر تبدیل کن</span>
+      </h1>
+
+      <p class="hero-description">
+        توضیحت را بنویس، سبک تصویر را انتخاب کن و در چند لحظه یک تصویر یا پوستر خلاقانه بساز.
+      </p>
+    </section>
+
+    <section id="workspace" class="container workspace">
+
+      <div class="card form-card">
+        <div class="card-title">
+          <h2>ساخت تصویر جدید</h2>
+          <span class="step">بدون محدودیت در نسخه آزمایشی</span>
+        </div>
+
+        <form id="imageForm">
+
+          <div class="form-group">
+            <label for="prompt">چه تصویری می‌خواهی؟</label>
+
+            <textarea
+              id="prompt"
+              placeholder="مثلاً: یک پوستر سینمایی مدرن درباره سفر به مریخ، با رنگ‌های تیره و نورپردازی سینمایی..."
+              required
+            ></textarea>
+
+            <div class="hint">
+              هرچه توضیحت دقیق‌تر باشد، نتیجه بهتر خواهد بود.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="style">سبک تصویر</label>
+
+            <select id="style">
+              <option value="modern">مدرن و مینیمال</option>
+              <option value="cinematic">سینمایی</option>
+              <option value="realistic">واقع‌گرایانه</option>
+              <option value="illustration">تصویرسازی دیجیتال</option>
+              <option value="3d">سه‌بعدی</option>
+              <option value="watercolor">آبرنگی</option>
+              <option value="neon">نئون و سایبرپانک</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>نسبت تصویر</label>
+
+            <div class="aspect-options">
+              <div class="aspect-option">
+                <input type="radio" id="square" name="aspect" value="square" checked />
+                <label for="square">مربعی<br />۱:۱</label>
+              </div>
+
+              <div class="aspect-option">
+                <input type="radio" id="portrait" name="aspect" value="portrait" />
+                <label for="portrait">پوستر<br />۴:۵</label>
+              </div>
+
+              <div class="aspect-option">
+                <input type="radio" id="landscape" name="aspect" value="landscape" />
+                <label for="landscape">افقی<br />۱۶:۹</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>تصویر مرجع، اختیاری</label>
+
+            <label class="upload-box" for="referenceImage">
+              <div id="uploadText">
+                <strong>📎 انتخاب تصویر مرجع</strong>
+                <span>برای تغییر سبک یا الهام گرفتن</span>
+              </div گرفتن</span>
+              </div>
+
+              <img id="uploadPreview" classیش‌نمایش تصویر مرجع" />
+              <input id="referenceImage" type="file" accept="image/*" />
+            </label>
+          </div>
+
+          <button id="generateButton" class="generate-button" type="submit">
+            <span>✦</span>
+            <span>ساخت تصویر</span>
+          </button>
+
+        </form>
+      </div>
+
+      <div class="card result-card">
+        <div class="result-header">
+          <h2>تصویر ساخته‌شده</h2>
+          <span id="resultStatus" class="result-status">منتظر درخواست شما</span>
+        </div>
+
+        <div class="result-area">
+
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon">✧</div>
+            <h3>هنوز تصویری ساخته نشده</h3>
+            <p>
+              توضیحت را در سمت راست وارد کن تا تصویر پیشنهادی اینجا نمایش داده شود.
+            </p>
+          </div>
+
+          <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>در حال آماده‌سازی تصویر...</p>
+          </div>
+
+          <img id="resultImage" class="result-image" alt="تصویر تولیدشده" />
+        </div>
+
+        <div id="resultActions" class="result-actions">
+          <button id="downloadButton" class="action-button">
+            دانلود تصویر
+          </button>
+
+          <button id="newButton" class="action-button">
+            ساخت تصویر جدید
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="features" class="container features">
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <h3>سریع و ساده</h3>
+        <p>ایده‌ات را به زبان خودت بنویس و بدون مراحل پیچیده تصویر بگیر.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🎨</div>
+        <h3>سبک‌های متنوع</h3>
+        <p>از طراحی مینیمال تا سبک سینمایی و سه‌بعدی، سبک مناسب را انتخاب کن.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🖼️</div>
+        <h3>مناسب برای پوستر</h3>
+        <p>نسبت تصویر پوستر، مربعی و افقی برای کاربردهای مختلف آماده شده است.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="about">
+    <div class="container">
+      © ۲۰۲۶ پوسترینو — نسخه آزمایشی تولید تصویر با هوش مصنوعی
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    /*
+      ============================================================
+      وضعیت فعلی:
+      این نسخه برای نمایش اولیه ساخته شده است.
+      هنوز به سرویس واقعی تولید تصویر متصل نیست.
+      ============================================================
+
+      برای اتصال واقعی، باید یک بک‌اند داشته باشی.
+      هرگز کلید API را در این فایل HTML قرار نده.
+    */
+
+    const imageForm = document.getElementById("imageForm");
+    const promptInput = document.getElementById("prompt");
+    const styleInput = document.getElementById("style");
+    const referenceInput = document.getElementById("referenceImage");
+    const uploadText = document.getElementById("uploadText");
+    const uploadPreview = document.getElementById("uploadPreview");
+
+    const generateButton = document.getElementById("generateButton");
+    const emptyState = document.getElementById("emptyState");
+    const loading = document.getElementById("loading");
+    const resultImage = document.getElementById("resultImage");
+    const resultActions = document.getElementById("resultActions");
+    const resultStatus = document.getElementById("resultStatus");
+    const downloadButton = document.getElementById("downloadButton");
+    const newButton = document.getElementById("newButton");
+    const toast = document.getElementById("toast");
+
+    let generatedImageUrl = "";
+
+ImageUrl = "";
+
+    function showToast(message, type = "success") {
+      toast.text      toast.className = `toast show ${type}`;
+
+      setTimeout(() => {
+        toast.className = "toast";
+      }, 3500);
+    }
+
+    referenceInput.addEventListener("change", () => {
+      const file = referenceInput.files[0];
+
+      if (!file) {
+        uploadPreview.style.display = "none";
+        uploadText.style.display = "block";
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        showToast("لطفاً یک فایل تصویری انتخاب کن.", "error");
+        referenceInput.value = "";
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        uploadPreview.src = event.target.result;
+        uploadPreview.style.display = "block";
+        uploadText.style.display = "none";
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    imageForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const prompt = promptInput.value.trim();
+      const style = styleInput.value;
+      const aspect = document.querySelector('input[name="aspect"]:checked').value;
+
+      if (!prompt) {
+        showToast("لطفاً توضیح تصویر را وارد کن.", "error");
+        promptInput.focus();
+        return;
+      }
+
+      emptyState.style.display = "none";
+      resultImage.style.display = "none";
+      resultActions.style.display = "none";
+      loading.style.display = "block";
+
+      generateButton.disabled = true;
+      generateButton.innerHTML = "<span>در حال ساخت...</span>";
+      resultStatus.textContent = "در حال تولید تصویر";
+
+      /*
+ /*
+        در نسخه واقعی، این بخش باید شبیه کد زیر:
+
+        const response = await fetch("آدرس-بک‌اند-شما/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            prompt,
+            style,
+            aspect
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "خطا در تولید تصویر");
+        }
+
+        resultImage.src = data.imageUrl;
+      */
+
+      try {
+        // شبیه‌سازی موقت برای نمایش نمونه اولیه
+        await wait(1800);
+
+        const demoImage = createDemoImage(prompt, style, aspect);
+
+        generatedImageUrl = demoImage;
+        resultImage.src = generatedImageUrl;
+
+        loading.style.display = "none";
+        resultImage.style.display = "block";
+        resultActions.style.display = "flex";
+
+        resultStatus.textContent = "تصویر آماده است";
+        showToast("نمونه آزمایشی تصویر آماده شد.", "success");
+
+      } catch (error) {
+        loading.style.display = "none";
+        emptyState.style.display = "block";
+        resultStatus.textContent = "خطا در تولید تصویر";
+        showToast("در تولید تصویر خطایی رخ داد.", "error");
+
+      } finally {
+        generateButton.disabled = false;
+        generateButton.innerHTML = "<span>✦</span><span>ساخت تصویر</span>";
+      }
+    });
+
+    function wait(milliseconds) {
+      return new Promise(resolve => setTimeout(resolve, milliseconds));
+    }
+
+    function createDemoImage(prompt, style, aspect) {
+      const canvas = document.createElement("canvas");
+
+      if (aspect === "portrait") {
+        canvas.width = 800;
+        canvas.height = 10000;
+      } else if (aspect === "landscape") {
+        canvas = 1200;
+        canvas.height = 675;
+      } else {
+        canvas.width = 900;
+        canvas.height = 900;
+      }
+
+      const context = canvas.getContext("2d");
+
+      const gradient = context.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+      gradient.addColorStop(0, "#312e81");
+      gradient.addColorStop(0.5, "#7c3aed");
+      gradient.addColorStop(1, "#0891b2");
+
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < 18; i++) {
+        context.beginPath();
+
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const radius = 30 + Math.random() * 160;
+
+        context.fillStyle = `rgba(255,255,255,${0.025 + Math.random() * 0.08})`;
+        context.arc(x, y, radius, 0, Math.PI * 2);
+        context.fill();
+      }
+
+      context.fillStyle = "rgba(0, 0, 0, 0.32)";
+      context.fillRect(45, canvas.height - 230, canvas.width - 90, 175);
+
+      context.direction = "rtl";
+      context.textAlign = "center";
+
+      context.fillStyle = "#ffffff";
+      context.font = "bold 34px Tahoma";
+      context.fillText("پیش‌نمایش تصویر", canvas.width / 2, canvas.height - 165);
+
+      context.fillStyle = "#dbeafe";
+      context.font = "20px Tahoma";
+
+      const shortPrompt =
+        prompt.length > 48 ? prompt.substring(0, 48) + "..." : prompt;
+
+      context.fillText(shortPrompt, canvas.width / 2, canvas.height - 115);
+
+      context.fillStyle = "#c4b5fd";
+      context.font = "16px Tahoma";
+      context.fillText(`سبک: ${getStyleName(style)}`, canvas.width / 2, canvas.height - 72);
+
+      return canvas.toDataURL("image/png");
+    }
+
+    function getStyleName(style) {
+      const styles = {
+        modern: "مدرن و مینیمال",
+        cinematic: "سینمایی",
+        realistic: "واقع‌گرایانه",
+        illustration: "تصویرسازی دیجیتال",
+        "3d": "سه‌بعدی",
+        watercolor: "آبرنگی",
+        neon: "نئون و سایبرپانک"
+      };
+
+      return styles[style] || "انتخاب‌شده";
+    }
+
+    downloadButton.addEventListener("click", () => {
+      if (!generatedImageUrl) {
+        showToast("هنوز تصویری برای دانلود وجود ندارد.", "error");
+        return;
+      }
+
+      const link = document.createElement("a");
+      link.href = generatedImageUrl;
+      link.download = "posterino-image.png";
+      link.click();
+    });
+
+    newButton.addEventListener("click", () => {
+      imageForm.reset();
+
+      uploadPreview.src = "";
+      uploadPreview.style.display = "none";
+      uploadText.style.display = "block";
+
+      resultImage.src = "";
+      resultImage.style.display = "none";
+      resultActions.style.display = "none";
+      emptyState.style.display = "block";
+
+      resultStatus.textContent = "منتظر درخواست شما";
+      generatedImageUrl = "";
+
+      window.scrollTo({
+        top: document.getElementById("workspace").offsetTop - 80,
+        behavior: "smooth"
+      });
+    });
+  </script>
+
+</body>
+</html>
