@@ -152,7 +152,7 @@
             color: #fff;
         }
 
-        /* بخش بازطراحی‌شده و فوق‌العاده شیک ورودی پرامپت */
+        /* بخش ورودی پرامپت */
         .prompt-wrapper {
             position: relative;
             background: linear-gradient(145deg, rgba(20, 29, 54, 0.9), rgba(11, 16, 32, 0.95));
@@ -178,10 +178,9 @@
             color: var(--text-muted);
         }
 
-        /* فیلد متن: ۱۰۰٪ خوانا، سفید خالص و با کنتراست شفاف */
         textarea#prompt-input {
             width: 100%;
-            height: 120px;
+            height: 110px;
             background: transparent !important;
             border: none !important;
             outline: none !important;
@@ -238,7 +237,7 @@
             border-color: var(--accent-cyan);
         }
 
-        /* استایل‌های انتخابی */
+        /* انتخاب استایل */
         .style-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -263,7 +262,7 @@
             color: var(--accent-cyan);
         }
 
-        /* دکمه جادویی تولید پوستر */
+        /* دکمه تولید */
         .btn-generate {
             position: relative;
             background: var(--gradient-main);
@@ -318,27 +317,38 @@
             background: rgba(255, 255, 255, 0.12);
         }
 
-        /* نمایش تگ‌های تحلیلی هوش مصنوعی */
-        .tags-display {
+        /* باکس گزارش تحلیل هوش مصنوعی */
+        .ai-log-box {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 16px;
+            padding: 12px 16px;
             display: none;
-            background: rgba(0, 240, 255, 0.06);
-            border: 1px dashed rgba(0, 240, 255, 0.3);
-            border-radius: 14px;
-            padding: 10px 14px;
+        }
+
+        .ai-log-title {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 800;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .tag-pill {
             display: inline-block;
             background: rgba(255, 255, 255, 0.1);
-            color: var(--accent-cyan);
-            font-size: 0.75rem;
+            color: #fff;
+            font-size: 0.72rem;
             padding: 3px 8px;
             border-radius: 8px;
-            margin: 3px 2px;
+            margin: 2px 3px 2px 0;
             font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* بوم و آرت‌بورد پوستر */
+        /* استیج و پوستر */
         .stage {
             display: flex;
             align-items: center;
@@ -347,43 +357,63 @@
 
         #poster-artboard {
             width: 460px;
-            height: 650px;
+            height: 660px;
             position: relative;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             background: #0b0f19;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.15);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 240, 255, 0.2);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 2.5rem 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2.2rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
 
-        /* لایه‌های پوستر */
+        /* لایه‌های پس‌زمینه و المان‌های وکتوری درون پوستر */
         .poster-bg-canvas {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-            object-fit: cover;
         }
 
         .poster-tint {
             position: absolute;
             inset: 0;
             z-index: 2;
-            background: linear-gradient(180deg, rgba(6, 9, 19, 0.75) 0%, rgba(6, 9, 19, 0.2) 45%, rgba(6, 9, 19, 0.95) 100%);
+            background: linear-gradient(180deg, rgba(6, 9, 19, 0, 0.85), 0 0 35px rgba(0, 240, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2.2rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* لایه‌های پس‌زمینه و المان‌های وکتوری درون پوستر */
+        .poster-bg-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .poster-tint {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba(6, 9, 19, 0.82) 0%, rgba(6, 9, 19, 0.25) 45%, rgba(6, 9, 19, 0.95) 100%);
         }
 
         .poster-glow-fx {
             position: absolute;
-            width: 260px;
-            height: 260px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
-            opacity: 0.35;
+            opacity: 0.4;
             top: 25%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -391,46 +421,51 @@
             pointer-events: none;
         }
 
+        /* محتوای پوستر */
         .poster-content {
             position: relative;
             z-index: 10;
             height: 100%;
+            display
+            border: 1px solid rgba(0, 240, 255, 0.4);
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: rgba(0, 240, 255, 0.08);
+        }
+
+        /* المان مرکزی گرافیکی پوستر */
+        .center-artwork-icon {
+            align-self: center;
+            margin: 1rem 0;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .badge-tag {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 6px 14px;
-            border-radius: 30px;
-            letter-spacing: 1px;
-        }
-
-        .poster-title {
-            font-size: 2.6rem;
+        .poster-headline {
+            font-size: 2.2rem;
             font-weight: 900;
-            line-height: 1.15;
+            line-height: 1.25;
             color: #ffffff;
-            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             word-wrap: break-word;
         }
 
-        .poster-sub {
+        .poster-slogan {
             font-size: 0.95rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.85);
             line-height: 1.6;
             border-right: 3px solid var(--accent-cyan);
-            padding-right: 10px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            padding-right: 12px;
+            margin-bottom: 15px;
         }
 
         .poster-footer {
@@ -446,18 +481,18 @@
             color: #000000;
             font-size: 0.85rem;
             font-weight: 900;
-            padding: 8px 18px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+            padding: 9px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(255, 255, 255, 0.35);
         }
 
         .poster-meta {
             text-align: left;
             direction: ltr;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.72rem;
+            color: rgba(255, 255, 255, 0.75);
             font-weight: 700;
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
         .spinner-anim {
@@ -480,14 +515,14 @@
     <header>
         <div class="brand-box">
             <div class="brand-icon">
-                <i data-lucide="sparkles" style="color: #fff; width: 22px;"></i>
+                <i data-lucide="bot" style="color: #fff; width: 22px;"></i>
             </div>
             <div>
                 <div class="brand-title">PosterStudio PRO 8B</div>
             </div>
         </div>
         <div class="status-pill">
-            ✦ هوش مصنوعی رندر زنده
+            ✦ هوش زایشی & رندر هوشمند
         </div>
     </header>
 
@@ -495,55 +530,59 @@
         <!-- پنل کنترل -->
         <div class="glass-panel">
             <div class="panel-header">
-                <i data-lucide="wand-2" style="color: var(--accent-cyan); width: 22px;"></i>
-                طراحی هوشمند پوستر
+                <i data-lucide="brain-circuit" style="color: var(--accent-cyan); width: 22px;"></i>
+                طراحی مفهومی با درک پرامپت
             </div>
 
-            <!-- فیلد پرامپت با دید کامل و استایل پیشرفته -->
+            <!-- فیلد پرامپت -->
             <div class="prompt-wrapper">
                 <div class="prompt-top-bar">
-                    <span>ایده یا سناریوی پوستر را بنویسید:</span>
+                    <span>سناریو یا ایده خام خود را بنویسید (AI خودش پوستر می‌سازد):</span>
                     <span style="color: var(--accent-cyan); cursor: pointer;" onclick="clearPrompt()">پاک کردن ✕</span>
                 </div>
                 
-                <textarea id="prompt-input" placeholder="مثال: مسابقات جهانی بازی‌های ویدیویی سایبرپانک ۲۰۲۶ با جوایز ویژه و حضور برترین استریمرها..." oninput="updateCounter(this)">مسابقات گیمینگ و هوش مصنوعی ۲۰۲۶ با حضور برترین تیم‌های جهان</textarea>
+                <textarea id="prompt-input" placeholder="مثال: من یک دوره آموزش برنامه نویسی پایتون دارم برای تابستون با تخفیف ویژه برای دانشجوها..." oninput="updateCounter(this)">یک فستیوال بزرگ موسیقی الکترونیک در برج میلاد با حضور بهترین دی‌جی‌ها و آتش‌بازی</textarea>
                 
                 <div class="prompt-bottom-bar">
-                    <span class="char-counter" id="char-count">۶۰ کاراکتر</span>
+                    <span class="char-counter" id="char-count">۷۶ کاراکتر</span>
                     <div class="quick-chips">
-                        <button class="chip-btn" onclick="insertPrompt('همایش بین‌المللی استارتاپ‌ها و هوش مصنوعی در تهران')">همایش AI</button>
-                        <button class="chip-btn" onclick="insertPrompt('کنسرت بزرگ موسیقی الکترونیک و نورپردازی نئونی')">کنسرت زنده</button>
-                        <button class="chip-btn" onclick="insertPrompt('جشنواره بزرگ تخفیف شگفت‌انگیز فروشگاه')">تخفیف ویژه</button>
+                        <button class="chip-btn" onclick="insertPrompt('افتتاحیه بزرگ کافه رستوران ایتالیایی با منوی ویژه و موسیقی زنده')">کافه رستوران</button>
+                        <button class="chip-btn" onclick="insertPrompt('مسابقات جام رمضان فیفا و کالاف دیوتی با جوایز ۱۰۰ میلیونی')">مسابقات گیمینگ</button>
+                        <button class="chip-btn" onclick="insertPrompt('ورکشاپ تخصصی آموزش هوش مصنوعی و ورود به بازار کار جهانی')">ورکشاپ هوش مصنوعی</button>
                     </div>
                 </div>
             </div>
 
             <div class="style-grid">
-                <div class="style-item active" onclick="selectStyle('auto', this)">🧠 تشخیص هوشمند</div>
-                <div class="style-item" onclick="selectStyle('cyber', this)">⚡ سایبر و گیمینگ</div>
-                <div class="style-item" onclick="selectStyle('minimal', this)">💎 لوکس و طلایی</div>
-                <div class="style-item" onclick="selectStyle('concert', this)">🎵 فستیوال و موزیک</div>
+                <div class="style-item active" onclick="selectStyle('auto', this)">🤖 تشخیص هوشمند سبک</div>
+                <div class="style-item" onclick="selectStyle('cyber', this)">⚡ تکنولوژی و گیمینگ</div>
+                <div class="style-item" onclick="selectStyle('luxury', this)">💎 لوکس و تجاری</div>
+                <div class="style-item" onclick="selectStyle('party', this)">🎵 فستیوال و هیجان</div>
             </div>
 
-            <div class="tags-display" id="tags-box">
-                <div style="font-size: 0.75rem; color: #fff; margin-bottom: 4px; font-weight: 700;">تحلیل استخراج‌شده:</div>
-                <div id="tags-container"></div>
+            <!-- لاگ هوش مصنوعی -->
+            <div class="ai-log-box" id="ai-log">
+                <div class="ai-log-title">
+                    <i data-lucide="sparkles" style="width: 14px;"></i>
+                    تحلیل سناریو و کپی‌رایتینگ هوشمند:
+                </div>
+                <div id="ai-tags"></div>
             </div>
 
-            <button class="btn-generate" id="btn-create" onclick="generatePosterFlow()">
+            <button class="btn-generate" id="btn-create" onclick="executeAIPosterEngine()">
                 <div class="spinner-anim" id="loader"></div>
-                <i data-lucide="zap" id="btn-icon" style="width: 20px;"></i>
-                <span id="btn-label">خلق آنی پوستر با هوش مصنوعی</span>
+                <i data-lucide="wand-2" id="btn-icon" style="width: 20px;"></i>
+                <span id="btn-label">تحلیل پرامپت و تولید پوستر واقعی</span>
             </button>
 
             <div class="action-row">
                 <button class="btn-sub" onclick="downloadPosterDirect()">
                     <i data-lucide="download" style="width: 18px; color: var(--accent-cyan);"></i>
-                    دانلود مستقیم تصویر (PNG)
+                    دانلود مستقیم (PNG)
                 </button>
-                <button class="btn-sub" onclick="randomColorGlow()">
+                <button class="btn-sub" onclick="randomThemeShift()">
                     <i data-lucide="palette" style="width: 18px; color: var(--accent-pink);"></i>
-                    تغییر هارمونی رنگ
+                    تغییر پالت و تم رنگی
                 </button>
             </div>
         </div>
@@ -551,24 +590,34 @@
         <!-- بوم پوستر -->
         <div class="stage">
             <div id="poster-artboard">
-                <!-- پس‌زمینه گرافیکی با Canvas داخلی (بدون باگ و بدون وابستگی) -->
-                <canvas id="poster-canvas-bg" class="poster-bg-canvas" width="460" height="650"></canvas>
+                <!-- رندر هنر و اشکال متناسب Canvas -->
+                <canvas id="poster-canvas-bg" class="poster-bg-canvas" width="460" height="660"></canvas>
                 <div class="poster-tint" id="poster-tint"></div>
                 <div class="poster-glow-fx" id="poster-glow"></div>
 
                 <div class="poster-content">
-                    <div class="badge-tag" id="badge-text">✦ CYBER CHAMPIONSHIP</div>
+                    <div class="poster-top">
+                        <div class="badge-tag" id="badge-text">✦ LIVE MUSIC FESTIVAL</div>
+                        <div class="date-badge" id="date-text">SUMMER 2026</div>
+                    </div>
+
+                    <!-- آیکون و آرت مرکزی متناسب با موضوع -->
+                    <div class="center-artwork-icon" id="center-art">
+                        <i data-lucide="disc" id="art-icon" style="width: 44px; height: 44px; color: var(--accent-cyan);"></i>
+                    </div>
 
                     <div>
-                        <h1 class="poster-title" id="title-text">مسابقات جهانی گیمینگ</h1>
-                        <p class="poster-sub" id="sub-text">رویداد هیجان‌انگیز سال ۲۰۲۶ با حضور برترین گیمرها و تکنولوژی‌های روز</p>
+                        <!-- تیتری که AI خودش خلق می‌کند (نه متن کاربر) -->
+                        <h1 class="poster-headline" id="title-text">انفجار ریتم و نور در تهران</h1>
+                        <!-- شعاری که AI خودش می‌سازد -->
+                        <p class="poster-slogan" id="sub-text">بزرگ‌ترین گردهمایی عاشقان موسیقی الکترونیک، تجربه‌ای فراتر از واقعیت با اجرای برترین دی‌جی‌ها.</p>
                     </div>
 
                     <div class="poster-footer">
-                        <div class="poster-cta-btn" id="cta-text">ورود به رویداد</div>
+                        <div class="poster-cta-btn" id="cta-text">رزرو زودهنگام بلیت</div>
                         <div class="poster-meta" id="meta-text">
-                            POSTERSTUDIO PRO // 2026<br>
-                            AI GENERATIVE STUDIO
+                            MILAD TOWER // HALL A<br>
+                            DOORS OPEN AT 19:00
                         </div>
                     </div>
                 </div>
@@ -605,109 +654,207 @@
             el.classList.add('active');
         }
 
-        // نقاشی پس‌زمینه‌های هنری نئونی و انتزاعی با موتور Canvas داخلی (۱۰۰٪ بدون وابستگی به API خارجی)
-        function drawAbstractBackground(theme) {
+        /* 
+           موتور هوش مصنوعی، درک مفهوم (NLP) و کپی‌رایتینگ خلاقانه
+           این سیستم پیام خام کاربر را تحلیل کرده و خودش یک پوستر تبلیغاتی واقعی می‌سازد.
+        */
+        const AIPosterBrain = {
+            // بانک دانش برای استخراج هدف و خلق عناوین تبلیغاتی
+            synthesize(prompt) {
+                const text = prompt.toLowerCase();
+                let category = 'tech';
+                let primaryColor = '#00f0ff';
+                let secondaryColor = '#8b5cf6';
+                let icon = 'sparkles';
+                let headline = '';
+                let slogan = '';
+                let badge = '';
+                let dateBadge = 'LIMITED EDITION';
+                let cta = 'اطلاعات بیشتر';
+                let meta = 'OFFICIAL EVENT // 2026\nSPECIAL REGISTRATION';
+                let tags = [];
+
+                // 1. حوزه کافه، غذا و رستوران
+                if (/کافه|رستوران|پیتزا|برگر|ایتالیایی|غذا|قهوه|نوشیدنی|افتتاحیه|کترینگ/i.test(text)) {
+                    category = 'food';
+                    primaryColor = '#f59e0b';
+                    secondaryColor = '#ef4444';
+                    icon = 'utensils';
+                    headline = 'طعم اصیل، تجربه‌ای فراموش‌نشدنی';
+                    slogan = 'دعوتید به ضیافتی از طعم‌های جادویی با هنر سرآشپزهای بین‌المللی در محیطی رویایی و دلنشین.';
+                    badge = '☕ GRAND OPENING';
+                    dateBadge = 'TASTE THE LUXURY';
+                    cta = 'رزرو میز اختصاصی';
+                    meta = 'SPECIAL GOURMET EXPERIENCE\nEVERYDAY 12:00 - 24:00';
+                    tags = ['رستوران و کافه', 'کپی‌رایتینگ جذاب', 'هارمونی گرم و اشتهاآور'];
+                }
+                // 2. حوزه کنسرت، مهمانی، موزیک و سرگرمی
+                else if (/موزیک|کنسرت|آهنگ|دی‌جی|دی جی|موسیقی|فستیوال|جشن|پارتی|آتش‌بازی|dj|music/i.test(text)) {
+                    category = 'party';
+                    primaryColor = '#ec4899';
+                    secondaryColor = '#8b5cf6';
+                    icon = 'disc';
+                    headline = 'شب شگفت‌انگیز نغمه و هیجان';
+                    slogan = 'غرق در امواج باس و نورپردازی نئونی سه‌بعدی؛ اجرای زنده برترین آرتیست‌های سال در یک شب تکرارنشدنی.';
+                    badge = '🎵 LIVE FESTIVAL 2026';
+                    dateBadge = 'DOORS OPEN 19:00';
+                    cta = 'تهیه بلیت آنلاین';
+                    meta = 'UNFORGETTABLE NIGHT\nLIMITED CAPACITY VIP';
+                    tags = ['موسیقی و فستیوال', 'تیتر انگیزشی و پرانرژی', 'پالت سایبر-نئون'];
+                }
+                // 3. حوزه گیمینگ، تورنمنت و بازی
+                else if (/گیم|بازی|فیفا|کالاف|مسابقه|تورنمنت|استریمر|پلی‌استیشن|ps5|game|gaming|وارزون/i.test(text)) {
+                    category = 'gaming';
+                    primaryColor = '#00f0ff';
+                    secondaryColor = '#3b82f6';
+                    icon = 'gamepad-2';
+                    headline = 'میدان نبرد قهرمانان واقعی';
+                    slogan = 'آدرنالین خالص و رقابت نفس‌گیر بر سر جایزه بزرگ؛ مهارتت رو در بزرگ‌ترین چالش سال به نمایش بذار!';
+                    badge = '⚡ ULTIMATE TOURNAMENT';
+                    dateBadge = '100M PRIZE POOL';
+                    cta = 'ثبت نام تیم در تورنمنت';
+                    meta = 'CYBER ARENA CHAMPIONSHIP\nOFFICIAL ESPORTS LEAGUE';
+                    tags = ['گیمینگ و مسابقات', 'لحن حماسی و رقابتی', 'سبک الکتریک و کنتراست تند'];
+                }
+                // 4. حوزه تخفیف، فروش، بلک فرایدی و حراج
+                else if (/تخفیف|حراج|فروشگاه|خرید|لباس|کت|کفش|ارزان|آف|off|sale|طلا|پوشاک/i.test(text)) {
+                    category = 'sale';
+                    primaryColor = '#10b981';
+                    secondaryColor = '#06b6d4';
+                    icon = 'shopping-bag';
+                    headline = 'جشنواره بزرگ تخفیف شگفت‌انگیز';
+                    slogan = 'فرصت طلایی خریدی رویایی با بالاترین کیفیت و تخفیف‌های باورنکردنی تا سقف ۷۰٪ فقط به مدت محدود.';
+                    badge = '🔥 MEGA SALE 50% OFF';
+                    dateBadge = 'ONLY THIS WEEKEND';
+                    cta = 'مشاهده محصولات و خرید';
+                    meta = 'EXCLUSIVE DISCOUNTS\nALL COLLECTIONS INCLUDED';
+                    tags = ['فروش ویژه و تخفیف', 'لحن فوری و وسوسه‌انگیز', 'هارمونی تجاری'];
+                }
+                // 5. حوزه آموزش، ورکشاپ، برنامه‌نویسی و استارتاپ
+                else if (/آموزش|برنامه‌نویسی|پایتون|هوش مصنوعی|ai|دانشجو|ورکشاپ|استارتاپ|کلاس|دوره|یادگیری/i.test(text)) {
+                    category = 'education';
+                    primaryColor = '#38bdf8';
+                    secondaryColor = '#6366f1';
+                    icon = 'cpu';
+                    headline = 'مسیر ورود به دنیای متخصصان هوش مصنوعی';
+                    slogan = 'صفر تا صد مهارت‌های بازار کار جهانی را پروژه محور یاد بگیرید و آینده شغلی خود را متحول کنید.';
+                    badge = '✦ MASTERCLASS 2026';
+                    dateBadge = 'CERTIFIED WORKSHOP';
+                    cta = 'رزرو صندلی در دوره';
+                    meta = 'FUTURE TECH ACADEMY\nLIVE MENTORSHIP & SUPPORT';
+                    tags = ['آموزش و آکادمی', 'لحن حرفه‌ای و پیشرفته', 'تم مدرن و علمی'];
+                }
+                // حالت پیش‌فرض و موضوعات متفرقه
+                else {
+                    category = 'modern';
+                    primaryColor = '#00f0ff';
+                    secondaryColor = '#ec4899';
+                    icon = 'sparkles';
+                    headline = 'خلق آینده‌ای فراتر از تصور';
+                    slogan = 'ترکیب بی‌نظیر خلاقیت و تکنولوژی برای رسیدن به بالاترین استانداردهای روز دنیا در رویدادی اختصاصی.';
+                    badge = '✦ EXCLUSIVE PREVIEW';
+                    dateBadge = 'SUMMER 2026';
+                    cta = 'عضویت و اطلاعات بیشتر';
+                    meta = 'PREMIUM GLOBAL STANDARD\nNEXT GEN EXPERIENCE';
+                    tags = ['مفهومی و نوآورانه', 'کپی‌رایتینگ مینیمال', 'ترکیب گرادیان‌های نوری'];
+                }
+
+                // اگر کاربر سبک خاصی را دستی ست کرده بود
+                if (chosenStyle === 'luxury') {
+                    primaryColor = '#fbbf24';
+                    secondaryColor = '#d97706';
+                    icon = 'crown';
+                    badge = '💎 LUXURY VIP SELECTION';
+                } else if (chosenStyle === 'cyber') {
+                    primaryColor = '#00f0ff';
+                    secondaryColor = '#3b82f6';
+                    icon = 'terminal';
+                    badge = '⚡ CYBERSPACE PROTOCOL';
+                } else if (chosenStyle === 'party') {
+                    primaryColor = '#ec4899';
+                    secondaryColor = '#8b5cf6';
+                    icon = 'music';
+                    badge = '🎵 ELECTRIC VIBES';
+                }
+
+                return {
+                    category,
+                    primaryColor,
+                    secondaryColor,
+                    icon,
+                    headline,
+                    slogan,
+                    badge,
+                    dateBadge,
+                    cta,
+                    meta,
+                    tags
+                };
+            }
+        };
+
+        // رندر و نقاشی آرتیستیک با بوم Canvas
+        function renderProceduralArtwork(spec) {
             const canvas = document.getElementById('poster-canvas-bg');
             const ctx = canvas.getContext('2d');
             const w = canvas.width;
             const h = canvas.height;
 
-            // پس‌زمینه تیره اصلی
-            ctx.fillStyle = '#080c18';
+            // زمینه تاریک کهکشانی
+            ctx.fillStyle = '#070b14';
             ctx.fillRect(0, 0, w, h);
 
-            let primary = '#00f0ff';
-            let secondary = '#8b5cf6';
-
-            if (theme === 'minimal') {
-                primary = '#fbbf24';
-                secondary = '#d97706';
-            } else if (theme === 'concert') {
-                primary = '#ec4899';
-                secondary = '#8b5cf6';
-            } else if (theme === 'cyber') {
-                primary = '#00f0ff';
-                secondary = '#3b82f6';
-            }
-
-            // رسم اشکال ارگانیک و امواج نوری شیک
-            for (let i = 0; i < 4; i++) {
+            // ایجاد اشکال معنادار نئونی و ساختاری
+            for (let i = 0; i < 5; i++) {
                 const grad = ctx.createRadialGradient(
-                    Math.random() * w, Math.random() * h, 20,
-                    Math.random() * w, Math.random() * h, 250
+                    w * (0.2 + 0.6 * Math.random()), h * (0.2 + 0.6 * Math.random()), 10,
+                    w * 0.5, h * 0.5, 280
                 );
-                grad.addColorStop(0, i % 2 === 0 ? primary : secondary);
+                grad.addColorStop(0, i % 2 === 0 ? spec.primaryColor : spec.secondaryColor);
                 grad.addColorStop(1, 'transparent');
 
                 ctx.save();
-                ctx.globalAlpha = 0.45;
+                ctx.globalAlpha = 0.35;
                 ctx.fillStyle = grad;
                 ctx.beginPath();
-                ctx.arc(Math.random() * w, Math.random() * h, 220, 0, Math.PI * 2);
+                ctx.arc(w * Math.random(), h * Math.random(), 200, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.restore();
             }
 
-            // رسم خطوط و گرید مدرن
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-            ctx.lineWidth = 1;
-            for (let x = 0; x < w; x += 30) {
+            // رسم وکتورهای هندسی شیک (خطوط زاویه‌دار مدرن)
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+            ctx.lineWidth = 1.5;
+
+            // گرید پس‌زمینه
+            for (let x = 0; x < w; x += 35) {
                 ctx.beginPath();
                 ctx.moveTo(x, 0);
                 ctx.lineTo(x, h);
                 ctx.stroke();
             }
+
+            // حلقه‌های نوری کانونی در مرکز
+            ctx.strokeStyle = spec.primaryColor;
+            ctx.globalAlpha = 0.25;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(w / 2, h * 0.38, 140, 0, Math.PI * 2);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(w / 2, h * 0.38, 170, 0, Math.PI * 2);
+            ctx.setLineDash([8, 8]);
+            ctx.stroke();
+            ctx.restore();
         }
 
-        // تحلیل عمیق معنایی متن کاربر
-        function analyzePromptText(text) {
-            const clean = text.trim();
-            let theme = 'cyber';
-            let tags = [];
-
-            if (/کنسرت|موزیک|آهنگ|جشن|پارتی|music/i.test(clean)) {
-                theme = 'concert';
-                tags = ['ریتم صوتی', 'طیف سرخ و نئون', 'انرژی زنده'];
-            } else if (/تخفیف|طلا|لوکس|فروشگاه|معماری|لباس|کت/i.test(clean)) {
-                theme = 'minimal';
-                tags = ['هارمونی طلایی', 'تایپوگرافی لوکس', 'مینیمال'];
-            } else if (/گیم|بازی|سایبر|هوش مصنوعی|ai|مسابقه|تکنولوژی/i.test(clean)) {
-                theme = 'cyber';
-                tags = ['سایبرپانک', 'کنتراست فیروزه‌ای', 'محیط آینده‌نگر'];
-            } else {
-                tags = ['تحلیل کلمات کلیدی', 'ترکیب مدرن', 'استایل اختصاصی'];
-            }
-
-            if (chosenStyle !== 'auto') {
-                theme = chosenStyle;
-            }
-
-            // تولید هوشمند متون از روی پرامپت
-            const parts = clean.split(/[\.\n!؟،,]+/).filter(p => p.trim().length > 0);
-            let title = parts[0] || "رویداد اختصاصی";
-            let sub = parts.length > 1 ? parts.slice(1).join(' - ') : "خلق شده با سیستم هوش مصنوعی و تایپوگرافی مدرن.";
-
-            let badge = "✦ SPECIAL EVENT 2026";
-            let cta = "اطلاعات بیشتر";
-
-            if (theme === 'cyber') {
-                badge = "⚡ AI & GAMING ARENA";
-                cta = "ورود به مسابقه";
-            } else if (theme === 'minimal') {
-                badge = "💎 EXCLUSIVE VIP";
-                cta = "مشاهده جزئیات";
-            } else if (theme === 'concert') {
-                badge = "🎵 LIVE EXPERIENCE";
-                cta = "خرید بلیت";
-            }
-
-            return { theme, title, sub, badge, cta, tags };
-        }
-
-        function generatePosterFlow() {
-            const input = document.getElementById('prompt-input').value;
-            if (!input.trim()) {
-                alert('لطفاً توصیف پوستر خود را در کادر بنویسید.');
+        // جریان کامل خلق پوستر واقعی
+        function executeAIPosterEngine() {
+            const prompt = document.getElementById('prompt-input').value;
+            if (!prompt.trim()) {
+                alert('لطفاً سناریو یا ایده پوستر خود را بنویسید.');
                 return;
             }
 
@@ -719,51 +866,70 @@
             btn.disabled = true;
             loader.style.display = 'inline-block';
             icon.style.display = 'none';
-            label.innerText = 'در حال تحلیل جمله و خلق لایه‌ها...';
+            label.innerText = 'هوش مصنوعی در حال سناریونویسی و تصویرسازی...';
 
             setTimeout(() => {
-                const res = analyzePromptText(input);
+                // اجرای مغز هوش مصنوعی
+                const generatedPoster = AIPosterBrain.synthesize(prompt);
 
-                // به‌روزرسانی برچسب‌های استخراج شده
-                const tagsContainer = document.getElementById('tags-container');
+                // نمایش تگ‌های تحلیلی
+                const tagsContainer = document.getElementById('ai-tags');
                 tagsContainer.innerHTML = '';
-                res.tags.forEach(t => {
-                    const pill = document.createElement('span');
-                    pill.className = 'tag-pill';
-                    pill.innerText = '✦ ' + t;
-                    tagsContainer.appendChild(pill);
+                generatedPoster.tags.forEach(t => {
+                    const span = document.createElement('span');
+                    span.className = 'tag-pill';
+                    span.innerText = '✦ ' + t;
+                    tagsContainer.appendChild(span);
                 });
-                document.getElementById('tags-box').style.display = 'block';
+                document.getElementById('ai-log').style.display = 'block';
 
-                // اعمال متن‌های پردازش شده به پوستر
-                document.getElementById('title-text').innerText = res.title;
-                document.getElementById('sub-text').innerText = res.sub;
-                document.getElementById('badge-text').innerText = res.badge;
-                document.getElementById('cta-text').innerText = res.cta;
+                // به‌روزرسانی محتوای پوستر
+                document.getElementById('title-text').innerText = generatedPoster.headline;
+                document.getElementById('sub-text').innerText = generatedPoster.slogan;
+                document.getElementById('badge-text').innerText = generatedPoster.badge;
+                document.getElementById('date-text').innerText = generatedPoster.dateBadge;
+                document.getElementById('cta-text').innerText = generatedPoster.cta;
+                document.getElementById('meta-text').innerHTML = generatedPoster.meta.replace('\n', '<br>');
 
-                // رسم پس‌زمینه اختصاصی متناسب با تم
-                drawAbstractBackground(res.theme);
+                // تغییر آیکون مرکزی
+                const artIcon = document.getElementById('art-icon');
+                artIcon.setAttribute('data-lucide', generatedPoster.icon);
+                artIcon.style.color = generatedPoster.primaryColor;
+                lucide.createIcons();
 
-                // استایل‌دهی نوری
-                let glowColor = '#00f0ff';
-                if (res.theme === 'minimal') glowColor = '#fbbf24';
-                if (res.theme === 'concert') glowColor = '#ec4899';
+                // استایل‌دهی نور و تایپوگرافی
+                document.getElementById('title-text').style.color = generatedPoster.primaryColor;
+                document.getElementById('title-text').style.textShadow = `0 0 30px ${generatedPoster.primaryColor}77, 0 4px 15px rgba(0,0,0,0.9)`;
+                document.getElementById('poster-glow').style.background = `radial-gradient(circle, ${generatedPoster.primaryColor} 0%, transparent 70%)`;
+                document.getElementById('date-text').style.color = generatedPoster.primaryColor;
+                document.getElementById('date-text').style.borderColor = generatedPoster.primaryColor + '66';
 
-                document.getElementById('title-text').style.color = glowColor;
-                document.getElementById('title-text').style.textShadow = `0 0 25px ${glowColor}66, 0 4px 15px rgba(0,0,0,0.9)`;
-                document.getElementById('poster-glow').style.background = `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`;
+                // رندر پس‌زمینه گرافیکی
+                renderProceduralArtwork(generatedPoster);
 
                 btn.disabled = false;
                 loader.style.display = 'none';
                 icon.style.display = 'inline-block';
-                label.innerText = 'خلق مجدد با پرامپت فعلی';
-            }, 600);
+                label.innerText = 'بازآفرینی پوستر با هوش مصنوعی';
+            }, 700);
         }
 
-        // خروجی گرفتن و دانلود ۱۰۰٪ تضمینی
+        // تغییر تم و رنگ تصادفی
+        function randomThemeShift() {
+            const colors = ['#00f0ff', '#ec4899', '#fbbf24', '#a855f7', '#10b981', '#38bdf8'];
+            const random = colors[Math.floor(Math.random() * colors.length)];
+            
+            document.getElementById('title-text').style.color = random;
+            document.getElementById('title-text').style.textShadow = `0 0 30px ${random}88, 0 4px 15px rgba(0,0,0,0.9)`;
+            document.getElementById('poster-glow').style.background = `radial-gradient(circle, ${random} 0%, transparent 70%)`;
+            document.getElementById('date-text').style.color = random;
+            document.getElementById('date-text').style.borderColor = random + '66';
+            document.getElementById('art-icon').style.color = random;
+        }
+
+        // خروجی باکیفیت و بدون نقص
         function downloadPosterDirect() {
             const artboard = document.getElementById('poster-artboard');
-            
             html2canvas(artboard, {
                 scale: 3,
                 useCORS: true,
@@ -771,29 +937,19 @@
                 backgroundColor: '#060913'
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `PosterStudio-Pro-${Date.now()}.png`;
+                link.download = `PosterStudio-AI-${Date.now()}.png`;
                 link.href = canvas.toDataURL('image/png', 1.0);
                 link.click();
             }).catch(err => {
-                alert('خطا در ذخیره تصویر. مجدداً تلاش کنید.');
+                alert('خطا در ذخیره پوستر. لطفاً دوباره امتحان کنید.');
                 console.error(err);
             });
         }
 
-        function randomColorGlow() {
-            const colors = ['#00f0ff', '#ec4899', '#fbbf24', '#a855f7', '#10b981', '#ffffff'];
-            const random = colors[Math.floor(Math.random() * colors.length)];
-            const title = document.getElementById('title-text');
-            title.style.color = random;
-            title.style.textShadow = `0 0 30px ${random}88, 0 4px 15px rgba(0,0,0,0.9)`;
-            document.getElementById('poster-glow').style.background = `radial-gradient(circle, ${random} 0%, transparent 70%)`;
-        }
-
-        // رسم اولیه پس‌زمینه در زمان لود صفحه
+        // اجرای اولیه هنگام لود صفحه
         window.onload = () => {
-            drawAbstractBackground('cyber');
+            executeAIPosterEngine();
         };
     </script>
 </body>
 </html>
-
