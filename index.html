@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PosterStudio 3D Pro - استودیوی تولید پوستر ۳بعدی با موتور مترجم هوش مصنوعی</title>
+    <title>PosterStudio 3D Pro - استودیوی تولید پوستر ۳بعدی</title>
     
-    <!-- فونت‌های استاندارد -->
+    <!-- فونت‌های استاندارد فارسی و انگلیسی -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Plus+Jakarta+Sans:wght@600;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     
-    <!-- کتابخانه‌های ضروری -->
+    <!-- آیکون‌ها و ابزار ذخیره تصویر -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         :root {
             --bg-base: #070913;
-            --panel-bg: rgba(15, 23, 42, 0.78);
+            --panel-bg: rgba(15, 23, 42, 0.85);
             --panel-border: rgba(255, 255, 255, 0.12);
             --neon-blue: #00f2fe;
             --neon-pink: #ff007f;
-            --neon-purple: #9333ea;
+            --neon-purple: #8b5cf6;
             --neon-gold: #fbbf24;
             --text-high: #f8fafc;
             --text-mid: #94a3b8;
@@ -45,7 +45,7 @@
             overflow-x: hidden;
         }
 
-        /* جلوه نوری پس‌زمینه استودیو */
+        /* انیمیشن‌های نوری در پس‌زمینه */
         .ambient-bg {
             position: fixed;
             inset: 0;
@@ -59,7 +59,7 @@
             border-radius: 50%;
             filter: blur(140px);
             opacity: 0.35;
-            animation: pulseGlow 15s infinite alternate ease-in-out;
+            animation: pulseGlow 14s infinite alternate ease-in-out;
         }
         .blob-1 { width: 600px; height: 600px; background: #4f46e5; top: -100px; right: -100px; }
         .blob-2 { width: 500px; height: 500px; background: #ec4899; bottom: -100px; left: -100px; animation-delay: -5s; }
@@ -122,39 +122,15 @@
             background: var(--neon-blue);
             border-radius: 50%;
             box-shadow: 0 0 8px var(--neon-blue);
+            animation: blink 1.5s infinite;
         }
 
-        main {
-            position: relative;
-            z-index: 10;
-            max-width: 1450px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 2.5rem;
-            display: grid;
-            grid-template-columns: 500px 1fr;
-            gap: 3rem;
-            align-items: start;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
-        @media (max-width: 1100px) {
-            main { grid-template-columns: 1fr; padding: 1.5rem; }
-        }
-
-        /* کنترل پنل ورودی */
-        .controls-card {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            backdrop
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-blue);
-        }
-
+        /* ساختار اصلی صفحه */
         main {
             position: relative;
             z-index: 10;
@@ -197,7 +173,42 @@
             color: #cbd5e1;
             display: flex;
             align-items: center;
-            gapکمه‌ها */
+            gap: 8px;
+        }
+
+        .custom-input, .custom-select, .custom-textarea {
+            background: rgba(2, 6, 23, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .custom-textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.5;
+        }
+
+        .custom-input:focus, .custom-select:focus, .custom-textarea:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            background: rgba(2, 6, 23, 0.9);
+        }
+
+        .custom-select {
+            cursor: pointer;
+        }
+
+        .custom-select option {
+            background: #0b1120;
+            color: #fff;
+        }
+
+        /* دکمه‌های عملیاتی */
         .action-btn {
             border: none;
             border-radius: 14px;
@@ -213,7 +224,7 @@
         }
 
         .btn-generate {
-            background: linear-gradient(135deg, var(--neon-blue), #8b5cf6, var(--neon-pink));
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
             color: #ffffff;
             box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
         }
@@ -226,6 +237,7 @@
         .btn-generate:disabled {
             opacity: 0.6;
             cursor: wait;
+            transform: none;
         }
 
         .btn-download {
@@ -239,7 +251,7 @@
             border-color: var(--neon-blue);
         }
 
-        /* باکس وضعیت و ترجمه */
+        /* باکس وضعیت و پیش‌نمایش پرامپت ترجمه‌شده */
         .status-badge {
             display: none;
             background: rgba(0, 242, 254, 0.08);
@@ -254,7 +266,7 @@
         .translated-preview {
             margin-top: 6px;
             padding: 6px 10px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 8px;
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.75rem;
@@ -280,27 +292,6 @@
             overflow: hidden;
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 242, 254, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .poster-image-layer {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .poster-gradient-layer {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background: linear-gradient(180deg, 
-                rgba(3, 7, 18, 0.8) 0%, 
-                rgba(3, 7, 18, 0.2) 40%, 
-                rgba(3, 7, 18, 0.6) 70%, 
-                rgba(3, 7, 18, 0.9px solid rgba(255, 255, 255, 0.15);
         }
 
         .poster-image-layer {
@@ -353,11 +344,30 @@
         }
 
         .poster-serial {
-            font-family:.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .middle-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* تایپوگرافی ۳بعدی */
+        .poster-3d-title {
+            font-size: 3.6rem;
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 0.2rem;
+            transition: all 0.3s ease;
             font-family: 'Lalezar', 'Vazirmatn', cursive;
         }
 
-        /* ۱: نئون سایبرپانک ۳بعدی */
+        /* استایل ۱: نئون سایبرپانک ۳بعدی */
         .style-cyberpunk {
             color: #ffffff;
             text-shadow: 
@@ -375,7 +385,7 @@
                 0 20px 35px rgba(0,242,254,.6);
         }
 
-        /* ۲: طلای لوکس متالیک ۳بعدی */
+        /* استایل ۲: طلای لوکس متالیک ۳بعدی */
         .style-gold {
             background: linear-gradient(180deg, #fff7d6 0%, #ffd700 45%, #b8860b 80%, #785202 100%);
             -webkit-background-clip: text;
@@ -387,7 +397,7 @@
                     drop-shadow(0 0 25px rgba(255, 215, 0, 0.6));
         }
 
-        /* ۳: گدازه آتشفشانی ۳بعدی */
+        /* استایل ۳: گدازه آتشفشانی ۳بعدی */
         .style-magma {
             color: #fff;
             text-shadow: 
@@ -401,7 +411,7 @@
                 0 0 40px #ff0000;
         }
 
-        /* ۴: کریستال یخی ۳بعدی */
+        /* استایل ۴: کریستال یخی ۳بعدی */
         .style-ice {
             background: linear-gradient(180deg, #ffffff 0%, #a5f3fc 60%, #0284c7 100%);
             -webkit-background-clip: text;
@@ -411,7 +421,7 @@
                     drop-shadow(0 8px 18px rgba(56, 189, 248, 0.7));
         }
 
-        /* ۵: کمیک‌بوک برجسته و بولد */
+        /* استایل ۵: کمیک‌بوک برجسته */
         .style-comic {
             color: #facc15;
             -webkit-text-stroke: 2px #000;
@@ -480,28 +490,6 @@
         .spinner {
             display: none;
             width: 20px;
-            #fff 0px,
-                #fff 2px,
-                transparent 2px,
-                transparent 4px,
-                #fff 4px,
-                #fff 7px,
-                transparent 7px,
-                transparent 9px
-            );
-            opacity: 0.85;
-        }
-
-        .barcode-label {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 1px;
-        }
-
-        .spinner {
-            display: none;
-            width: 20px;
             height: 20px;
             border: 3px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
@@ -527,7 +515,22 @@
         </div>
         <div class="engine-badge">
             <div class="live-dot"></div>
-            <span>group">
+            <span>AI Translation & 3D Typography Engine</span>
+        </div>
+    </header>
+
+    <main>
+        <!-- فرم تنظیمات و کنترل -->
+        <div class="controls-card">
+            <div class="input-group">
+                <label>
+                    <i data-lucide="languages" style="width: 16px; color: var(--neon-blue);"></i>
+                    سناریو و سوژه پس‌زمینه (فارسی بنویسید):
+                </label>
+                <textarea id="bg-prompt" class="custom-textarea" placeholder="مثال: کافه دنج در شب بارانی، فنجان قهوه داغ روی میز چوبی با نور ملایم چراغ"></textarea>
+            </div>
+
+            <div class="input-group">
                 <label>
                     <i data-lucide="type" style="width: 16px; color: var(--neon-pink);"></i>
                     تیتر اصلی پوستر (سه‌بعدی و دلخواه):
@@ -538,14 +541,14 @@
             <div class="input-group">
                 <label>
                     <i data-lucide="align-right" style="width: 16px; color: var(--neon-gold);"></i>
-                    زیرعنوان یا شعار تبلیغاتی دلخواه:
+                    زیرعنوان یا شعار تبلیغاتی:
                 </label>
-                <input type="text" id="subtitle-input" class="custom-input" value="تجربه عطری ماندگار از دانه‌های برشته‌شده عربیکا، تخفیف ۲۰٪ ویژه فصل">
+                <input type="text" id="subtitle-input" class="custom-input" value="تجربه عطری ماندگار از دانه‌های برشته‌شده عربیکا با ۲۰٪ تخفیف افتتاحیه">
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div class="input-group">
-                    <label>تگ بالای پوستر:</label>
+                    <label>نشان بالای پوستر:</label>
                     <input type="text" id="tag-input" class="custom-input" value="✦ SPECIAL OFFER">
                 </div>
                 <div class="input-group">
@@ -560,8 +563,31 @@
                     انتخاب افکت و متریال فونت ۳بعدی:
                 </label>
                 <select id="style-selector" class="custom-select" onchange="applyTextStyle(this.value)">
-                    <option value="style-cyberpunk">سایبرپانک نئونی ۳بعدی</option>
                     <option value="style-gold" selected>طلای متالیک و لوکس ۳بعدی</option>
+                    <option value="style-cyberpunk">سایبرپانک نئونی ۳بعدی</option>
+                    <option value="style-magma">گدازه آتشین و درخشان ۳بعدی</option>
+                    <option value="style-ice">کریستال یخی و هایپر-رئال</option>
+                    <option value="style-comic">کمیک‌بوک برجسته و بولد</option>
+                </select>
+            </div>
+
+            <div class="status-badge" id="ai-status"></div>
+
+            <button class="action-btn btn-generate" id="generate-btn" onclick="generateAccuratePoster()">
+                <div class="spinner" id="btn-spinner"></div>
+                <i data-<label>متن دکمه (CTA):</label>
+                    <input type="text" id="cta-input" class="custom-input" value="سفارش آنلاین">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>
+                    <i data-lucide="palette" style="width: 16px; color: var(--neon-blue);"></i>
+                    انتخاب افکت و متریال فونت ۳بعدی:
+                </label>
+                <select id="style-selector" class="custom-select" onchange="applyTextStyle(this.value)">
+                    <option value="style-gold" selected>طلای متالیک و لوکس ۳بعدی</option>
+                    <option value="style-cyberpunk">سایبرپانک نئونی ۳بعدی</option>
                     <option value="style-magma">گدازه آتشین و درخشان ۳بعدی</option>
                     <option value="style-ice">کریستال یخی و هایپر-رئال</option>
                     <option value="style-comic">کمیک‌بوک برجسته و بولد</option>
@@ -582,27 +608,7 @@
             </button>
         </div>
 
-        <!-- پیش‌نمایش پوستر (Artboard) -->
-        <div class="preview-area">
-            <div class="poster-frame" id="poster-artboard">
-                <!-- تصویر پس‌زمینه هوش مصنوعی -->
-                <img id="poster-bg-img" class="poster-image-layer" 
-                     src="https://image.pollinations.ai/prompt/commercial%20key%20visual%20of%20hot%20espresso%20coffee%20cup%20on%20dark%20wooden%20table%20rain%20on%20window%20cinematic%20studio%20lighting%20octane%20render%208k%20no%20text?width=480&height=680&nologo=true&seed=88" 
-                     crossorigin="anonymous" 
-                     alt="Poster Background">
-                
-                <div class="poster-gradient-layer"></div>
-
-                <!-- محتوای متنی روی پوستر -->
-                <div class="poster-content-layer">
-                    <div class="top-row">
-                        <div class="poster-badge" id="poster-tag">✦ SPECIAL OFFER</div>
-                        <div class="poster-serial">PRO-3D</div>
-                    </div>
-
-                    <div class="middle-content">
-                        <h1 class="poster-3d-title style-gold" id="poster-title-display">قهوه اصیل</h1>
-                        <p class="poster-subtitle" id="poster-subtitle-display">تجربه عطری ماندگار از دانه‌های برشته‌شده عربیکا، تخفیف ۲۰٪ ویژه فصل</p>
+        <!-- پیش‌نمایش آرت‌بورد پو                        <p class="poster-subtitle" id="poster-subtitle-display">تجربه عطری ماندگار از دانه‌های برشته‌شده عربیکا با ۲۰٪ تخفیف افتتاحیه</p>
                     </div>
 
                     <div class="bottom-row">
@@ -620,7 +626,7 @@
     <script>
         lucide.createIcons();
 
-        // به‌روزرسانی زنده متن‌ها همزمان با تایپ کاربر
+        // اتصال زنده ورودی‌های متن به پوستر
         document.getElementById('title-input').addEventListener('input', (e) => {
             document.getElementById('poster-title-display').innerText = e.target.value || "عنوان پوستر";
         });
@@ -642,14 +648,14 @@
             titleElement.className = `poster-3d-title ${styleClass}`;
         }
 
-        // مدل هوش مصنوعی برای ترجمه و بهینه‌سازی فنی پرامپت فارسی به انگلیسی
+        // مدل هوش مصنوعی برای ترجمه سناریوی فارسی به پرامپت استودیویی انگلیسی
         async function translateAndEnrichPrompt(persianText) {
             const promptForLLM = `Translate and expand the following Persian background request into a top-tier English image generation prompt for Midjourney/Flux.
 Rules:
-- Translate the meaning accurately.
-- Add studio lighting, cinematic atmosphere, 8k resolution, octane render.
-- Strictly append: NO TEXT, NO LETTERS, NO WORDS, clean background.
-- Return ONLY the final English prompt text without quotes, explanation, or markdown.
+- Translate the core subject and mood accurately.
+- Add studio lighting, cinematic atmosphere, 8k resolution, octane render, master photography.
+- Strictly ensure: NO TEXT, NO LETTERS, NO WORDS, clean background.
+- Output ONLY the final English prompt text without quotes, explanation, or markdown.
 
 Persian Request: ${persianText}`;
 
@@ -660,7 +666,7 @@ Persian Request: ${persianText}`;
             return englishPrompt.trim().replace(/^"|"$/g, '');
         }
 
-        // تولید پوستر با ترجمه دقیق و رندر هوش مصنوعی
+        // پردازش، ترجمه و ساخت پس‌زمینه با هوش مصنوعی
         async function generateAccuratePoster() {
             const promptInput = document.getElementById('bg-prompt').value.trim();
             const titleInput = document.getElementById('title-input').value.trim();
@@ -668,7 +674,7 @@ Persian Request: ${persianText}`;
             const rawConcept = promptInput || titleInput;
 
             if (!rawConcept) {
-                alert('لطفاً موضوع پس‌زمینه یا عنوان پوستر را بنویسید.');
+                alert('لطفاً سناریوی پس‌زمینه یا عنوان پوستر را بنویسید.');
                 return;
             }
 
@@ -684,20 +690,20 @@ Persian Request: ${persianText}`;
             statusBadge.style.display = 'block';
 
             try {
-                // مرحله اول: ترجمه هوشمند پرامپت با LLM
+                // مرحله ۱: ترجمه هوشمند پرامپت فارسی
                 btnText.innerText = 'هوش مصنوعی در حال ترجمه پرامپت به انگلیسی...';
-                statusBadge.innerHTML = '⚡ <b>گام ۱:</b> در حال ترجمه مفهوم فارسی به پرامپت تخصصی انگلیسی و اضافه کردن استایل‌های سینمایی...';
+                statusBadge.innerHTML = '⚡ <b>گام ۱:</b> در حال ترجمه سناریوی فارسی به پرامپت عکاسی و سینمایی انگلیسی...';
 
                 let translatedEnglishPrompt = "";
                 try {
                     translatedEnglishPrompt = await translateAndEnrichPrompt(rawConcept);
                 } catch (e) {
-                    console.warn("LLM Translation failed, fallback to direct keyword wrap:", e);
+                    console.warn("LLM Translation failed, using fallback keyword formulation:", e);
                     translatedEnglishPrompt = `commercial advertising key visual of ${rawConcept}, cinematic studio lighting, highly detailed, octane render, 8k, dramatic atmosphere, no text, clean background`;
                 }
 
-                // مرحله دوم: نمایش پرامپت ترجمه‌شده و ارسال به موتور تصویرساز
-                btnText.innerText = 'در حال تولید تصویر پس‌زمینه با هوش مصنوعی...';
+                // مرحله ۲: نمایش پرامپت و ارسال به موتور رندر
+                btnText.innerText = 'در حال ساخت تصویر پس‌زمینه با هوش مصنوعی...';
                 statusBadge.innerHTML = `
                     ⚡ <b>گام ۲:</b> پرامپت ترجمه شد! ارسال به موتور تصویرساز:
                     <div class="translated-preview">👉 ${translatedEnglishPrompt}</div>
@@ -709,7 +715,7 @@ Persian Request: ${persianText}`;
 
                 const imgElement = document.getElementById('poster-bg-img');
 
-                // پیش‌بارگذاری امن تصویر
+                // بارگذاری تصویر در حافظه
                 const tempImage = new Image();
                 tempImage.crossOrigin = "anonymous";
 
@@ -719,7 +725,7 @@ Persian Request: ${persianText}`;
                     spinner.style.display = 'none';
                     icon.style.display = 'inline-block';
                     btnText.innerText = 'تولید مجدد پس‌زمینه هوشمند';
-                    statusBadge.innerHTML += '<br>✅ <b>پایان:</b> پس‌زمینه دقیقاً متناسب با ایده شما ساخته و بارگذاری شد!';
+                    statusBadge.innerHTML += '<br>✅ <b>پایان:</b> تصویر با موفقیت تولید و روی پوستر اعمال شد!';
                 };
 
                 tempImage.onerror = function () {
@@ -735,7 +741,7 @@ Persian Request: ${persianText}`;
                 tempImage.src = generatedImageUrl;
 
             } catch (error) {
-                console.error("General error:", error);
+                console.error("Execution error:", error);
                 btn.disabled = false;
                 spinner.style.display = 'none';
                 icon.style.display = 'inline-block';
@@ -744,12 +750,12 @@ Persian Request: ${persianText}`;
             }
         }
 
-        // خروجی تصویر پوستر با کیفیت بالا
+        // خروجی تصویر با کیفیت بالا مناسب چاپ
         function downloadPoster() {
             const artboard = document.getElementById('poster-artboard');
             
             html2canvas(artboard, {
-                scale: 3, // رزولوشن بالا مناسب برای چاپ
+                scale: 3,
                 useCORS: true,
                 allowTaint: true,
                 backgroundColor: '#020617'
@@ -760,7 +766,7 @@ Persian Request: ${persianText}`;
                 link.click();
             }).catch(err => {
                 console.error("Download Error:", err);
-                alert('خطا در دریافت خروجی تصویر.');
+                alert('خطا در دانلود تصویر پوستر.');
             });
         }
     </script>
