@@ -3,119 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>استودیو طراحی پوستر هوشمند | PicForge</title>
+  <title>PosterStudio Pro 4.0 | استودیو طراحی پوسترهای تبلیغاتی</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&family=Bebas+Neue&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: rgba(18, 24, 38, 0.85);
-      --border: rgba(255, 255, 255, 0.12);
-      --primary: #4f46e5;
-      --accent: #ec4899;
+      --bg: #090c15;
+      --card: rgba(18, 24, 38, 0.85);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.4);
+      --gold: #f59e0b;
       --text: #f8fafc;
       --text-muted: #94a3b8;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       background-color: var(--bg);
       color: var(--text);
+      font-family: 'Vazirmatn', sans-serif;
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.08), transparent 40%);
+      padding: 24px;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 16px;
-    }
-
-    header {
+    .app-header {
+      max-width: 1400px;
+      margin: 0 auto 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
+      padding: 16px 28px;
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #ec4899);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 20px var(--accent-glow);
     }
 
     .brand-title h1 {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 900;
-      background: linear-gradient(90deg, #818cf8, #f472b6);
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .brand-title p {
-      font-size: 0.8rem;
+    .brand-title span {
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
-    .grid {
+    .main-workspace {
+      max-width: 1400px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 24px;
+      grid-template-columns: 460px 1fr;
+      gap: 28px;
+      align-items: start;
     }
 
-    @media (max-width: 900px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 1024px) {
+      .main-workspace { grid-template-columns: 1fr; }
     }
 
     .panel {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
+      background: var(--card);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5e1;
     }
 
     .form-group {
       margin-bottom: 16px;
-    }
-
-    label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #e2e8f0;
-    }
-
-    input[type="text"], textarea, select {
-      width: 100%;
-      background: rgba(10, 14, 23, 0.7);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      color: white;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    input[type="text"]:focus, textarea:focus, select:focus {
-      border-color: var(--primary);
-    }
-
-    textarea {
-      height: 90px;
-      resize: vertical;
     }
 
     .form-row {
@@ -124,343 +120,530 @@
       gap: 12px;
     }
 
-    .btn-submit {
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    input, textarea, select {
       width: 100%;
-      padding: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(10, 14, 26, 0.6);
+      color: #fff;
+      font-size: 0.92rem;
+      font-family: inherit;
+      transition: all 0.25s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+      background: rgba(10, 14, 26, 0.9);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .btn-render {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
       border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background: linear-gradient(135deg, #6366f1, #a855f7);
       color: white;
-      font-size: 1rem;
-      font-weight: 700;
+      font-size: 1.05rem;
+      font-weight: 800;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+      transition: all 0.25s;
       margin-top: 10px;
-      transition: opacity 0.2s, transform 0.1s;
     }
 
-    .btn-submit:hover {
-      opacity: 0.95;
-      transform: translateY(-1px);
+    .btn-render:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.5);
     }
 
-    .btn-submit:disabled {
+    .btn-render:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    .preview-box {
-      min-height: 520px;
+    .preview-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      min-height: 600px;
       position: relative;
     }
 
-    #posterCanvas {
-      max-width: 100%;
-      max-height: 540px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-      display: none;
-    }
-
-    .empty-state {
+    .placeholder-state {
       text-align: center;
       color: var(--text-muted);
+      padding: 40px;
+    }
+
+    .placeholder-icon {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      opacity: 0.7;
     }
 
     .loading-state {
       display: none;
       text-align: center;
+      padding: 40px;
     }
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid rgba(255, 255, 255, 0.1);
-      border-top-color: var(--accent);
+    .custom-loader {
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      margin: 0 auto 16px;
-      animation: spin 0.8s linear infinite;
+      border: 4px solid rgba(255,255,255,0.05);
+      border-top-color: var(--accent);
+      border-bottom-color: #ec4899;
+      animation: spin 1s infinite linear;
+      margin: 0 auto 20px;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    #posterCanvas {
+      max-width: 100%;
+      max-height: 620px;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+      display: none;
     }
 
-    .download-btn {
+    .action-bar {
       display: none;
       width: 100%;
-      margin-top: 16px;
-      padding: 12px;
-      background: #10b981;
-      border: none;
-      color: white;
+      margin-top: 20px;
+      gap: 12px;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-size: 0.9rem;
       font-weight: 700;
-      border-radius: 10px;
       cursor: pointer;
+      text-align: center;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-download-main {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-icon">⚡</div>
       <div class="brand-title">
-        <h1>PicForge Studio</h1>
-        <p>سیستم مستقل طراحی پوستر و تایپوگرافی فارسی</p>
-      </div>
-    </header>
-
-    <div class="grid">
-      <!-- پنل تنظیمات -->
-      <div class="panel">
-        <form id="posterForm" onsubmit="return false;">
-          <div class="form-group">
-            <label for="prompt">توصیف تصویر پس‌زمینه (هر موضوعی: صنعتی، کافه، بوتیک، پزشکی، همایش...)</label>
-            <textarea id="prompt" placeholder="مثال: فضای داخل یک کافه دنج با نورپردازی گرم و فنجان قهوه روی میز چوبی..." required></textarea>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="headline">عنوان اصلی پوستر (فارسی)</label>
-              <input type="text" id="headline" placeholder="مثال: کافه رستوران کارما" required />
-            </div>
-            <div class="form-group">
-              <label for="subhead">شعار یا متن کوتاه</label>
-              <input type="text" id="subhead" placeholder="مثال: طعم واقعی قهوه اصیل" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="badge">برچسب بالای پوستر</label>
-              <input type="text" id="badge" placeholder="مثال: افتتاحیه | پیشنهاد ویژه" />
-            </div>
-            <div class="form-group">
-              <label for="contact">اطلاعات تماس / آدرس / پیج اینستاگرام</label>
-              <input type="text" id="contact" placeholder="مثال: تلفن: ۰۲۱-۸۸۸۸۸۸۸۸ | @Cafe_Karma" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="mood">سبک نورپردازی و تصویر</label>
-            <select id="mood">
-              <option value="commercial studio lighting, ultra-realistic, highly detailed, clean composition">تبلیغاتی و تمیز (Studio Commercial)</option>
-              <option value="cinematic mood, dramatic shadows, warm ambiance, 8k">سینمایی و گرم (Cinematic Warm)</option>
-              <option value="modern minimalist, clean negative space, sleek design">مینیمال و مدرن (Minimalist)</option>
-              <option value="vibrant colors, cyberpunk neon glow, dynamic">نئونی و پرانرژی (Neon Glow)</option>
-            </select>
-          </div>
-
-          <button type="button" class="btn-submit" id="submitBtn">
-            ساخت پوستر اختصاصی
-          </button>
-        </form>
-      </div>
-
-      <!-- پنل پیش‌نمایش -->
-      <div class="panel preview-box">
-        <div class="empty-state" id="emptyState">
-          <h3>پوستر شما اینجا نمایش داده می‌شود</h3>
-          <p style="font-size: 0.85rem; margin-top: 6px;">اطلاعات فرم را پر کرده و روی دکمه ساخت پوستر کلیک کنید.</p>
-        </div>
-
-        <div class="loading-state" id="loadingState">
-          <div class="spinner"></div>
-          <p id="statusMsg">در حال طراحی پس‌زمینه با هوش مصنوعی...</p>
-        </div>
-
-        <canvas id="posterCanvas" width="900" height="1200"></canvas>
-
-        <button class="download-btn" id="downloadBtn">
-          📥 دانلود پوستر با کیفیت بالا (PNG)
-        </button>
+        <h1>PosterStudio Pro 4.0</h1>
+        <span>استودیو خلق گرافیک تبلیغاتی با رندر زنده</span>
       </div>
     </div>
-  </div>
+  </header>
+
+  <main class="main-workspace">
+    <!-- پنل فرم و ورودی‌ها -->
+    <div class="panel">
+      <div class="section-title">⚙️ مشخصات و محتوای پوستر</div>
+      
+      <form id="posterForm">
+        <div class="form-group">
+          <label>توصیف صحنه و تصویر (Prompt به زبان دلخواه)</label>
+          <textarea id="prompt" placeholder="مثلاً: بطری عطر لوکس شیشه‌ای روی آب با انعکاس نور مهتاب و قطرات کریستالی..." required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>عنوان اصلی (تیتر)</label>
+            <input type="text" id="headline" placeholder="مثلاً: نام برند یا جشنواره" required />
+          </div>
+          <div class="form-group">
+            <label>برچسب نئونی (Badge)</label>
+            <input type="text" id="badgeText" placeholder="مثلاً: ویژه / ۴۰٪ آف" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>شعار تبلیغاتی</label>
+          <input type="text" id="subhead" placeholder="مثلاً: تجربه‌ای بی‌نظیر از کیفیت و اصالت" />
+        </div>
+
+        <div class="form-group">
+          <label>اطلاعات تماس / دسترسی</label>
+          <input type="text" id="contact" placeholder="مثلاً: وبسایت، آیدی شبکه‌های اجتماعی یا تلفن" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>استایل تایپوگرافی</label>
+            <select id="typographyStyle">
+              <option value="gold3d">طلایی سه‌بعدی و سایه عمیق (Luxury 3D)</option>
+              <option value="fire3d">آتشین و استروک متالیک (Energetic Pro)</option>
+              <option value="cyberNeon">نئون سایبری و درخشش آبی (Cyber Glow)</option>
+              <option value="minimalClean">مدرن مینیمال سفید (Clean Bold)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>فیلتر نوری پس‌زمینه</label>
+            <select id="lightingStyle">
+              <option value="cinematicDark">تاریک سینمایی با وینیت (Vignette)</option>
+              <option value="studioWarm">نورپردازی گرم استودیویی</option>
+              <option value="gradientBottom">تیرگی محو پایین کادر</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-render" id="genBtn">
+          <span>خلق و رندر پوستر تجاری</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- پنل پیش‌نمایش و رندر -->
+    <div class="panel preview-container">
+      <div class="placeholder-state" id="placeholder">
+        <div class="placeholder-icon">🎨</div>
+        <h3>آماده پردازش و رندر بیلبوردی</h3>
+        <p style="font-size:0.85rem; margin-top:6px;">اطلاعات را وارد کنید و دکمه خلق پوستر را بزنید</p>
+      </div>
+
+      <div class="loading-state" id="loadingState">
+        <div class="custom-loader"></div>
+        <h3>در حال تصویرسازی و کامپوزیت لایه‌ها...</h3>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;">ترکیب تایپوگرافی ۳ بعدی با رزولوشن بالا</p>
+      </div>
+
+      <canvas id="posterCanvas" width="900" height="1350"></canvas>
+
+      <div class="action-bar" id="actionBar">
+        <button class="btn-action btn-download-main" id="downloadBtn">💾 دانلود فایل خروجی (PNG باکیفیت)</button>
+        <button class="btn-action" id="rerenderBtn">🔄 رندر مجدد فونت‌ها</button>
+      </div>
+    </div>
+  </main>
 
   <script>
-    // سیستم ترکیب تصویر و متون فارسی روی بوم (Canvas)
-    function renderFinalPoster(bgImage, data) {
-      const canvas = document.getElementById('posterCanvas');
-      const ctx = canvas.getContext('2d');
-      const w = canvas.width;
-      const h = canvas.height;
-
-      // ۱. رسم پس‌زمینه
-      ctx.clearRect(0, 0, w, h);
-      ctx.drawImage(bgImage, 0, 0, w, h);
-
-      // ۲. ایجاد لایه تیره گرادیانت برای خوانایی عالی متن‌ها
-      const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0, 'rgba(8, 11, 18, 0.88)');
-      grad.addColorStop(0.3, 'rgba(8, 11, 18, 0.35)');
-      grad.addColorStop(0.7, 'rgba(8, 11, 18, 0.45)');
-      grad.addColorStop(1, 'rgba(8, 11, 18, 0.95)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
-
-      // ۳. کادر شیک بیرونی
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(30, 30, w - 60, h - 60);
-
-      // ۴. برچسب بالا (Badge)
-      if (data.badge) {
-        ctx.font = '700 20px "Vazirmatn"';
-        const badgeWidth = ctx.measureText(data.badge).width + 40;
-        const badgeHeight = 42;
-        const badgeX = (w - badgeWidth) / 2;
-        const badgeY = 70;
-
-        ctx.fillStyle = 'rgba(79, 70, 229, 0.45)';
-        ctx.strokeStyle = '#818cf8';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.roundRect(badgeX, badgeY, badgeWidth, badgeHeight, 99);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.textAlign = 'center';
-        ctx.fillText(data.badge, w / 2, badgeY + 28);
-      }
-
-      // ۵. عنوان اصلی (Headline)
-      if (data.headline) {
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '900 52px "Vazirmatn"';
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-        ctx.shadowBlur = 18;
-        ctx.fillText(data.headline, w / 2, 175);
-
-        // خط تزیینی زیر عنوان
-        ctx.shadowBlur = 0;
-        const lineGrad = ctx.createLinearGradient(w / 2 - 120, 0, w / 2 + 120, 0);
-        lineGrad.addColorStop(0, 'transparent');
-        lineGrad.addColorStop(0.5, '#ec4899');
-        lineGrad.addColorStop(1, 'transparent');
-        ctx.fillStyle = lineGrad;
-        ctx.fillRect(w / 2 - 120, 195, 240, 3);
-      }
-
-      // ۶. زیرعنوان / شعار
-      if (data.subhead) {
-        ctx.font = '600 28px "Vazirmatn"';
-        ctx.fillStyle = '#38bdf8';
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-        ctx.shadowBlur = 12;
-        ctx.fillText(data.subhead, w / 2, 245);
-      }
-
-      // ۷. اطلاعات تماس در کادر پایین
-      if (data.contact) {
-        const footW = w - 120;
-        const footH = 65;
-        const footX = 60;
-        const footY = h - 130;
-
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.roundRect(footX, footY, footW, footH, 12);
-        ctx.fill();
-        ctx.stroke();
-
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#f8fafc';
-        ctx.font = '700 22px "Vazirmatn"';
-        ctx.shadowBlur = 6;
-        ctx.fillText(data.contact, w / 2, footY + 41);
+    // موتور غنی‌سازی هوشمند پرامپت عکاسی تبلیغاتی
+    class CommercialVisualEngine {
+      enhance(rawText) {
+        return `commercial advertising product billboard photography, ${rawText}, stunning composition, cinematic rim lighting, 8k resolution, award-winning studio lighting, masterpiece, hyper-realistic, no text`;
       }
     }
 
-    // دکمه شروع ساخت
-    document.getElementById('submitBtn').addEventListener('click', async () => {
-      const promptVal = document.getElementById('prompt').value.trim();
-      const headline = document.getElementById('headline').value.trim();
-      const subhead = document.getElementById('subhead').value.trim();
-      const badge = document.getElementById('badge').value.trim();
-      const contact = document.getElementById('contact').value.trim();
-      const mood = document.getElementById('mood').value;
-
-      if (!promptVal || !headline) {
-        alert("لطفاً حداقل توصیف تصویر و عنوان اصلی را بنویسید.");
-        return;
+    // موتور رندر پیشرفته گرافیکی و تایپوگرافی روی بوم
+    class AdvancedPosterRenderer {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
       }
 
-      const emptyState = document.getElementById('emptyState');
-      const loadingState = document.getElementById('loadingState');
-      const canvas = document.getElementById('posterCanvas');
-      const downloadBtn = document.getElementById('downloadBtn');
-      const submitBtn = document.getElementById('submitBtn');
+      render(bgImage, options) {
+        const ctx = this.ctx;
+        const w = this.canvas.width;
+        const h = this.canvas.height;
 
-      emptyState.style.display = 'none';
-      canvas.style.display = 'none';
-      downloadBtn.style.display = 'none';
-      loadingState.style.display = 'block';
-      submitBtn.disabled = true;
+        // ۱. رسم تصویر پس‌زمینه
+        ctx.drawImage(bgImage, 0, 0, w, h);
 
-      try {
-        // ۱. ترجمه خودکار متن ورودی به انگلیسی بدون ارور
-        let englishPrompt = promptVal;
-        try {
-          const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(promptVal)}`);
-          const json = await res.json();
-          if (json && json[0]) {
-            englishPrompt = json[0].map(item => item[0]).join(' ');
-          }
-        } catch (e) {
-          console.log("استفاده مستقیم از پرامپت ورودی");
+        // ۲. اعمال لایه‌های نور و تیرگی سینمایی بر اساس انتخاب
+        this.applyLighting(options.lightingStyle, w, h);
+
+        // ۳. کادربندی دوبل دور پوستر
+        this.drawBorders(w, h);
+
+        // ۴. پلاک نئونی بالا در صورت وجود
+        if (options.badge && options.badge.trim() !== "") {
+          this.drawBadge(options.badge, w / 2, 105, options.typographyStyle);
         }
 
-        // ۲. بهینه‌سازی پرامپت با تاکید اکید بر نبودن متن در پس‌زمینه
-        const finalPrompt = `${englishPrompt}, poster background backdrop, ${mood}, clean empty space for typography, strictly no text, no words, no letters, no watermark, 8k`;
+        // ۵. تایپوگرافی سه‌بعدی تیتر
+        if (options.headline && options.headline.trim() !== "") {
+          this.draw3DHeadline(options.headline, w / 2, 225, options.typographyStyle);
+        }
 
-        // ۳. ساخت پس‌زمینه
-        const seed = Math.floor(Math.random() * 999999);
-        const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=900&height=1200&seed=${seed}&nologo=true&model=flux`;
+        // ۶. شعار فرعی در کادر شیشه‌ای
+        if (options.subhead && options.subhead.trim() !== "") {
+          this.drawSubhead(options.subhead, w / 2, 305);
+        }
 
-        const bgImg = new Image();
-        bgImg.crossOrigin = 'anonymous';
-        bgImg.src = imgUrl;
+        // ۷. بخش فوتر و اطلاعات تماس
+        if (options.contact && options.contact.trim() !== "") {
+          this.drawFooter(options.contact, 50, h - 130, w - 100, 75);
+        }
+      }
 
+      applyLighting(style, w, h) {
+        const ctx = this.ctx;
+        ctx.save();
+        const grad = ctx.createLinearGradient(0, 0, 0, h);
+
+        if (style === "cinematicDark") {
+          grad.addColorStop(0, 'rgba(0, 0, 0, 0.85)');
+          grad.addColorStop(0.3, 'rgba(0, 0, 0, 0.25)');
+          grad.addColorStop(0.7, 'rgba(0, 0, 0, 0.25)');
+          grad.addColorStop(1, 'rgba(0, 0, 0, 0.95)');
+        } else if (style === "studioWarm") {
+          grad.addColorStop(0, 'rgba(20, 10, 5, 0.8)');
+          grad.addColorStop(0.5, 'rgba(0, 0, 0, 0.15)');
+          grad.addColorStop(1, 'rgba(15, 8, 5, 0.9)');
+        } else {
+          grad.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
+          grad.addColorStop(0.4, 'rgba(0, 0, 0, 0.05)');
+          grad.addColorStop(1, 'rgba(0, 0, 0, 0.92)');
+        }
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+        ctx.restore();
+      }
+
+      drawBorders(w, h) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(35, 35, w - 70, h - 70);
+
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(45, 45, w - 90, h - 90);
+        ctx.restore();
+      }
+
+      drawBadge(text, x, y, style) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.font = '800 22px "Vazirmatn"';
+        const textWidth = ctx.measureText(text).width + 50;
+
+        const grad = ctx.createLinearGradient(x - textWidth/2, y - 20, x + textWidth/2, y + 20);
+        if (style === 'cyberNeon') {
+          grad.addColorStop(0, '#06b6d4');
+          grad.addColorStop(1, '#3b82f6');
+          ctx.shadowColor = 'rgba(6, 182, 212, 0.8)';
+        } else {
+          grad.addColorStop(0, '#ef4444');
+          grad.addColorStop(1, '#f59e0b');
+          ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+        }
+
+        ctx.shadowBlur = 20;
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.roundRect(x - textWidth/2, y - 20, textWidth, 40, 20);
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      }
+
+      draw3DHeadline(text, x, y, style) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.font = '900 68px "Lalezar", "Vazirmatn"';
+
+        // سایه‌های چندلایه عمیق ۳ بعدی
+        for (let i = 7; i > 0; i--) {
+          ctx.fillStyle = `rgba(0, 0, 0, ${0.4 + i * 0.08})`;
+          ctx.fillText(text, x + i, y + i);
+        }
+
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 8;
+        ctx.strokeText(text, x, y);
+
+        // رنگ متن اصلی
+        const grad = ctx.createLinearGradient(x, y - 50, x, y + 10);
+        if (style === 'gold3d') {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.4, '#fde047');
+          grad.addColorStop(1, '#d97706');
+          ctx.shadowColor = '#f59e0b';
+        } else if (style === 'fire3d') {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.3, '#fb923c');
+          grad.addColorStop(1, '#ef4444');
+          ctx.shadowColor = '#ef4444';
+        } else if (style === 'cyberNeon') {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.5, '#67e8f9');
+          grad.addColorStop(1, '#3b82f6');
+          ctx.shadowColor = '#38bdf8';
+        } else {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(1, '#e2e8f0');
+          ctx.shadowColor = 'rgba(255,255,255,0.4)';
+        }
+
+        ctx.shadowBlur = 15;
+        ctx.fillStyle = grad;
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      }
+
+      drawSubhead(text, x, y) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.font = '700 26px "Vazirmatn"';
+        const w = ctx.measureText(text).width + 44;
+
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.lineWidth = 1.5;
+
+        ctx.beginPath();
+        ctx.roundRect(x - w/2, y - 22, w, 44, 10);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#f8fafc';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x, y);
+        ctx.restore();
+      }
+
+      drawFooter(text, x, y, w, h) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.fillStyle = 'rgba(10, 15, 29, 0.75)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.lineWidth = 1.5;
+
+        ctx.beginPath();
+        ctx.roundRect(x, y, w, h, 16);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.font = '600 24px "Vazirmatn"';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x + w / 2, y + h / 2);
+        ctx.restore();
+      }
+    }
+
+    // اتصال و مدیریت فرآیند
+    const form = document.getElementById('posterForm');
+    const canvas = document.getElementById('posterCanvas');
+    const placeholder = document.getElementById('placeholder');
+    const loadingState = document.getElementById('loadingState');
+    const actionBar = document.getElementById('actionBar');
+    const genBtn = document.getElementById('genBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const rerenderBtn = document.getElementById('rerenderBtn');
+
+    const visualEngine = new CommercialVisualEngine();
+    const renderer = new AdvancedPosterRenderer(canvas);
+    let currentLoadedImage = null;
+
+    function getFormData() {
+      return {
+        prompt: document.getElementById('prompt').value,
+        headline: document.getElementById('headline').value,
+        badge: document.getElementById('badgeText').value,
+        subhead: document.getElementById('subhead').value,
+        contact: document.getElementById('contact').value,
+        typographyStyle: document.getElementById('typographyStyle').value,
+        lightingStyle: document.getElementById('lightingStyle').value
+      };
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = getFormData();
+
+      placeholder.style.display = 'none';
+      canvas.style.display = 'none';
+      actionBar.style.display = 'none';
+      loadingState.style.display = 'block';
+      genBtn.disabled = true;
+
+      try {
+        const enhanced = visualEngine.enhance(data.prompt);
+        const encoded = encodeURIComponent(enhanced);
+        const seed = Math.floor(Math.random() * 9999999);
+        const imageUrl = `https://image.pollinations.ai/prompt/${encoded}?width=900&height=1350&seed=${seed}&nologo=true&model=flux`;
+
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
         await new Promise((resolve, reject) => {
-          bgImg.onload = resolve;
-          bgImg.onerror = () => reject(new Error("خطا در دریافت تصویر از سرور"));
+          img.onload = resolve;
+          img.onerror = () => reject(new Error('خطا در بارگذاری تصویر هوش مصنوعی'));
+          img.src = imageUrl;
         });
 
-        // ۴. چاپ متون فارسی و نمایش پوستر نهایی
-        renderFinalPoster(bgImg, { headline, subhead, badge, contact });
+        currentLoadedImage = img;
+        renderer.render(currentLoadedImage, data);
 
         loadingState.style.display = 'none';
         canvas.style.display = 'block';
-        downloadBtn.style.display = 'block';
-
+        actionBar.style.display = 'flex';
       } catch (err) {
-        alert("ارتباط با هوش مصنوعی با خطا مواجه شد. لطفاً اتصال اینترنت خود را بررسی و دوباره تلاش کنید.");
+        alert('متأسفانه در دریافت تصویر مشکلی پیش آمد. لطفاً مجدداً امتحان کنید.');
         console.error(err);
-        emptyState.style.display = 'block';
+        placeholder.style.display = 'block';
         loadingState.style.display = 'none';
       } finally {
-        submitBtn.disabled = false;
+        genBtn.disabled = false;
       }
     });
 
-    // دکمه دانلود
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      const canvas = document.getElementById('posterCanvas');
-      const a = document.createElement('a');
-      a.download = `Poster-${Date.now()}.png`;
-      a.href = canvas.toDataURL('image/png', 1.0);
-      a.click();
+    // رندر مجدد سریع بدون مصرف دوباره اینترنت اگر متن یا استایل عوض شد
+    rerenderBtn.addEventListener('click', () => {
+      if (currentLoadedImage) {
+        renderer.render(currentLoadedImage, getFormData());
+      }
+    });
+
+    // دانلود مستقیم فایل
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = `Poster-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png', 1.0);
+      link.click();
     });
   </script>
 </body>
 </html>
-
