@@ -1,441 +1,851 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PosterStudio Pro 8B — Local AI & Persian Poster Engine</title>
-<style>
-:root{
-  --bg:#050b14;--panel:#0a1526;--line:#1c3554;--text:#f1f5f9;
-  --muted:#8fa6bf;--accent:#6366f1;--accent2:#ec4899;--ok:#10b981;--warn:#f59e0b;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;min-height:100vh;color:var(--text);
-  background:radial-gradient(circle at 15% 10%,#1e1b4b 0,transparent 40%),radial-gradient(circle at 85% 90%,#172554 0,transparent 40%),linear-gradient(135deg,#020617,#0a1120);
-  font-family:Tahoma,"Segoe UI",system-ui,sans-serif;line-height:1.6;
-}
-.app{display:grid;grid-template-columns:420px 1fr;min-height:100vh}
-aside{padding:20px;background:rgba(10,21,38,.96);border-left:1px solid var(--line);overflow-y:auto;max-height:100vh}
-main{min-width:0;padding:22px;display:flex;flex-direction:column;align-items:center;gap:16px;overflow-y:auto;max-height:100vh}
-h1{font-size:20px;margin:0 0 4px;font-weight:900}
-h2{font-size:13.5px;margin:18px 0 10px;color:#cbd5e1;border-bottom:1px solid var(--line);padding-bottom:5px}
-.muted{color:var(--muted);font-size:11.5px}
-.field{margin:10px 0}
-label{display:block;color:#b0c4de;font-size:11.5px;margin-bottom:4px;font-weight:600}
-input,textarea,select{
-  width:100%;border:1px solid var(--line);border-radius:8px;background:#050e1a;
-  color:var(--text);padding:9px 11px;font:inherit;font-size:12.5px;outline:none;
-}
-textarea{min-height:85px;resize:vertical}
-input:focus,textarea:focus,select:focus{border-color:#818cf8}
-.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-button{
-  width:100%;border:0;border-radius:8px;padding:10px;color:white;
-  font:inherit;font-size:12px;font-weight:700;cursor:pointer;
-}
-button:disabled{opacity:.5;cursor:wait}
-.primary{background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.secondary{background:#1e344e}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-canvas{
-  width:min(720px,94vw);height:auto;max-height:76vh;object-fit:contain;
-  background:#020617;border-radius:14px;box-shadow:0 25px 80px rgba(0,0,0,.85);border:1px solid #1e293b;
-}
-.card{width:min(720px,94vw);padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(10,21,38,.85)}
-.status{font-size:12px;color:#cbd5e1;display:flex;align-items:center;gap:6px}
-.status::before{content:"";width:8px;height:8px;background:var(--ok);border-radius:50%;display:inline-block}
-.status.working::before{background:var(--warn);animation:pulse 1s infinite}
-@keyframes pulse{50%{opacity:.3}}
-.analysis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;margin-top:8px}
-.badge{background:#0d1e33;border:1px solid #1c385c;border-radius:7px;padding:7px;font-size:11px;color:#cbd5e1}
-.badge b{display:block;color:#f8fafc;font-size:11.5px;margin-bottom:2px}
-.details-box{margin-top:8px;padding:8px 10px;background:#06101c;border:1px dashed #1e3a5f;border-radius:7px;font-size:11px;color:#94a3b8}
-.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;font-size:11.5px;color:#cbd5e1}
-.toggle-row input{width:auto}
-#toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#047857;
-  color:#ecfdf5;padding:9px 16px;border-radius:8px;opacity:0;pointer-events:none;transition:.25s;z-index:99;font-size:12.5px;font-weight:bold;
-}
-#toast.show{opacity:1}
-@media(max-width:920px){.app{display:block}aside{max-height:none;border-left:0;border-bottom:1px solid var(--line)}main{max-height:none;padding:14px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PosterStudio PRO 8B - استودیو طراحی فوق‌پیشرفته هوش مصنوعی</title>
+    
+    <!-- فونت‌های مدرن فارسی و انگلیسی لوکس -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@400;600;800;900&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- کتابخانه‌های آیکون، رندر و دانلود -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --bg-deep: #05070d;
+            --bg-card: rgba(13, 17, 28, 0.65);
+            --border-glow: rgba(99, 102, 241, 0.25);
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ff007a;
+            --accent-gold: #fbbf24;
+            --gradient-main: linear-gradient(135deg, #00f0ff 0%, #8b5cf6 50%, #ff007a 100%);
+            --gradient-gold: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', 'Outfit', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* پس‌زمینه داینامیک و جلوه‌های نوری زنده */
+        .ambient-sphere {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.28;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatGlow 14s ease-in-out infinite alternate;
+        }
+        .sphere-1 {
+            width: 500px;
+            height: 500px;
+            background: #6366f1;
+            top: -10%;
+            right: -5%;
+        }
+        .sphere-2 {
+            width: 450px;
+            height: 450px;
+            background: #ff007a;
+            bottom: -10%;
+            left: -5%;
+            animation-duration: 18s;
+        }
+        .sphere-3 {
+            width: 350px;
+            height: 350px;
+            background: #00f0ff;
+            top: 40%;
+            left: 20%;
+            animation-duration: 22s;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(60px, 80px) scale(1.15); }
+        }
+
+        /* هدر فوق شیک Glassmorphic */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1.1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 7, 13, 0.7);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-main);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+            transform: rotate(-5deg);
+            transition: transform 0.4s ease;
+        }
+        .brand:hover .brand-logo {
+            transform: rotate(0deg) scale(1.08);
+        }
+        .brand-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .badge-status {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        /* ساختار اصلی */
+        main {
+            position: relative;
+            ztext-fill-color: transparent;
+        }
+        .badge-status {
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-cyan);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        /* ساختار اصلی */
+        main {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            max-width: 1650px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 460px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1150px) {
+            main {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+        }
+
+        /* استایل پنل کنترل و تنظیمات */
+        .glass-panel {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur {
+            width: 100%;
+            background: rgba(5, 7, 13, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 1.1rem;
+            color: #fff;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            outline: none;
+            resize: none;
+            height: 130px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        textarea:focus {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+            background: rgba(5, 7, 13, 0.8);
+        }
+
+        /* کارت گزینه‌های حالت بصری */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .style-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+
+        .style-card.active, .style-card:hover {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* دکمه خلق نئونی با انیمیشن براق */
+        .btn-magic {
+            position: relative;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: 18px;
+            padding: 1.2rem;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #fff;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .btn-magic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: 0.6s;
+        }
+
+        .btn-magic:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(255, 0, 122, 0.5);
+        }
+
+        .btn-magic:hover::before {
+            left: 100%;
+        }
+
+        .btn-magic:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* دکمه‌های کنترلی دانلود و رندوم */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 0.9rem;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255
+            transition: 0.6s;
+        }
+
+        .btn-magic:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 15px 40px rgba(255, 0, 122, 0.5);
+        }
+
+        .btn-magic:hover::before {
+            left: 100%;
+        }
+
+        .btn-magic:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* دکمه‌های کنترلی دانلود و رندوم */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 0.9rem;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.14);
+            transform: translateY(-2px);
+        }
+
+        /* محفظه پیش‌نمایش پوستر */
+        .stage-viewport {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* کادر اصلی پوستر - نسبت استاندارد و فوق لوکس */
+        #poster-;
+            filter: contrast(1.15) brightness(0.85);
+            transition: all 0.8s ease;
+        }
+
+        .poster-tint-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba(5,7,13,0.7) 0%, rgba(5,7,13,0.2) 40%, rgba(5,7,13,0.92) 95%);
+        }
+
+        .poster-glow-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            opacity: 0.3;
+            z-index: 3;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        .poster-grid-decor {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+            z-index: 3;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* محتوای متنی و تایپوگرافی پوستر */
+        .poster-inner-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .poster-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .poster-pill-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: 50px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+        }
+
+        .poster-accent-symbol {
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .poster-center-block {
+            margin: auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .poster-title-text {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1.12;
+            color: #ffffff;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, 0.9);
+            letter-spacing: -0.5px;
+            word-wrap: break-word;
+        }
+
+        .poster-subtitle-text {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            border-right: 3px solid var(--accent-cyan);
+            padding-right: 12px;
+        }
+
+        .poster-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .poster-cta-btn {
+            background: #ffffff;
+            color: #000000;
+            font-weight: 900;
+            font-size: 0.85rem;
+            padding: 10px 22px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.5px;
+        }
+
+        .poster-meta-code {
+            text-align: left;
+            direction: ltr;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        /* لودر چرخشی مدرن */
+        .spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* تگ‌های هوشمند تحلیلی */
+        .ai-insight-box {
+            display: none;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed rgba(0, 240, 255, 0.3);
+            border-radius: 16px;
+            padding: 12px 16px;
+        }
+        .ai-tags-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .ai-tag-chip {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-<div class="app">
-<aside>
-  <h1>🧠 PosterStudio Pro 8B</h1>
-  <div class="muted">موتور تحلیل نیت، کپی‌رایتینگ خودکار و رندر پارامتریک</div>
 
-  <h2>۱. ورودی سناریوی شما</h2>
-  <div class="field">
-    <label for="scenario">سناریوی پوستر (استخراج خودکار تمام پارامترها)</label>
-    <textarea id="scenario">برای رستوران حسین فود یک پوستر تبلیغاتی حرفه‌ای بساز؛ برگر داغ با پنیر کش‌دار، نور قرمز سینمایی، فضای تاریک و جذاب برای جوان‌ها، با تخفیف ویژه امشب و شماره ۰۹۱۲۱۲۳۴۵۶۷</textarea>
-  </div>
-  <button id="analyzeBtn" class="primary">⚡ تحلیل سناریو و کپی‌رایتینگ خودکار</button>
+    <!-- نورهای پس‌زمینه شناور -->
+    <div class="ambient-sphere sphere-1"></div>
+    <div class="ambient-sphere sphere-2"></div>
+    <div class="ambient-sphere sphere-3"></div>
 
-  <h2>۲. خروجی هوشمند متون</h2>
-  <div class="field"><label for="brand">نام برند / کسب‌وکار</label><input id="brand" value="رستوران حسین فود"></div>
-  <div class="field"><label for="title">تیتر اصلی پیشنهادی</label><input id="title" value="انفجار طعم، اوج لذت!"></div>
-  <div class="field"><label for="subtitle">زیرعنوان توصیفی</label><input id="subtitle" value="برگر دست‌ساز ذغالی با پنیر کش‌دار دوبل"></div>
-  <div class="field"><label for="offer">بخش آفر / تخفیف ویژه</label><input id="offer" value="۲۰٪ تخفیف ویژه امشب"></div>
-  <div class="field"><label for="cta">فراخوان اقدام (CTA)</label><input id="cta" value="همین حالا سفارش دهید"></div>
-  <div class="field"><label for="phone">شماره تماس یا آیدی</label><input id="phone" value="۰۹۱۲۱۲۳۴۵۶۷"></div>
+    <!-- نوار هدر مدرن -->
+    <header>
+        <div class="brand">
+            <div class="brand-logo">
+                <i data-lucide="sparkles" style="color: #fff; width: 24px; height: 24px;"></i>
+            </div>
+            <div>
+                <div class="brand-title">PosterStudio Pro 8B</div>
+                <div style="font-size: 0.72rem; color: var(--text-dim);">سیستم مستقل رندر پوستر با هوش مصنوعی</div>
+            </div>
+        </div>
+        <div class="badge-status">
+            <div class="pulse-dot"></div>
+            بدون نیاز به API Key
+        </div>
+    </header>
 
-  <h2>۳. پارامترهای بصری و رندر</h2>
-  <div class="row">
-    <div class="field">
-      <label for="palette">پالت رنگی</label>
-      <select id="palette">
-        <option value="cinematicRed">قرمز سینمایی</option>
-        <option value="midnightGold">طلایی لوکس</option>
-        <option value="cyberPurple">نئون بنفش</option>
-        <option value="electricBlue">آبی مدرن</option>
-        <option value="emeraldGreen">سبز ارگانیک</option>
-        <option value="warmAmber">نارنجی گرم</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="format">ابعاد</label>
-      <select id="format">
-        <option value="portrait">عمودی (3:4)</option>
-        <option value="story">استوری (9:16)</option>
-        <option value="square">مربع (1:1)</option>
-        <option value="landscape">افقی (16:9)</option>
-      </select>
-    </div>
-  </div>
-  <div class="row-3">
-    <div class="field">
-      <label for="productCategory">دسته محصول</label>
-      <select id="productCategory">
-        <option value="burger">برگر / غذا</option>
-        <option value="pizza">پیتزا</option>
-        <option value="coffee">کافه / دسر</option>
-        <option value="tech">دیجیتال</option>
-        <option value="fashion">پوشاک</option>
-        <option value="general">عمومی</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="mood">حال‌وهوا</label>
-      <select id="mood">
-        <option value="darkLuxury">تیره و لوکس</option>
-        <option value="appetizing">اشتهابرانگیز</option>
-        <option value="highEnergy">پرهیجان</option>
-        <option value="minimal">مینیمال</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="steamEffect">افکت ویژه</label>
-      <select id="steamEffect">
-        <option value="steam">بخار داغ</option>
-        <option value="particles">ذرات نوری</option>
-        <option value="glow">هاله نئونی</option>
-        <option value="none">بدون افکت</option>
-      </select>
-    </div>
-  </div>
-  <div class="toggle-row"><span>بافت خطوط سینمایی</span><input type="checkbox" id="chkGrid" checked></div>
-  <div class="toggle-row"><span>بج تضمین کیفیت</span><input type="checkbox" id="chkBadge" checked></div>
-  <div class="toggle-row"><span>واترمارک سیستم</span><input type="checkbox" id="chkWatermark" checked></div>
+    <main>
+        <!-- پنل کنترل و هوش تحلیل‌گر -->
+        <div class="glass-panel">
+            <div class="panel-heading">
+                <i data-lucide="cpu" style="color: var(--accent-cyan); width: 24px;"></i>
+                موتور تحلیل معنایی و خلاقیت پوستر
+            </div>
 
-  <button id="renderBtn" class="primary" style="margin-top:12px">🎨 رسم و به‌روزرسانی پوستر</button>
-  <div class="btn-group">
-    <button id="downloadPng" class="secondary">📥 دریافت PNG</button>
-    <button id="downloadSvg" class="secondary">📥 دریافت SVG</button>
-  </div>
-  <button id="resetBtn" class="secondary" style="margin-top:8px;background:#2d1219">🔄 بازنشانی تنظیمات</button>
-</aside>
+            <div class="input-group">
+                <div class="input-label">
+                    <span>ایده، سناریو یا متن کامل پوستر:</span>
+                    <span style="font-size: 0.75rem; color: var(--accent-purple);">تحلیل کامل کلمات و جملات</span>
+                </div>
+                <textarea id="prompt-input" placeholder="مثال: یک همایش بزرگ در مورد آینده متاورس و رباتیک در تهران، می‌خوام حال‌وهوای تاریک و نئونی داشته باشه و نوشته‌ها بسیار پرانرژی و جذاب باشن..."></textarea>
+            </div>
 
-<main>
-  <div class="card">
-    <div id="status" class="status">آماده؛ سناریوی خود را بنویسید یا تغییر دهید</div>
-    <div id="analysisBadges" class="analysis-grid"></div>
-    <div id="promptDetails" class="details-box" style="display:none"></div>
-  </div>
-  <canvas id="posterCanvas" width="900" height="1200"></canvas>
-</main>
-</div>
-<div id="toast">پیام سیستم</div>
+            <div class="input-group">
+                <div class="input-label">
+                    <span>استایل بصری منتخب:</span>
+                </div>
+                <div class="style-grid">
+                    <div class="style-card active" onclick="setStyle('auto', this)">🧠 تحلیل هوشمند خودکار</div>
+                    <div class="style-card" onclick="setStyle('cyber', this)">⚡ سایبرپانک و گیمینگ</div>
+                    <div class="style-card" onclick="setStyle('minimal', this)">💎 فوق لوکس و مینیمال</div>
+                    <div class="style-card" onclick="setStyle('event', this)">🎪 فستیوال و کنسرت</div>
+                </div>
+            </div>
 
-<script>
-const palettes = {
-  cinematicRed: { bg1:"#1a0408", bg2:"#080103", accent:"#ef4444", glow:"rgba(239,68,68,0.45)", badgeBg:"#dc2626", badgeText:"#fff" },
-  midnightGold: { bg1:"#141108", bg2:"#050402", accent:"#f59e0b", glow:"rgba(245,158,11,0.40)", badgeBg:"#d97706", badgeText:"#1a0f00" },
-  cyberPurple:  { bg1:"#150824", bg2:"#06010d", accent:"#a855f7", glow:"rgba(168,85,247,0.45)", badgeBg:"#9333ea", badgeText:"#fff" },
-  electricBlue: { bg1:"#061324", bg2:"#01060d", accent:"#38bdf8", glow:"rgba(56,189,248,0.40)", badgeBg:"#0284c7", badgeText:"#fff" },
-  emeraldGreen: { bg1:"#041a12", bg2:"#010805", accent:"#10b981", glow:"rgba(16,185,129,0.40)", badgeBg:"#059669", badgeText:"#fff" },
-  warmAmber:    { bg1:"#210e05", bg2:"#0a0401", accent:"#f97316", glow:"rgba(249,115,22,0.45)", badgeBg:"#ea580c", badgeText:"#fff" }
-};
-const formatSizes = { portrait:[900,1200], story:[900,1600], square:[1080,1080], landscape:[1280,720] };
+            <!-- جعبه تگ‌های استخراج شده توسط هوش مصنوعی -->
+            <div class="ai-insight-box" id="ai-insight">
+                <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">المان‌های کشف‌شده در پرامپت شما:</div>
+                <div class="ai-tags-wrap" id="ai-tags"></div>
+            </div>
 
-function normalizeText(s){
-  if(!s) return "";
-  return s.replace(/[\u064B-\u065F]/g,"").replace(/ي/g,"ی").replace(/ك/g,"ک")
-    .replace(/[\u200C\u200D]/g," ").replace(/[٠-٩]/g,d=>d.charCodeAt(0)-1632)
-    .replace(/[۰-۹]/g,d=>d.charCodeAt(0)-1776).toLowerCase().trim();
-}
+            <button class="btn-magic" id="btn-generate" onclick="generateVisualPoster()">
+                <div class="spinner" id="spinner"></div>
+                <i data-lucide="wand-2" id="btn-icon" style="width: 20px;"></i>
+                <span id="btn-text">تحلیل پرامپت و رندر آنی پوستر</span>
+            </button>
 
-class ScenarioAnalyzer {
-  constructor(raw){ this.raw = raw; this.clean = normalizeText(raw); }
-  extractBrand(){
-    const m = this.raw.match(/(?:برای|جهت|تبلیغ|پوستر)\s+(?:رستوران|فست\s*فود|کافه|برند|فروشگاه)?\s*([A-Za-z0-9\u0600-\u06FF\s]{2,22}?)(?:یک|،|,|\.|
-|$)/i);
-    if(m && m[1] && m[1].trim().length > 2) return m[1].trim();
-    return "رستوران حسین فود";
-  }
-  extractContact(){
-    const m = this.raw.match(/(?:۰۹|09|\+989)[0-9۰-۹\s\-]{8,14}/);
-    return m ? m[0].trim() : "۰۹۱۲ ۱۲۳ ۴۵۶۷";
-  }
-  detectCategory(){
-    const c = this.clean;
-    if(/برگر|همبرگر|چیزبرگر|ساندویچ|گریل/.test(c)) return "burger";
-    if(/پیتزا|پپرونی|پنیر پیتزا|تنوری/.test(c)) return "pizza";
-    if(/قهوه|کافه|اسپرسو|لاته|کیک/.test(c)) return "coffee";
-    if(/موبایل|گوشی|لپ تاپ|دیجیتال|هدفون/.test(c)) return "tech";
-    if(/لباس|پوشاک|کفش|مد|مزون/.test(c)) return "fashion";
-    return "general";
-  }
-  detectPalette(cat){
-    const c = this.clean;
-    if(/قرمز|آتش|تند|سینمایی/.test(c)) return "cinematicRed";
-    if(/طلایی|لوکس|لاکچری|خاص/.test(c)) return "midnightGold";
-    if(/بنفش|نئون|سایبر|گیم/.test(c)) return "cyberPurple";
-    if(/آبی|تکنولوژی|سرد/.test(c)) return "electricBlue";
-    if(/سبز|طبیعی|ارگانیک/.test(c)) return "emeraldGreen";
-    if(/نارنجی|گرم|لذیذ/.test(c)) return "warmAmber";
-    return cat==="burger"?"cinematicRed":(cat==="coffee"?"midnightGold":"warmAmber");
-  }
-  detectMood(){
-    const c = this.clean;
-    if(/لوکس|تیره|لاکچری/.test(c)) return "darkLuxury";
-    if(/داغ|لذیذ|پنیر|اشتها/.test(c)) return "appetizing";
-    if(/جوان|انرژی|تخفیف|هیجان/.test(c)) return "highEnergy";
-    return "darkLuxury";
-  }
-  detectOffer(){
-    const m = this.raw.match(/(\d{1,2}|[۰-۹]{1,2})\s*%\s*(?:تخفیف)?/);
-    if(m) return `${m[1]}٪ تخفیف ویژه`;
-    if(/تخفیف/.test(this.clean)) return "تخفیف ویژه امشب";
-    return "پیشنهاد شگفت‌انگیز این هفته";
-  }
-  generateCopy(cat){
-    const bank = {
-      burger:{ t:"انفجار طعم واقعی!", sub:"برگر دست‌ساز ذغالی با پنیر کش‌دار دوبل", cta:"سفارش آنلاین با ارسال گرم" },
-      pizza:{ t:"عطر تنور، کش بی‌نهایت پنیر!", sub:"خمیر دست‌ساز ایتالیایی و تازه‌ترین مخلفات", cta:"تحویل فوری در ۳۰ دقیقه" },
-      coffee:{ t:"یک فنجان آرامش اصیل", sub:"دانه‌های برشته‌کاری شده ۱۰۰٪ تخصصی", cta:"رزرو میز و منوی باریستا" },
-      tech:{ t:"نسل جدید سرعت و نوآوری", sub:"طراحی فوق باریک با پردازش هوشمند", cta:"خرید با گارانتی معتبر" },
-      fashion:{ t:"استایل خاص، امضای شماست", sub:"کالکشن اختصاصی فصل با دوخت ممتاز", cta:"مشاهده کالکشن جدید" },
-      general:{ t:"کیفیت بی‌نظیر، انتخابی ماندگار", sub:"ارائه بهترین خدمات با قیمت استثنایی", cta:"همین حالا سفارش دهید" }
-    };
-    return bank[cat] || bank.general;
-  }
-  analyzeAll(){
-    const brand = this.extractBrand(), cat = this.detectCategory();
-    const copy = this.generateCopy(cat);
-    return {
-      brand, category:cat, palette:this.detectPalette(cat), mood:this.detectMood(),
-      offer:this.detectOffer(), phone:this.extractContact(),
-      title:copy.t, subtitle:copy.sub, cta:copy.cta,
-      steamEffect:(cat==="burger"||cat==="pizza"||cat==="coffee")?"steam":"particles"
-    };
-  }
-}
+            <div class="action-grid">
+                <button class="btn-secondary" onclick="exportHighRes()">
+                    <i data-lucide="download" style="width: 18px; color: var(--accent-cyan);"></i>
+                    دانلود کیفیت بالا (HD)
+                </button>
+                <button class="btn-secondary" onclick="cycleTypography()">
+                    <i data-lucide="palette" style="width: 18px; color: var(--accent-pink);"></i>
+                    تغییر افکت رنگ و نور
+                </button>
+            </div>
+        </div>
 
-class CanvasPosterRenderer {
-  constructor(id){ this.canvas = document.getElementById(id); this.ctx = this.canvas.getContext("2d"); }
-  setSize(fmt){ const [w,h] = formatSizes[fmt] || formatSizes.portrait; this.canvas.width = w; this.canvas.height = h; }
-  drawBackground(p, grid){
-    const w=this.canvas.width, h=this.canvas.height, ctx=this.ctx;
-    const g = ctx.createRadialGradient(w*.5, h*.45, w*.05, w*.5, h*.5, w*.95);
-    g.addColorStop(0, p.bg1); g.addColorStop(.65, p.bg2); g.addColorStop(1, "#020408");
-    ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+        <!-- میز کار و بوم پوستر -->
+        <div class="stage-viewport">
+            <div id="poster-artboard">
+                <!-- تصویر پس‌زمینه با هوش مصنوعی و منابع استودیو -->
+                <img id="poster-bg" class="poster-bg-photo" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" crossorigin="anonymous" alt="AI Generated BG">
+                <div class="poster-tint-overlay" id="poster-tint"></div>
+                <div class="poster-grid-decor"></div>
+                <div class="poster-glow-circle" id="poster-glow"></div>
 
-    const spot = ctx.createRadialGradient(w*.5, h*.48, 10, w*.5, h*.48, w*.55);
-    spot.addColorStop(0, p.glow); spot.addColorStop(1, "transparent");
-    ctx.fillStyle = spot; ctx.fillRect(0,0,w,h);
+                <!-- لایه متون با تایپوگرافی خیره‌کننده -->
+                <div class="poster-inner-content">
+                    <div class="poster-header">
+                        <div class="poster-pill-badge" id="poster-badge">✦ NEXUS SUMMIT 2026</div>
+                        <div class="poster-accent-symbol">✦ ✦</div>
+                    </div>
 
-    if(grid){
-      ctx.save(); ctx.globalAlpha = 0.08; ctx.strokeStyle = p.accent; ctx.lineWidth = 1.5;
-      for(let x=-h; x<w+h; x+=65){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x+h*.7,h); ctx.stroke(); }
-      ctx.restore();
-    }
-  }
-  fitText(txt, maxW, font){
-    const ctx = this.ctx; ctx.font = font;
-    if(ctx.measureText(txt).width <= maxW) return txt;
-    let out = txt;
-    while(out.length && ctx.measureText(out + "…").width > maxW) out = out.slice(0,-1);
-    return out + "…";
-  }
-  drawBurger(cx, cy, r){
-    const ctx = this.ctx;
-    ctx.fillStyle = "#c2782b"; ctx.beginPath(); ctx.ellipse(cx, cy+r*.65, r*1.1, r*.25, 0, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle = "#22c55e"; ctx.beginPath(); ctx.ellipse(cx, cy+r*.45, r*1.18, r*.22, 0, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle = "#451a03"; ctx.beginPath(); ctx.ellipse(cx, cy+r*.3, r*1.15, r*.26, 0, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle = "#facc15"; ctx.beginPath();
-    ctx.moveTo(cx-r*1.05, cy+r*.15);
-    ctx.quadraticCurveTo(cx-r*.5, cy+r*.45, cx-r*.3, cy+r*.2);
-    ctx.quadraticCurveTo(cx, cy+r*.55, cx+r*.3, cy+r*.2);
-    ctx.quadraticCurveTo(cx+r*.7, cy+r*.48, cx+r*1.05, cy+r*.15);
-    ctx.quadraticCurveTo(cx, cy+r*.02, cx-r*1.05, cy+r*.15);
-    ctx.fill();
-    ctx.fillStyle = "#dc2626"; ctx.beginPath(); ctx.ellipse(cx, cy-r*.05, r*1.08, r*.22, 0, 0, Math.PI*2); ctx.fill();
-    const bunG = ctx.createLinearGradient(cx, cy-r*.85, cx, cy-r*.1);
-    bunG.addColorStop(0,"#e08a3c"); bunG.addColorStop(1,"#9a4e13");
-    ctx.fillStyle = bunG; ctx.beginPath(); ctx.ellipse(cx, cy-r*.25, r*1.12, r*.48, 0, Math.PI, 0); ctx.fill();
-    ctx.fillStyle = "#fef3c7";
-    for(let i=0;i<12;i++){
-      let ang=(i/12)*Math.PI*0.8+0.35, kx=cx+Math.cos(ang)*(r*.85)*(0.4+(i%3)*0.25), ky=(cy-r*.35)-Math.sin(ang)*(r*.35)+((i%2)*10);
-      ctx.fillRect(kx-5, ky-2, 10, 3.5);
-    }
-  }
-  drawProduct(cat, p, eff){
-    const w=this.canvas.width, h=this.canvas.height, ctx=this.ctx, cx=w*.5, cy=h*.51, r=Math.min(w,h)*.22;
-    ctx.save();
-    ctx.shadowColor = p.accent; ctx.shadowBlur = r*.35;
-    if(cat==="burger") this.drawBurger(cx, cy, r);
-    else {
-      ctx.fillStyle = p.accent; ctx.beginPath(); ctx.roundRect(cx-r*.8, cy-r*.8, r*1.6, r*1.6, 26); ctx.fill();
-      ctx.fillStyle = "#0a1120"; ctx.beginPath(); ctx.roundRect(cx-r*.65, cy-r*.65, r*1.3, r*1.3, 18); ctx.fill();
-      ctx.fillStyle = "#fff"; ctx.font = `bold ${r*.55}px Tahoma`; ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText("★", cx, cy);
-    }
-    ctx.restore();
-    if(eff==="steam"){
-      ctx.save(); ctx.globalAlpha=0.35; ctx.strokeStyle="#fff"; ctx.lineWidth=Math.max(3,r*.04); ctx.lineCap="round";
-      for(let i=-1; i<=1; i++){
-        let ox=i*(r*.38), sy=cy-r*.7;
-        ctx.beginPath(); ctx.moveTo(cx+ox, sy);
-        ctx.bezierCurveTo(cx+ox+(i?25:-25), sy-r*.35, cx+ox-(i?25:-25), sy-r*.7, cx+ox, sy-r*1.05);
-        ctx.stroke();
-      }
-      ctx.restore();
-    }
-  }
-  drawTypography(d, p, opt){
-    const w=this.canvas.width, h=this.canvas.height, ctx=this.ctx;
-    ctx.textAlign="center"; ctx.direction="rtl";
-    ctx.fillStyle = p.accent; ctx.font = `bold ${Math.max(16, w*.024)}px Tahoma`;
-    ctx.fillText(d.brand || "پوستر تبلیغاتی حرفه‌ای", w*.5, h*.07);
+                    <div class="poster-center-block">
+                        <h1 class="poster-title-text" id="poster-title">آینده نامحدود هوش مصنوعی</h1>
+                        <p class="poster-subtitle-text" id="poster-subtitle">رویدادی پیشگامانه برای طراحان و توسعه‌دهندگان سراسر جهان</p>
+                    </div>
 
-    ctx.save(); ctx.shadowColor="#000"; ctx.shadowBlur=18; ctx.fillStyle="#fff";
-    ctx.font = `900 ${Math.max(28, w*.068)}px Tahoma`;
-    ctx.fillText(this.fitText(d.title, w*.88, ctx.font), w*.5, h*.15); ctx.restore();
+                    <div class="poster-footer">
+                        <div class="poster-cta-btn" id="poster-cta">رزرو صندلی VIP</div>
+                        <div class="poster-meta-code" id="poster-meta">
+                            EDITION 2026<br>
+                            SEC-08 // TOKYO - TEHRAN
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-    ctx.fillStyle = "rgba(255,255,255,0.85)"; ctx.font = `${Math.max(15, w*.027)}px Tahoma`;
-    ctx.fillText(this.fitText(d.subtitle, w*.84, ctx.font), w*.5, h*.205);
+    <script>
+        lucide.createIcons();
 
-    if(d.offer){
-      const bw=w*.76, bh=Math.max(54, h*.072), bx=(w-bw)/2, by=h*.77;
-      ctx.save(); ctx.shadowColor=p.accent; ctx.shadowBlur=18; ctx.fillStyle=p.badgeBg;
-      ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 15); ctx.fill(); ctx.restore();
-      ctx.fillStyle = p.badgeText; ctx.font = `900 ${Math.max(18, w*.038)}px Tahoma`;
-      ctx.fillText(this.fitText(d.offer, bw*.9, ctx.font), w*.5, by+bh*.62);
-    }
-    if(d.cta || d.phone){
-      ctx.fillStyle="#fff"; ctx.font = `bold ${Math.max(15, w*.028)}px Tahoma`;
-      ctx.fillText(this.fitText(`${d.cta||"سفارش سریع"} | ☎ ${d.phone||""}`, w*.9, ctx.font), w*.5, h*.89);
-    }
-    if(opt.showBadge){
-      const bx=w*.84, by=h*.32, br=Math.max(28, w*.052);
-      ctx.save(); ctx.fillStyle=p.accent; ctx.beginPath(); ctx.arc(bx,by,br,0,Math.PI*2); ctx.fill();
-      ctx.fillStyle="#fff"; ctx.font=`bold ${br*.42}px Tahoma`; ctx.fillText("۱۰۰٪", bx, by-2);
-      ctx.font=`bold ${br*.3}px Tahoma`; ctx.fillText("تضمینی", bx, by+br*.45); ctx.restore();
-    }
-    if(opt.showWatermark){
-      ctx.fillStyle="rgba(255,255,255,0.45)"; ctx.font=`${Math.max(10, w*.016)}px Tahoma`;
-      ctx.fillText("طراحی‌شده توسط PosterStudio Pro 8B — Local Engine", w*.5, h*.965);
-    }
-  }
-  renderAll(d, pk, fmt, opt){
-    this.setSize(fmt);
-    const p = palettes[pk] || palettes.cinematicRed;
-    this.drawBackground(p, opt.showGrid);
-    this.drawProduct(d.category, p, d.steamEffect);
-    this.drawTypography(d, p, opt);
-  }
-}
+        let currentStyle = 'auto';
 
-function exportSvg(d, pk, fmt){
-  const [w,h] = formatSizes[fmt] || formatSizes.portrait, p = palettes[pk] || palettes.cinematicRed;
-  const esc = (s) => String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="${p.bg1}"/><stop offset="100%" stop-color="#020408"/></linearGradient>
-    <radialGradient id="gl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="${p.accent}" stop-opacity="0.5"/><stop offset="100%" stop-color="${p.accent}" stop-opacity="0"/></radialGradient>
-  </defs>
-  <rect width="100%" height="100%" fill="url(#bg)"/>
-  <circle cx="${w*.5}" cy="${h*.48}" r="${w*.45}" fill="url(#gl)"/>
-  <text x="50%" y="${h*.07}" text-anchor="middle" fill="${p.accent}" font-family="Tahoma" font-size="${w*.024}" font-weight="bold">${esc(d.brand)}</text>
-  <text x="50%" y="${h*.15}" text-anchor="middle" fill="#fff" font-family="Tahoma" font-size="${w*.068}" font-weight="900">${esc(d.title)}</text>
-  <text x="50%" y="${h*.205}" text-anchor="middle" fill="#fff" fill-opacity="0.85" font-family="Tahoma" font-size="${w*.027}">${esc(d.subtitle)}</text>
-  <ellipse cx="${w*.5}" cy="${h*.51}" rx="${w*.22}" ry="${h*.08}" fill="${p.accent}" fill-opacity="0.85"/>
-  <rect x="${w*.12}" y="${h*.77}" width="${w*.76}" height="${h*.072}" rx="15" fill="${p.badgeBg}"/>
-  <text x="50%" y="${h*.815}" text-anchor="middle" fill="${p.badgeText}" font-family="Tahoma" font-size="${w*.038}" font-weight="900">${esc(d.offer)}</text>
-  <text x="50%" y="${h*.89}" text-anchor="middle" fill="#fff" font-family="Tahoma" font-size="${w*.028}" font-weight="bold">${esc(d.cta)} | ☎ ${esc(d.phone)}</text>
-</svg>`;
-}
+        function setStyle(style, element) {
+            currentStyle = style;
+            document.querySelectorAll('.style-card').forEach(el => el.classList.remove('active'));
+            element.classList.add('active Pier');
+            element.classList.add('active');
+        }
 
-const $ = (id) => document.getElementById(id);
-const renderer = new CanvasPosterRenderer("posterCanvas");
+        // دیتابیس هوشمند پس‌زمینه‌های حرفه‌ای و استایل‌های متناسب بدون نیاز به API
+        const assetVault = {
+            cyber: {
+                bgs: [
+                    'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1200&auto=format&fit=crop'
+                ],
+                glow: '#00f0ff',
+                titleColor: '#00f0ff',
+                tint: 'linear-gradient(180deg, rgba(8,5,20,0.6) 0%, rgba(5,2,15,0.2) 40%, rgba(3,1,10,0.95) 90%)'
+            },
+            minimal: {
+                bgs: [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop'
+                ],
+                glow: '#fbbf24',
+                titleColor: '#ffffff',
+                tint: 'linear-gradient(180deg, rgba(15,12,8,0.7) 0%, rgba(20,15,10,0.1) 40%, rgba(10,8,5,0.95) 90%)'
+            },
+            event: {
+                bgs: [
+                    'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1200&auto=format&fit=crop'
+                ],
+                glow: '#ff007a',
+                titleColor: '#ff007a',
+                tint: 'linear-gradient(180deg, rgba(20,5,15,0.7) 0%, rgba(20,5,15,0.2)=format&fit=crop'
+                ],
+                glow: '#00f0ff',
+                titleColor: '#00f0ff',
+                tint: 'linear-gradient(180deg, rgba(8,5,20,0.6) 0%, rgba(5,2,15,0.2) 40%, rgba(3,1,10,0.95) 90%)'
+            },
+            minimal: {
+                bgs: [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=1200&auto=format&fit=crop'
+                ],
+                glow: '#fbbf24',
+                titleColor: '#ffffff',
+                tint: 'linear-gradient(180deg, rgba(15,12,8,0.7) 0%, rgba(20,15,10,0.1) 40%, rgba(10,8,5,0.95) 90%)'
+            },
+            event: {
+                bgs: [
+                    'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop',
+                    'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=1200&auto=format&fit=crop'
+                ],
+                glow: '#ff007a',
+                titleColor: '#ff007a',
+                tint: 'linear-gradient(180deg, rgba(20,5,15,0.7) 0%, rgba(20,5,15,0.2)event';
+                tags.push('انرژی بالا', 'طیف سرخ و بنفش', 'محیط استیج');
+            } else {
+                tags.push('ترکیب رنگ هوشمند', 'تایپوگرافی های‌کنتراست', 'فضای مدرن');
+            }
 
-function showToast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2000); }
-function getFormData(){ return { brand:$("brand").value.trim(), title:$("title").value.trim(), subtitle:$("subtitle").value.trim(), offer:$("offer").value.trim(), cta:$("cta").value.trim(), phone:$("phone").value.trim(), category:$("productCategory").value, steamEffect:$("steamEffect").value }; }
-function getRenderOptions(){ return { showGrid:$("chkGrid").checked, showBadge:$("chkBadge").checked, showWatermark:$("chkWatermark").checked }; }
+            if (currentStyle !== 'auto') {
+                detectedTheme = currentStyle;
+            }
 
-function executeAnalysis(){
-  const sc = $("scenario").value;
-  if(!sc.trim()){ showToast("متن سناریو را وارد کنید"); return; }
-  $("status").className = "status working"; $("status").textContent = "در حال تحلیل و استخراج پارامترها...";
-  setTimeout(()=>{
-    const a = new ScenarioAnalyzer(sc); const r = a.analyzeAll();
-    $("brand").value = r.brand; $("title").value = r.title; $("subtitle").value = r.subtitle;
-    $("offer").value = r.offer; $("cta").value = r.cta; $("phone").value = r.phone;
-    $("palette").value = r.palette; $("productCategory").value = r.category;
-    $("mood").value = r.mood; $("steamEffect").value = r.steamEffect;
-    $("analysisBadges").innerHTML = `<div class="badge"><b>برند</b>${r.brand}</div><div class="badge"><b>دسته</b>${r.category}</div><div class="badge"><b>پالت</b>${r.palette}</div><div class="badge"><b>افکت</b>${r.steamEffect}</div>`;
-    $("promptDetails").style.display = "block";
-    $("promptDetails").innerHTML = `<strong>تحلیل هوشمند:</strong> نیت کاربر برای دسته <em>«${r.category}»</em> با پالت <em>«${r.palette}»</em> و متون لحن <em>«${r.mood}»</em> اعمال گردید.`;
-    renderPoster();
-    $("status").className = "status"; $("status").textContent = "تحلیل و رندر با موفقیت تکمیل شد";
-    showToast("پوستر با متون هوشمند تولید شد");
-    saveState();
-  }, 140);
-}
+            // تعیین عنوان اصلی و متن مکمل بر اساس ساختار جمله
+            let title = "رویداد ویژه";
+            let subtitle = clean;
+            let badge = "PREMIUM 2026";
+            let cta = "اطلاعات و رزرو";
 
-function renderPoster(){ renderer.renderAll(getFormData(), $("palette").value, $("format").value, getRenderOptions()); }
-function downloadFile(blob, fn){ const u=URL.createObjectURL(blob), a=document.createElement("a"); a.href=u; a.download=fn; a.click(); setTimeout(()=>URL.revokeObjectURL(u),1000); }
+            if (segments.length >= 2) {
+                title = segments[0];
+                subtitle = segments.slice(1).join(' — ');
+            } else if (segments.length === 1) {
+                if (segments[0].length > 32) {
+                    title = segments[0].substring(0, 26) + "...";
+                    subtitle = segments[0];
+                } else {
+                    title = segments[0];
+                    subtitle = "خلق شده با سیستم تحلیل عمیق پرامپت و پردازش داینامیک گرافیک.";
+                }
+            }
 
-function saveState(){
-  localStorage.setItem("posterStudioState_8b", JSON.stringify({
-    scenario:$("scenario").value, brand:$("brand").value, title:$("title").value,
-    subtitle:$("subtitle").value, offer:$("offer").value, cta:$("cta").value, phone:$("phone").value,
-    palette:$("palette").value, format:$("format").value, category:$("productCategory").value,
-    mood:$("mood").value, steamEffect:$("steamEffect").value
-  }));
-}
-function loadState(){
-  const raw = localStorage.getItem("posterStudioState_8b"); if(!raw) return;
-  try{
-    const s = JSON.parse(raw);
-    for(let k in s){ const el = $(k==="category"?"productCategory":k); if(el) el.value=s[k]; }
-  }catch(e){}
-}
+            if (detectedTheme === 'cyber') {
+                badge = "⚡ CYBER ARENA 2026";
+                cta = "ورود به رقابت";
+            } else if (detectedTheme === 'minimal') {
+                badge = "✦ EXCLUSIVE COLLECTION";
+                cta = "مشاهده کالکشن";
+            } else if (detectedTheme === 'event') {
+                badge = "🎵 LIVE EXPERIENCE";
+                cta = "تهیه بلیت اختصاصی";
+            }
 
-$("analyzeBtn").addEventListener("click", executeAnalysis);
-$("renderBtn").addEventListener("click", ()=>{ renderPoster(); saveState(); showToast("پوستر به‌روز شد"); });
-$("downloadPng").addEventListener("click", ()=> renderer.canvas.toBlob(b=>{ if(b) downloadFile(b,"poster-8b.png"); },"image/png"));
-$("downloadSvg").addEventListener("click", ()=> downloadFile(new Blob([exportSvg(getFormData(),$("palette").value,$("format").value)],{type:"image/svg+xml;charset=utf-8"}),"poster-8b.svg"));
-$("resetBtn").addEventListener("click", ()=>{ localStorage.removeItem("posterStudioState_8b"); location.reload(); });
-["palette","format","productCategory","mood","steamEffect"].forEach(id => $(id).addEventListener("change", ()=>{ renderPoster(); saveState(); }));
-["chkGrid","chkBadge","chkWatermark"].forEach(id => $(id).addEventListener("change", renderPoster));
+            return { theme: detectedTheme, title, subtitle, badge, cta, tags };
+        }
 
-loadState(); executeAnalysis();
-</script>
+        function generateVisualPoster() {
+            const input = document.getElementById('prompt-input').value;
+            if (!input.trim()) {
+                alert('لطفاً یک جمله یا توصیف از پوستر مورد نظرتان بنویسید.');
+                return;
+            }
+
+            const btn = document.getElementById('btn-generate');
+            const spinner = document.getElementById('spinner');
+            const icon = document.getElementById('btn-icon');
+            const btnText = document.getElementById('btn-text');
+
+            btn.disabled = true;
+            spinner.style.display = 'inline-block';
+            icon.style.display = 'none';
+            btnText.innerText = 'در حال تحلیل اجزای جمله و تولید گرافیک...';
+
+            setTimeout(() => {
+                const analysis = processDeepPrompt(input);
+
+                // نمایش تگ‌های تحلیلی
+                const tagsBox = document.getElementById('ai-insight');
+                const tagsWrap = document.getElementById('ai-tags');
+                tagsWrap.innerHTML = '';
+                analysis.tags.forEach(t => {
+                    const chip = document.createElement('span');
+                    chip.className = 'ai-tag-chip';
+                    chip.innerText = '✦ ' + t;
+                    tagsWrap.appendChild(chip);
+                });
+                tagsBox.style.display = 'block';
+
+                // اعمال متن‌های پردازش شده
+                document.getElementById('poster-title').innerText = analysis.title;
+                document.getElementById('poster-subtitle').innerText = analysis.subtitle;
+                document.getElementById('poster-badge').innerText = analysis.badge;
+                document.getElementById('poster-cta').innerText = analysis.cta;
+
+                // بارگذاری تصویر و استایل
+                const assets = assetVault[analysis.theme] || assetVault.general;
+                const randomImg = assets.bgs[Math.floor(Math.random() * assets.bgs.length)];
+                
+                document.getElementById('poster-bg').src = randomImg;
+                document.getElementById('poster-tint').style.background = assets.tint;
+                document.getElementById('poster-glow').style.background = `radial-gradient(circle, ${assets.glow} 0%, transparent 70%)`;
+                
+                const titleEl = document.getElementById('poster-title');
+                titleEl.style.color = assets.titleColor;
+                titleEl.style.textShadow = `0 0 35px ${assets.glow}55, 0 5px 20px rgba(0,0,0,0.9)`;
+
+                btn.disabled = false;
+                spinner.style.display = 'none';
+                icon.style.display = 'inline-block';
+                btnText.innerText = 'تحلیل مجدد و خلق نسخه دیگر';
+            }, 750);
+        }
+
+        function exportHighRes() {
+            const board = document.getElementById('poster-artboard');
+            html2canvas(board, {
+                useCORS: true,
+                scale: 3,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `PosterStudio-${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+            });
+        }
+
+        function cycleTypography() {
+            const colors = ['#00f0ff', '#ff007a', '#fbbf24', '#a855f7', '#38ef7d', '#ffffff'];
+            const chosen = colors[Math.floor(Math.random() * colors.length)];
+            const title = document.getElementById('poster-title');
+            title.style.color = chosen;
+            title.style.textShadow = `0 0 30px ${chosen}88, 0 5px 20px rgba(0,0,0,0.9)`;
+            document.getElementById('poster-glow').style.background = `radial-gradient(circle, ${chosen} 0%, transparent 70%)`;
+        }
+    </script>
 </body>
 </html>
 
