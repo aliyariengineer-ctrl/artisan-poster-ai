@@ -3,111 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PosterStudio Pro 4.0 | استودیو طراحی پوسترهای تبلیغاتی</title>
+  <title>PosterStudio AI 6.0 | تحلیل پیشرفته جمله و طراحی هوشمند</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&family=Bebas+Neue&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;600;700;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090c15;
-      --card: rgba(18, 24, 38, 0.85);
-      --border: rgba(255, 255, 255, 0.08);
+      --bg-dark: #07090e;
+      --panel-bg: rgba(15, 21, 37, 0.78);
+      --border-color: rgba(255, 255, 255, 0.08);
       --accent: #6366f1;
-      --accent-glow: rgba(99, 102, 241, 0.4);
-      --gold: #f59e0b;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+      --text-main: #f8fafc;
+      --text-dim: #94a3b8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
       font-family: 'Vazirmatn', sans-serif;
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12), transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.08), transparent 40%);
+        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(236, 72, 153, 0.12), transparent 45%);
       padding: 24px;
+      overflow-x: hidden;
     }
 
-    .app-header {
-      max-width: 1400px;
-      margin: 0 auto 24px;
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 28px;
-      background: var(--card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
+      padding: 18px 30px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border-color);
       border-radius: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 15px;
     }
 
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), #ec4899);
+    .logo-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--accent-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      box-shadow: 0 0 20px var(--accent-glow);
+      font-size: 1.6rem;
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
     }
 
-    .brand-title h1 {
-      font-size: 1.25rem;
+    .brand h1 {
+      font-size: 1.35rem;
       font-weight: 900;
-      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      background: linear-gradient(to right, #fff, #94a3b8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .brand-title span {
-      font-size: 0.78rem;
-      color: var(--text-muted);
+    .brand p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
     }
 
-    .main-workspace {
-      max-width: 1400px;
-      margin: 0 auto;
+    .ai-badge {
+      font-size: 0.75rem;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .studio-grid {
       display: grid;
-      grid-template-columns: 460px 1fr;
+      grid-template-columns: 480px 1fr;
       gap: 28px;
       align-items: start;
     }
 
-    @media (max-width: 1024px) {
-      .main-workspace { grid-template-columns: 1fr; }
+    @media (max-width: 1080px) {
+      .studio-grid { grid-template-columns: 1fr; }
     }
 
     .panel {
-      background: var(--card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
+      background: var(--panel-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border-color);
       border-radius: 24px;
       padding: 28px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4);
     }
 
-    .section-title {
-      font-size: 1rem;
+    .panel-title {
+      font-size: 1.05rem;
       font-weight: 800;
       margin-bottom: 20px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: #cbd5e1;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 14px;
     }
 
     .form-group {
@@ -123,349 +140,616 @@
     label {
       display: block;
       margin-bottom: 6px;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: var(--text-dim);
     }
 
     input, textarea, select {
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(10, 14, 26, 0.6);
+      border: 1px solid var(--border-color);
+      background: rgba(7, 10, 20, 0.7);
       color: #fff;
       font-size: 0.92rem;
       font-family: inherit;
-      transition: all 0.25s;
+      transition: all 0.25s ease;
     }
 
     input:focus, textarea:focus, select:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
-      background: rgba(10, 14, 26, 0.9);
+      background: rgba(7, 10, 20, 0.95);
     }
 
     textarea {
       resize: vertical;
-      min-height: 85px;
+      min-height: 90px;
     }
 
-    .btn-render {
+    .btn-ai-assist {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed var(--accent);
+      color: #c7d2fe;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 16px;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-ai-assist:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-style: solid;
+    }
+
+    .btn-generate {
       width: 100%;
       padding: 16px;
       border-radius: 14px;
       border: none;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
+      background: var(--accent-gradient);
       color: white;
       font-size: 1.05rem;
-      font-weight: 800;
+      font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
-      transition: all 0.25s;
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+      transition: all 0.3s;
       margin-top: 10px;
     }
 
-    .btn-render:hover {
+    .btn-generate:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(99, 102, 241, 0.5);
+      box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
     }
 
-    .btn-render:disabled {
+    .btn-generate:disabled {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    .preview-container {
+    .preview-panel {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 600px;
+      min-height: 640px;
       position: relative;
     }
 
-    .placeholder-state {
+    .placeholder-box {
       text-align: center;
-      color: var(--text-muted);
+      color: var(--text-dim);
       padding: 40px;
     }
 
-    .placeholder-icon {
-      font-size: 3.5rem;
-      margin-bottom: 12px;
-      opacity: 0.7;
+    .placeholder-box .icon {
+      font-size: 4rem;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 0 20px rgba(99,102,241,0.3));
     }
 
-    .loading-state {
+    .loading-box {
       display: none;
       text-align: center;
       padding: 40px;
     }
 
-    .custom-loader {
-      width: 60px;
-      height: 60px;
+    .pulse-ring {
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.05);
-      border-top-color: var(--accent);
+      border: 4px solid rgba(255,255,255,0.06);
+      border-top-color: #6366f1;
       border-bottom-color: #ec4899;
       animation: spin 1s infinite linear;
-      margin: 0 auto 20px;
+      margin: 0 auto 24px;
     }
 
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
     #posterCanvas {
       max-width: 100%;
-      max-height: 620px;
+      max-height: 640px;
       height: auto;
       border-radius: 18px;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.85);
       display: none;
     }
 
-    .action-bar {
+    .preview-actions {
       display: none;
       width: 100%;
       margin-top: 20px;
       gap: 12px;
     }
 
-    .btn-action {
+    .action-btn {
       flex: 1;
-      padding: 13px;
+      padding: 14px;
       border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
       transition: 0.2s;
-      text-decoration: none;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
     }
 
-    .btn-action:hover {
+    .action-btn:hover {
       background: rgba(255, 255, 255, 0.12);
     }
 
-    .btn-download-main {
+    .btn-download {
       background: linear-gradient(135deg, #10b981, #059669);
       border: none;
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    }
+
+    .nlp-feedback {
+      font-size: 0.78rem;
+      color: #38bdf8;
+      margin-top: 6px;
+      display: block;
     }
   </style>
 </head>
 <body>
 
-  <header class="app-header">
-    <div class="brand">
-      <div class="brand-icon">⚡</div>
-      <div class="brand-title">
-        <h1>PosterStudio Pro 4.0</h1>
-        <span>استودیو خلق گرافیک تبلیغاتی با رندر زنده</span>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo-badge">✦</div>
+        <div>
+          <h1>PosterStudio AI 6.0</h1>
+          <p>تحلیل عمیق جملات فارسی و کارگردانی کامپوزیت تجاری</p>
+        </div>
+      </div>
+      <div class="ai-badge">
+        <span>●</span> موتور تحلیل ساختاری NLP فعال است
+      </div>
+    </header>
+
+    <div class="studio-grid">
+      <!-- پنل ورودی -->
+      <div class="panel">
+        <div class="panel-title">
+          <span>🧠 توصیف کامل ایده یا سناریو</span>
+          <span style="font-size:0.75rem; color:var(--text-dim)">تحلیل جمله کامل</span>
+        </div>
+
+        <form id="posterForm">
+          <div class="form-group">
+            <label>جمله یا توصیف سناریو (هرچقدر با جزئیات‌تر باشد، نتیجه بهتر است)</label>
+            <textarea id="promptInput" placeholder="مثال: یک همبرگر دست‌ساز دوبل با پنیر گودای آب‌شده روی تخته‌چوب که کنارش سس باربیکیو و سیب‌زمینی برشته در نوری تاریک و دودی قرار دارد..." required></textarea>
+            <span class="nlp-feedback" id="nlpFeedback"></span>
+          </div>
+
+          <button type="button" class="btn-ai-assist" id="autoCopyBtn">✨ تحلیل جمله و پیشنهاد خودکار تیتر و شعار</button>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>عنوان اصلی (تیتر سه‌بعدی)</label>
+              <input type="text" id="headlineInput" placeholder="مثلاً: رویال برگر دودی" required />
+            </div>
+            <div class="form-group">
+              <label>برچسب تبلیغاتی (Badge)</label>
+              <input type="text" id="badgeInput" placeholder="مثلاً: ویژه امشب / ۳۰٪ تخفیف" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>شعار فرعی یا توضیحات محصول</label>
+            <input type="text" id="subheadInput" placeholder="مثلاً: تجربه‌ای بی‌نظیر از گوشت تازه با طعم اصیل زغالی" />
+          </div>
+
+          <div class="form-group">
+            <label>اطلاعات تماس / آدرس / پیج</label>
+            <input type="text" id="contactInput" placeholder="مثلاً: سفارش تلفنی و بیرون‌بر: ۰۲۱-۸۸۸۸۸۸ | @BrandName" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>پالت و تایپوگرافی</label>
+              <select id="styleSelect">
+                <option value="luxuryGold">طلایی درخشان و متالیک (Gold Master)</option>
+                <option value="cyberNeon">نئون سایبری و الکتریک (Cyber Glow)</option>
+                <option value="gourmetDark">استودیویی سینمایی و دودی (Cinematic Pro)</option>
+                <option value="cleanModern">مینیمال شیک و روشن (Clean Modern)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>افکت‌های لایه گرافیکی</label>
+              <select id="fxSelect">
+                <option value="sparks">ذرات معلق نورانی و دود (Sparks & Smoke)</option>
+                <option value="bokeh">بوکه نورانی سینمایی (Cinematic Bokeh)</option>
+                <option value="clean">کادربندی بیلبوردی خالص (Minimal Frame)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-generate" id="generateBtn">
+            <span>🚀 خلق پوستر با تحلیل عمیق سناریو</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- پنل پیش‌نمایش -->
+      <div class="panel preview-panel">
+        <div class="placeholder-box" id="placeholder">
+          <div class="icon">🌌</div>
+          <h3 style="font-size:1.2rem; margin-bottom:6px;">آماده رندر سناریوی شما</h3>
+          <p style="font-size:0.85rem;">جمله مورد نظر خود را بنویسید؛ سیستم کل مفاهیم، اشیاء، نور و لحن را پردازش می‌کند.</p>
+        </div>
+
+        <div class="loading-box" id="loadingState">
+          <div class="pulse-ring"></div>
+          <h3 style="font-size:1.15rem; margin-bottom:8px;">در حال درک معنایی و ساخت صحنه...</h3>
+          <p style="font-size:0.85rem; color:var(--text-dim);" id="loadingStatusText">تجزیه گرامری عبارات و رندر هوشمند استودیویی</p>
+        </div>
+
+        <canvas id="posterCanvas" width="900" height="1350"></canvas>
+
+        <div class="preview-actions" id="previewActions">
+          <button class="action-btn btn-download" id="downloadBtn">💾 دانلود فایل خروجی (PNG باکیفیت)</button>
+          <button class="action-btn" id="liveRefreshBtn">🎨 رندر مجدد لایه‌ها و متن</button>
+        </div>
       </div>
     </div>
-  </header>
-
-  <main class="main-workspace">
-    <!-- پنل فرم و ورودی‌ها -->
-    <div class="panel">
-      <div class="section-title">⚙️ مشخصات و محتوای پوستر</div>
-      
-      <form id="posterForm">
-        <div class="form-group">
-          <label>توصیف صحنه و تصویر (Prompt به زبان دلخواه)</label>
-          <textarea id="prompt" placeholder="مثلاً: بطری عطر لوکس شیشه‌ای روی آب با انعکاس نور مهتاب و قطرات کریستالی..." required></textarea>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>عنوان اصلی (تیتر)</label>
-            <input type="text" id="headline" placeholder="مثلاً: نام برند یا جشنواره" required />
-          </div>
-          <div class="form-group">
-            <label>برچسب نئونی (Badge)</label>
-            <input type="text" id="badgeText" placeholder="مثلاً: ویژه / ۴۰٪ آف" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>شعار تبلیغاتی</label>
-          <input type="text" id="subhead" placeholder="مثلاً: تجربه‌ای بی‌نظیر از کیفیت و اصالت" />
-        </div>
-
-        <div class="form-group">
-          <label>اطلاعات تماس / دسترسی</label>
-          <input type="text" id="contact" placeholder="مثلاً: وبسایت، آیدی شبکه‌های اجتماعی یا تلفن" />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>استایل تایپوگرافی</label>
-            <select id="typographyStyle">
-              <option value="gold3d">طلایی سه‌بعدی و سایه عمیق (Luxury 3D)</option>
-              <option value="fire3d">آتشین و استروک متالیک (Energetic Pro)</option>
-              <option value="cyberNeon">نئون سایبری و درخشش آبی (Cyber Glow)</option>
-              <option value="minimalClean">مدرن مینیمال سفید (Clean Bold)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>فیلتر نوری پس‌زمینه</label>
-            <select id="lightingStyle">
-              <option value="cinematicDark">تاریک سینمایی با وینیت (Vignette)</option>
-              <option value="studioWarm">نورپردازی گرم استودیویی</option>
-              <option value="gradientBottom">تیرگی محو پایین کادر</option>
-            </select>
-          </div>
-        </div>
-
-        <button type="submit" class="btn-render" id="genBtn">
-          <span>خلق و رندر پوستر تجاری</span>
-        </button>
-      </form>
-    </div>
-
-    <!-- پنل پیش‌نمایش و رندر -->
-    <div class="panel preview-container">
-      <div class="placeholder-state" id="placeholder">
-        <div class="placeholder-icon">🎨</div>
-        <h3>آماده پردازش و رندر بیلبوردی</h3>
-        <p style="font-size:0.85rem; margin-top:6px;">اطلاعات را وارد کنید و دکمه خلق پوستر را بزنید</p>
-      </div>
-
-      <div class="loading-state" id="loadingState">
-        <div class="custom-loader"></div>
-        <h3>در حال تصویرسازی و کامپوزیت لایه‌ها...</h3>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:6px;">ترکیب تایپوگرافی ۳ بعدی با رزولوشن بالا</p>
-      </div>
-
-      <canvas id="posterCanvas" width="900" height="1350"></canvas>
-
-      <div class="action-bar" id="actionBar">
-        <button class="btn-action btn-download-main" id="downloadBtn">💾 دانلود فایل خروجی (PNG باکیفیت)</button>
-        <button class="btn-action" id="rerenderBtn">🔄 رندر مجدد فونت‌ها</button>
-      </div>
-    </div>
-  </main>
+  </div>
 
   <script>
-    // موتور غنی‌سازی هوشمند پرامپت عکاسی تبلیغاتی
-    class CommercialVisualEngine {
-      enhance(rawText) {
-        return `commercial advertising product billboard photography, ${rawText}, stunning composition, cinematic rim lighting, 8k resolution, award-winning studio lighting, masterpiece, hyper-realistic, no text`;
+    // ==========================================
+    // ۱. موتور تحلیل عمیق معنایی جملات (Deep NLP Semantic Synthesizer)
+    // ==========================================
+    class DeepSemanticSynthesizer {
+      constructor() {
+        // دیکشنری گرامری و ساختار شناسی معانی
+        this.conceptMap = {
+          // محصولات و موضوعات اصلی
+          'برگر': 'gourmet juicy artisan burger, melted cheese, fresh lettuce',
+          'پیتزا': 'authentic italian stone-baked pizza with stringy mozzarella and basil',
+          'غذا': 'appetizing gourmet culinary dish',
+          'ساندویچ': 'deluxe gourmet sandwich on artisan bun',
+          'سوخاری': 'crispy golden fried chicken with crunchy crust',
+          'کباب': 'sizzling charcoal grilled skewers with herb garnish',
+          'کافه': 'specialty hot coffee cup with latte art on dark wood table',
+          'قهوه': 'steaming fresh espresso with roasted coffee beans',
+          'اسپرسو': 'rich dark espresso cup with golden crema',
+          'عطر': 'luxury designer perfume glass bottle with crystal facets',
+          'ادکلن': 'high-end luxury fragrance bottle with fine mist spray',
+          'پوست': 'premium skincare cosmetic serum bottle with hyaluronic droplets',
+          'آرایشی': 'luxury cosmetic makeup product with silky texture',
+          'ماشین': 'modern exotic sports luxury car with gleaming reflections',
+          'خودرو': 'high performance sleek luxury automobile in futuristic bay',
+          'کفش': 'stylish designer sneaker hovering in mid-air',
+          'لباس': 'high-fashion designer garment displayed elegantly',
+          'ساعت': 'luxury swiss chronograph watch with detailed dial',
+          'طلا': 'exquisite gold jewelry ring with sparkling diamond',
+          'جواهر': 'gleaming gemstone jewelry necklace',
+          'املاک': 'magnificent modern architectural villa with infinity pool',
+          'معماری': 'award-winning contemporary interior design and architecture',
+          'موبایل': 'futuristic sleek smartphone showcasing edge-to-edge screen',
+          'لپتاپ': 'modern ultrabook laptop on clean minimalist workspace',
+          'آموزش': 'inspirational educational setup with glowing lightbulb concept',
+          'سفر': 'breathtaking exotic travel paradise destination'
+        };
+
+        // مفاهیم نوری و اتمسفر جمله
+        this.moodModifiers = {
+          'دودی': 'wisps of atmospheric aromatic smoke, moody restaurant lighting',
+          'آتش': 'subtle fiery glowing sparks and warm embers',
+          'تاریک': 'dramatic low-key chiaroscuro lighting, deep shadows',
+          'روشن': 'bright natural softbox daylight studio lighting',
+          'لوکس': 'luxurious golden rim lighting, elegant high-end aesthetic',
+          'نئون': 'vibrant cyber neon glow, dynamic electric lighting',
+          'آب': 'crystal clear water splashes, reflective wet surface',
+          'آبدار': 'mouth-watering dripping sauce, succulent texture',
+          'داغ': 'rising hot steam, fresh sizzling appearance',
+          'طبیعت': 'surrounded by organic fresh green foliage and botanical elements',
+          'مدرن': 'sleek minimalist composition, modern commercial shot',
+          'قدیمی': 'rustic vintage wooden texture, nostalgic warm tones'
+        };
+
+        // افکت‌های پویای صحنه
+        this.actionModifiers = {
+          'ریختن': 'dynamic splash freeze-motion shot',
+          'معلق': 'floating explosion of ingredients in mid-air',
+          'ترد': 'crispy textured macro close-up detail',
+          'بخار': 'delicate rising steam curls in backlight',
+          'درخشان': 'sparkling reflective highlights and subtle lens flare'
+        };
+      }
+
+      // تجزیه و سنتز کل جمله به پرامپت استودیویی تجاری
+      synthesize(sentence) {
+        const clean = sentence.trim().toLowerCase();
+        let promptParts = [];
+        let detectedConcepts = [];
+        let detectedMoods = [];
+        let detectedActions = [];
+
+        // الف) یافتن سوژه‌های اصلی درون جمله
+        for (const [key, val] of Object.entries(this.conceptMap)) {
+          if (clean.includes(key)) {
+            promptParts.push(val);
+            detectedConcepts.push(key);
+          }
+        }
+
+        // ب) استخراج اتمسفر و نورپردازی از روی ساختار جمله
+        for (const [key, val] of Object.entries(this.moodModifiers)) {
+          if (clean.includes(key)) {
+            promptParts.push(val);
+            detectedMoods.push(key);
+          }
+        }
+
+        // ج) استخراج افکت‌های حرکتی و جزئیات فیزیکی
+        for (const [key, val] of Object.entries(this.actionModifiers)) {
+          if (clean.includes(key)) {
+            promptParts.push(val);
+            detectedActions.push(key);
+          }
+        }
+
+        // اگر هیچ مفهوم خاصی تطبیق داده نشد، با مدل مفهومی آزاد پردازش شود
+        if (promptParts.length === 0) {
+          promptParts.push(`ultra-realistic advertising commercial hero shot of ${sentence}`);
+        }
+
+        // کامپوزیت نهایی به سبک عکاسی تبلیغاتی بدون حضور بیلبوردهای ناخواسته
+        const finalPrompt = `award-winning commercial advertising product photography, ${promptParts.join(', ')}, professional studio lighting, 8k resolution, razor-sharp focus, cinematic composition, hyper-detailed, clean backdrop, no billboards, no building exterior, no ugly artifacts, no text`;
+
+        return {
+          finalPrompt,
+          detectedConcepts,
+          detectedMoods,
+          detectedActions
+        };
+      }
+
+      // استخراج هوشمند تیتر و شعار از روی محتوای جمله
+      generateContextualCopywriting(sentence) {
+        const clean = sentence.trim().toLowerCase();
+        
+        // استخراج کلمات برجسته ابتدای جمله برای تیتر
+        const words = clean.split(/\s+/);
+        let headline = "تجربه‌ای فراتر از انتظار";
+        let badge = "✨ پیشنهاد ویژه";
+        let subhead = sentence.length > 70 ? sentence.substring(0, 68) + "..." : sentence;
+
+        if (clean.includes('برگر') || clean.includes('پیتزا') || clean.includes('فود') || clean.includes('غذا')) {
+          headline = clean.includes('دوبل') ? "انفجار طعم دوبل" : (clean.includes('دودی') ? "طعم اصیل دودی" : "لذت ناب یک طعم واقعی");
+          badge = clean.includes('تخفیف') ? "⚡ تخفیف استثنایی امشب" : "🔥 برترین کیفیت روز";
+        } else if (clean.includes('قهوه') || clean.includes('کافه') || clean.includes('اسپرسو')) {
+          headline = "عطر و آرامش قهوه ناب";
+          badge = "☕ دانه‌های ۱۰۰٪ عربیکا";
+        } else if (clean.includes('عطر') || clean.includes('ادکلن')) {
+          headline = "رایحه‌ای ماندگار و اشرافی";
+          badge = "💎 ماندگاری و خط بوی بالا";
+        } else if (clean.includes('ماشین') || clean.includes('خودرو')) {
+          headline = "هیجان بی‌پایان سرعت و قدرت";
+          badge = "⚡ مهندسی مدرن و پیشرو";
+        } else if (words.length >= 2) {
+          headline = words.slice(0, 3).join(' ');
+        }
+
+        return {
+          headline,
+          badge,
+          subhead,
+          contact: "سفارش و اطلاعات بیشتر: ۰۲۱-۹۱۰۰۰۰۰۰ | وب‌سایت و اینستاگرام"
+        };
       }
     }
 
-    // موتور رندر پیشرفته گرافیکی و تایپوگرافی روی بوم
-    class AdvancedPosterRenderer {
+    // ==========================================
+    // ۲. موتور کامپوزیت و رندر گرافیکی بوم (Canvas Compositor)
+    // ==========================================
+    class CanvasCompositor {
       constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
       }
 
-      render(bgImage, options) {
+      render(bgImage, data) {
         const ctx = this.ctx;
         const w = this.canvas.width;
         const h = this.canvas.height;
 
-        // ۱. رسم تصویر پس‌زمینه
+        // ۱. رسم تصویر هوش مصنوعی
         ctx.drawImage(bgImage, 0, 0, w, h);
 
-        // ۲. اعمال لایه‌های نور و تیرگی سینمایی بر اساس انتخاب
-        this.applyLighting(options.lightingStyle, w, h);
+        // ۲. لایه‌بندی نوری سینمایی برای ایجاد کنتراست متن‌ها
+        this.drawLightingOverlay(w, h, data.style);
 
-        // ۳. کادربندی دوبل دور پوستر
-        this.drawBorders(w, h);
-
-        // ۴. پلاک نئونی بالا در صورت وجود
-        if (options.badge && options.badge.trim() !== "") {
-          this.drawBadge(options.badge, w / 2, 105, options.typographyStyle);
+        // ۳. کشیدن ذرات و پترن‌های نوری گرافیکی
+        if (data.fx === 'sparks') {
+          this.drawSparklesAndEmbers(w, h);
+        } else if (data.fx === 'bokeh') {
+          this.drawCinematicBokeh(w, h);
         }
 
-        // ۵. تایپوگرافی سه‌بعدی تیتر
-        if (options.headline && options.headline.trim() !== "") {
-          this.draw3DHeadline(options.headline, w / 2, 225, options.typographyStyle);
+        // ۴. خطوط کادربندی نئونی بیلبورد
+        this.drawGraphicFrames(w, h, data.style);
+
+        // ۵. برچسب نئونی بالا
+        if (data.badge && data.badge.trim() !== "") {
+          this.drawNeonBadge(data.badge, w / 2, 110, data.style);
         }
 
-        // ۶. شعار فرعی در کادر شیشه‌ای
-        if (options.subhead && options.subhead.trim() !== "") {
-          this.drawSubhead(options.subhead, w / 2, 305);
+        // ۶. تیتر اصلی سه‌بعدی متالیک
+        if (data.headline && data.headline.trim() !== "") {
+          this.draw3DHeadline(data.headline, w / 2, 230, data.style);
         }
 
-        // ۷. بخش فوتر و اطلاعات تماس
-        if (options.contact && options.contact.trim() !== "") {
-          this.drawFooter(options.contact, 50, h - 130, w - 100, 75);
+        // ۷. شعار فرعی در باکس شیشه‌ای بلور
+        if (data.subhead && data.subhead.trim() !== "") {
+          this.drawGlassSubhead(data.subhead, w / 2, 315);
+        }
+
+        // ۸. نوار لوکس فوتر برای اطلاعات تماس
+        if (data.contact && data.contact.trim() !== "") {
+          this.drawLuxuryFooter(data.contact, 45, h - 135, w - 90, 80, data.style);
         }
       }
 
-      applyLighting(style, w, h) {
+      drawLightingOverlay(w, h, style) {
         const ctx = this.ctx;
         ctx.save();
-        const grad = ctx.createLinearGradient(0, 0, 0, h);
-
-        if (style === "cinematicDark") {
-          grad.addColorStop(0, 'rgba(0, 0, 0, 0.85)');
-          grad.addColorStop(0.3, 'rgba(0, 0, 0, 0.25)');
-          grad.addColorStop(0.7, 'rgba(0, 0, 0, 0.25)');
-          grad.addColorStop(1, 'rgba(0, 0, 0, 0.95)');
-        } else if (style === "studioWarm") {
-          grad.addColorStop(0, 'rgba(20, 10, 5, 0.8)');
-          grad.addColorStop(0.5, 'rgba(0, 0, 0, 0.15)');
-          grad.addColorStop(1, 'rgba(15, 8, 5, 0.9)');
-        } else {
-          grad.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
-          grad.addColorStop(0.4, 'rgba(0, 0, 0, 0.05)');
-          grad.addColorStop(1, 'rgba(0, 0, 0, 0.92)');
-        }
-
-        ctx.fillStyle = grad;
+        
+        const vertGrad = ctx.createLinearGradient(0, 0, 0, h);
+        vertGrad.addColorStop(0, 'rgba(5, 7, 15, 0.90)');
+        vertGrad.addColorStop(0.28, 'rgba(5, 7, 15, 0.22)');
+        vertGrad.addColorStop(0.65, 'rgba(5, 7, 15, 0.25)');
+        vertGrad.addColorStop(1, 'rgba(5, 7, 15, 0.95)');
+        ctx.fillStyle = vertGrad;
         ctx.fillRect(0, 0, w, h);
+
+        const radGrad = ctx.createRadialGradient(w / 2, 230, 20, w / 2, 230, 380);
+        if (style === 'cyberNeon') {
+          radGrad.addColorStop(0, 'rgba(56, 189, 248, 0.25)');
+          radGrad.addColorStop(1, 'transparent');
+        } else {
+          radGrad.addColorStop(0, 'rgba(245, 158, 11, 0.22)');
+          radGrad.addColorStop(1, 'transparent');
+        }
+        ctx.fillStyle = radGrad;
+        ctx.fillRect(0, 50, w, 400);
+
         ctx.restore();
       }
 
-      drawBorders(w, h) {
+      drawSparklesAndEmbers(w, h) {
         const ctx = this.ctx;
         ctx.save();
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(35, 35, w - 70, h - 70);
-
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(45, 45, w - 90, h - 90);
+        const sparksCount = 45;
+        for (let i = 0; i < sparksCount; i++) {
+          const x = (Math.sin(i * 99) * 0.5 + 0.5) * w;
+          const y = (Math.cos(i * 33) * 0.5 + 0.5) * h;
+          const radius = Math.random() * 3.5 + 1;
+          
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = (i % 2 === 0) ? 'rgba(251, 191, 36, 0.85)' : 'rgba(255, 255, 255, 0.9)';
+          ctx.shadowColor = '#f59e0b';
+          ctx.shadowBlur = 12;
+          ctx.fill();
+        }
         ctx.restore();
       }
 
-      drawBadge(text, x, y, style) {
+      drawCinematicBokeh(w, h) {
+        const ctx = this.ctx;
+        ctx.save();
+        for (let i = 0; i < 15; i++) {
+          const x = (Math.sin(i * 123) * 0.5 + 0.5) * w;
+          const y = (Math.cos(i * 456) * 0.5 + 0.5) * h;
+          const radius = Math.random() * 35 + 15;
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      drawGraphicFrames(w, h, style) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.strokeStyle = (style === 'cyberNeon') ? 'rgba(56, 189, 248, 0.28)' : 'rgba(245, 158, 11, 0.3)';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(30, 30, w - 60, h - 60);
+
+        const cornerSize = 24;
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 3;
+
+        ctx.beginPath();
+        ctx.moveTo(30, 30 + cornerSize); ctx.lineTo(30, 30); ctx.lineTo(30 + cornerSize, 30);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(w - 30 - cornerSize, 30); ctx.lineTo(w - 30, 30); ctx.lineTo(w - 30, 30 + cornerSize);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      drawNeonBadge(text, x, y, style) {
         const ctx = this.ctx;
         ctx.save();
         ctx.font = '800 22px "Vazirmatn"';
-        const textWidth = ctx.measureText(text).width + 50;
+        const tw = ctx.measureText(text).width + 56;
+        const th = 44;
 
-        const grad = ctx.createLinearGradient(x - textWidth/2, y - 20, x + textWidth/2, y + 20);
+        const grad = ctx.createLinearGradient(x - tw/2, y - th/2, x + tw/2, y + th/2);
         if (style === 'cyberNeon') {
           grad.addColorStop(0, '#06b6d4');
           grad.addColorStop(1, '#3b82f6');
-          ctx.shadowColor = 'rgba(6, 182, 212, 0.8)';
+          ctx.shadowColor = 'rgba(6, 182, 212, 0.9)';
         } else {
-          grad.addColorStop(0, '#ef4444');
+          grad.addColorStop(0, '#f43f5e');
           grad.addColorStop(1, '#f59e0b');
-          ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+          ctx.shadowColor = 'rgba(244, 63, 94, 0.9)';
         }
 
-        ctx.shadowBlur = 20;
+        ctx.shadowBlur = 24;
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.roundRect(x - textWidth/2, y - 20, textWidth, 40, 20);
+        ctx.roundRect(x - tw/2, y - th/2, tw, th, 22);
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x, y);
+, 30); ctx.lineTo(w - 30, 30 + cornerSize);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      drawNeonBadge(text, x, y, style) {
+        const ctx = this.ctx;
+        ctx.save();
+        ctx.font = '800 22px "Vazirmatn"';
+        const tw = ctx.measureText(text).width + 56;
+        const th = 44;
+
+        const grad = ctx.createLinearGradient(x - tw/2, y - th/2, x + tw/2, y + th/2);
+        if (style === 'cyberNeon') {
+          grad.addColorStop(0, '#06b6d4');
+          grad.addColorStop(1, '#3b82f6');
+          ctx.shadowColor = 'rgba(6, 182, 212, 0.9)';
+        } else {
+          grad.addColorStop(0, '#f43f5e');
+          grad.addColorStop(1, '#f59e0b');
+          ctx.shadowColor = 'rgba(244, 63, 94, 0.9)';
+        }
+
+        ctx.shadowBlur = 24;
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.roundRect(x - tw/2, y - th/2, tw, th, 22);
         ctx.fill();
 
         ctx.shadowBlur = 0;
@@ -480,59 +764,22 @@
         const ctx = this.ctx;
         ctx.save();
         ctx.textAlign = 'center';
-        ctx.font = '900 68px "Lalezar", "Vazirmatn"';
+        ctx.font = '900 70px "Lalezar", "Vazirmatn"';
 
-        // سایه‌های چندلایه عمیق ۳ بعدی
-        for (let i = 7; i > 0; i--) {
-          ctx.fillStyle = `rgba(0, 0, 0, ${0.4 + i * 0.08})`;
-          ctx.fillText(text, x + i, y + i);
-        }
-
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 8;
-        ctx.strokeText(text, x, y);
-
-        // رنگ متن اصلی
-        const grad = ctx.createLinearGradient(x, y - 50, x, y + 10);
-        if (style === 'gold3d') {
-          grad.addColorStop(0, '#ffffff');
-          grad.addColorStop(0.4, '#fde047');
-          grad.addColorStop(1, '#d97706');
-          ctx.shadowColor = '#f59e0b';
-        } else if (style === 'fire3d') {
-          grad.addColorStop(0, '#ffffff');
-          grad.addColorStop(0.3, '#fb923c');
-          grad.addColorStop(1, '#ef4444');
-          ctx.shadowColor = '#ef4444';
-        } else if (style === 'cyberNeon') {
-          grad.addColorStop(0, '#ffffff');
-          grad.addColorStop(0.5, '#67e8f9');
-          grad.addColorStop(1, '#3b82f6');
-          ctx.shadowColor = '#38bdf8';
-        } else {
-          grad.addColorStop(0, '#ffffff');
-          grad.addColorStop(1, '#e2e8f0');
-          ctx.shadowColor = 'rgba(255,255,255,0.4)';
-        }
-
-        ctx.shadowBlur = 15;
-        ctx.fillStyle = grad;
-        ctx.fillText(text, x, y);
-        ctx.restore();
-      }
-
-      drawSubhead(text, x, y) {
+        for (let i = 8; i > 0; i--) {
+          ctx.      drawGlassSubhead(text, x, y) {
         const ctx = this.ctx;
         ctx.save();
-        ctx.font = '700 26px "Vazirmatn"';
-        const w = ctx.measureText(text).width + 44;
+        ctx.font = '700 25px "Vazirmatn"';
+        const tw = ctx.measureText(text).width + 50;
+        const th = 48;
 
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.fillStyle = 'rgba(10, 15, 30, 0.65)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
         ctx.lineWidth = 1.5;
 
         ctx.beginPath();
-        ctx.roundRect(x - w/2, y - 22, w, 44, 10);
+        ctx.roundRect(x - tw/2, y - th/2, tw, th, 12);
         ctx.fill();
         ctx.stroke();
 
@@ -543,104 +790,153 @@
         ctx.restore();
       }
 
-      drawFooter(text, x, y, w, h) {
+      drawLuxuryFooter(text, x, y, w, h, style) {
         const ctx = this.ctx;
         ctx.save();
-        ctx.fillStyle = 'rgba(10, 15, 29, 0.75)';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+        
+        ctx.fillStyle = 'rgba(8, 12, 24, 0.85)';
+        ctx.strokeStyle = (style === 'cyberNeon') ? 'rgba(56, 189, 248, 0.4)' : 'rgba(245, 158, 11, 0.4)';
         ctx.lineWidth = 1.5;
 
         ctx.beginPath();
-        ctx.roundRect(x, y, w, h, 16);
+        ctx.roundRect(x, y, w, h, 18);
         ctx.fill();
         ctx.stroke();
 
-        ctx.font = '600 24px "Vazirmatn"';
-        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '700 24px "Vazirmatn"';
+        ctx.fillStyle = '#ffffff';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(text, x + w / 2, y + h / 2);
+
         ctx.restore();
       }
     }
 
-    // اتصال و مدیریت فرآیند
+    // ==========================================
+    // ۳. کنترلر و رویدادهای اپلیکیشن
+    // ==========================================
+    const promptInput = document.getElementById('promptInput');
+    const headlineInput = document.getElementById('headlineInput');
+    const badgeInput = document.getElementById('badgeInput');
+    const subheadInput = document.getElementById('subheadInput');
+    const contactInput = document.getElementById('contactInput');
+    const styleSelect = document.getElementById('styleSelect');
+    const fxSelect = document.getElementById('fxSelect');
+    const nlpFeedback = document.getElementById('nlpFeedback');
+
     const form = document.getElementById('posterForm');
+    const autoCopyBtn = document.getElementById('autoCopyBtn');
+    const generateBtn = document.getElementById('generateBtn');
     const canvas = document.getElementById('posterCanvas');
     const placeholder = document.getElementById('placeholder');
     const loadingState = document.getElementById('loadingState');
-    const actionBar = document.getElementById('actionBar');
-    const genBtn = document.getElementById('genBtn');
+    const previewActions = document.getElementById('previewActions');
     const downloadBtn = document.getElementById('downloadBtn');
-    const rerenderBtn = document.getElementById('rerenderBtn');
+    const liveRefreshBtn = document.getElementById('liveRefreshBtn');
 
-    const visualEngine = new CommercialVisualEngine();
-    const renderer = new AdvancedPosterRenderer(canvas);
-    let currentLoadedImage = null;
+    const synthesizer = new DeepSemanticSynthesizer();
+    const compositor = new CanvasCompositor(canvas);
+    let loadedImage = null;
+
+    // به‌روزرسانی زنده بازخورد تحلیل جمله هنگام تایپ
+    promptInput.addEventListener('input', () => {
+      const txt = promptInput.value.trim();
+      if (txt.length > 5) {
+        const analysis = synthesizer.synthesize(txt);
+        const tags = [...analysis.detectedConcepts, ...analysis.detectedMoods, ...analysis.detectedActions];
+        if (tags.length > 0) {
+          nlpFeedback.textContent = `🎯 عناصر شناسایی شده در جمله: [ ${tags.join(' • ')} ]`;
+        } else {
+          nlpFeedback.textContent = `🔍 تحلیل مفهوم سناریو به عنوان عکاسی تبلیغاتی تجاری`;
+        }
+      } else {
+        nlpFeedback.textContent = '';
+      }
+    });
+
+    // پیشنهاد هوشمند متن‌ها بر اساس کل جمله
+    autoCopyBtn.addEventListener('click', () => {
+      const sentence = promptInput.value.trim();
+      if (!sentence) {
+        alert('لطفاً ابتدا جمله یا سناریوی مورد نظر خود را بنویسید.');
+        return;
+      }
+      const copy = synthesizer.generateContextualCopywriting(sentence);
+      headlineInput.value = copy.headline;
+      badgeInput.value = copy.badge;
+      subheadInput.value = copy.subhead;
+      contactInput.value = copy.contact;
+    });
 
     function getFormData() {
       return {
-        prompt: document.getElementById('prompt').value,
-        headline: document.getElementById('headline').value,
-        badge: document.getElementById('badgeText').value,
-        subhead: document.getElementById('subhead').value,
-        contact: document.getElementById('contact').value,
-        typographyStyle: document.getElementById('typographyStyle').value,
-        lightingStyle: document.getElementById('lightingStyle').value
+        prompt: promptInput.value,
+        headline: headlineInput.value,
+        badge: badgeInput.value,
+        subhead: subheadInput.value,
+        contact: contactInput.value,
+        style: styleSelect.value,
+        fx: fxSelect.value
       };
     }
 
+    // ارسال فرم و پردازش تصویر
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = getFormData();
 
       placeholder.style.display = 'none';
       canvas.style.display = 'none';
-      actionBar.style.display = 'none';
+      previewActions.style.display = 'none';
       loadingState.style.display = 'block';
-      genBtn.disabled = true;
+      generateBtn.disabled = true;
 
       try {
-        const enhanced = visualEngine.enhance(data.prompt);
-        const encoded = encodeURIComponent(enhanced);
-        const seed = Math.floor(Math.random() * 9999999);
+        // ۱. تحلیل عمیق معنایی جمله و تبدیل به پرامپت استودیویی استاندارد
+        const analysis = synthesizer.synthesize(data.prompt);
+        const encoded = encodeURIComponent(analysis.finalPrompt);
+        const seed = Math.floor(Math.random() * 99999999);
         const imageUrl = `https://image.pollinations.ai/prompt/${encoded}?width=900&height=1350&seed=${seed}&nologo=true&model=flux`;
 
+        // ۲. بارگذاری تصویر
         const img = new Image();
         img.crossOrigin = 'anonymous';
         await new Promise((resolve, reject) => {
           img.onload = resolve;
-          img.onerror = () => reject(new Error('خطا در بارگذاری تصویر هوش مصنوعی'));
+          img.onerror = () => reject(new Error('خطا در بارگذاری تصویر استودیو'));
           img.src = imageUrl;
         });
 
-        currentLoadedImage = img;
-        renderer.render(currentLoadedImage, data);
+        loadedImage = img;
+        
+        // ۳. رندر چندلایه روی کانواس
+        compositor.render(loadedImage, data);
 
         loadingState.style.display = 'none';
         canvas.style.display = 'block';
-        actionBar.style.display = 'flex';
+        previewActions.style.display = 'flex';
       } catch (err) {
-        alert('متأسفانه در دریافت تصویر مشکلی پیش آمد. لطفاً مجدداً امتحان کنید.');
+        alert('در دریافت تصویر خطایی رخ داد، لطفاً دوباره امتحان کنید.');
         console.error(err);
         placeholder.style.display = 'block';
         loadingState.style.display = 'none';
       } finally {
-        genBtn.disabled = false;
+        generateBtn.disabled = false;
       }
     });
 
-    // رندر مجدد سریع بدون مصرف دوباره اینترنت اگر متن یا استایل عوض شد
-    rerenderBtn.addEventListener('click', () => {
-      if (currentLoadedImage) {
-        renderer.render(currentLoadedImage, getFormData());
+    // رندر مجدد بدون دانلود مجدد تصویر در صورت تغییر متون یا استایل
+    liveRefreshBtn.addEventListener('click', () => {
+      if (loadedImage) {
+        compositor.render(loadedImage, getFormData());
       }
     });
 
-    // دانلود مستقیم فایل
+    // دانلود تصویر با رزولوشن اصلی
     downloadBtn.addEventListener('click', () => {
       const link = document.createElement('a');
-      link.download = `Poster-${Date.now()}.png`;
+      link.download = `PosterStudio-${Date.now()}.png`;
       link.href = canvas.toDataURL('image/png', 1.0);
       link.click();
     });
