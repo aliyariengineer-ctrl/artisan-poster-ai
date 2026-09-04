@@ -2,273 +2,10 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="Studio ULTRA - Modern Generative Canvas</title>
-    
-    <!-- فونت‌های رسمی -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <style>
-        :root {
-            --bg-base: #030712;
-            --glass-surface: rgba(15, 23, 42, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --neon-blue: #00f2fe;
-            --neon-purple: #9d4edd;
-            --neon-pink: #ff007f;
-            --neon-emerald: #10b981;
-            --text-high: #f8fafc;
-            --text-mid: #94a3b8;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Vazirmatn', 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg-base);
-            color: var(--text-high);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* --- انیمیشن پس‌زمینه و گوی‌های شناور مدرن --- */
-        .ambient-canvas {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.35;
-            animation: blobPulse 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-        }
-
-        .blob-1 { width: 600px; height: 600px; background: linear-gradient(135deg, #4f46e5, #06b6d4); top: -150px; right: -100px; }
-        .blob-2 { width: 550px; height: 550px; background: linear-gradient(135deg, #ff007f, #7928ca); bottom: -150px; left: -100px; animation-duration: 22s; }
-        .blob-3 { width: 400px; height: 400px; background: #00f2fe; top: 40%; left: 35%; filter: blur(160px); opacity: 0.15; animation-duration: ) 1px, transparent 1px);
-            background-size: 32px 32px;
-            pointer-events: none;
-            z-index: 1;
-            mask-image: radial-gradient(circle5) rotate(90deg); }
-            100% { transform: translate(-40px, 40px) scale(0.95) rotate(180deg); }
-        }
-
-        /* شبکه نقطه‌ای مدرن (Grid Overlay) */
-        .grid-overlay {
-            position: fixed;
-            inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-            background-size: 32px 32px;
-            pointer-events: none;
-            z-index: 1;
-            mask-image: radial-gradient(circle at center, black 40%, transparent 95%);
-        }
-
-        /* هدر شیشه‌ای */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 1.1rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(3, 7, 18, 0.75);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .brand-badge {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
-            position: relative;
-        }
-
-        .brand-badge::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-pink));
-            z-index: -1;
-            opacity: 0.5;
-            filter: blur(6px);
-        }
-
-        .brand-name {
-            font-size: 1.35rem;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 40%, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .model-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            color: var(--neon-blue);
-            font-weight: 700;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
-        }
-
-        .pulsing-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--neon-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-blue);
-            animation: blink 1.5s infinite ease-in-out;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.8); } }
-
-        /* لایه اصلی اپ */
-        main {
-            position: relative;
-            z-index: 10;
-            flex: 1;
-            max-width: 1550px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 2.5rem;
-            display: grid;
-            grid-template-columns: 500px 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        @media (max-width: 1150px) {
-            main { grid-template-columns: 1fr; padding: 1.5rem; }
-        }
-
-        /* پنل شیشه‌ای تنظیمات */
-        .glass-card {
-            background: var(--glass-surface);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(28px);
-            border-radius: 26px;
-            padding: 2rem;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .section-label {
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* باکس پرامپت با کنتراست عمیق */
-        .prompt-box {
-            background: rgba(3, 7, 18, 0.85);
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 1.2rem;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .prompt-box:focus-within {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
-        }
-
-        textarea#user-prompt {
-            width: 100%;
-            height: 125px;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #ffffff;
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.7;
-            resize: none;
-            caret-color: var(--neon-blue);
-        }
-
-        .prompt-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 10px;
-            margin-top: 6px;
-        }
-
-        /* سبک‌های پوستر */
-        .style-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .style-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            padding: 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.25s;
-        }
-
-        .style-btn.active, .style-btn:hover {<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PosterStudio ULTRA - AI Generative Studio</title>
     
-    <!-- فونت‌های استاندارد فارسی و انگلیسی -->
+    <!-- فونت‌ها -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -281,7 +18,7 @@
     <style>
         :root {
             --bg-base: #030712;
-            --glass-surface: rgba(15, 23, 42, 0.7);
+            --glass-surface: rgba(15, 23, 42, 0.75);
             --glass-border: rgba(255, 255, 255, 0.12);
             --neon-blue: #00f2fe;
             --neon-purple: #9d4edd;
@@ -308,7 +45,7 @@
             position: relative;
         }
 
-        /* انیمیشن گوی‌های شناور مدرن */
+        /* انیمیشن پس‌زمینه */
         .ambient-canvas {
             position: fixed;
             inset: 0;
@@ -320,7 +57,7 @@
         .blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(130px);
+            filter: blur(120px);
             opacity: 0.35;
             animation: blobPulse 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
         }
@@ -353,7 +90,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(3, 7, 18, 0.8);
+            background: rgba(3, 7, 18, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
         }
@@ -410,7 +147,7 @@
             position: relative;
             z-index: 10;
             flex: 1;
-            max-width: 1550px;
+            max-width: 1450px;
             width: 100%;
             margin: 0 auto;
             padding: 2.5rem;
@@ -420,7 +157,7 @@
             align-items: start;
         }
 
-        @media (max-width: 1150px) {
+        @media (max-width: 1100px) {
             main { grid-template-columns: 1fr; padding: 1.5rem; }
         }
 
@@ -437,14 +174,16 @@
         }
 
         .section-label {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: var(--neon-blue);
-             var(--neon-blue);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        textarea#user7, 18, 0.85);
+        .prompt-box {
+            background: rgba(3, 7, 18, 0.85);
             border: 1.5px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
             padding: 1.2rem;
@@ -458,7 +197,7 @@
 
         textarea#user-prompt {
             width: 100%;
-            height: 110px;
+            height: 120px;
             background: transparent;
             border: none;
             outline: none;
@@ -476,6 +215,11 @@
             border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 10px;
             margin-top: 6px;
+        }
+
+        .prompt-hint {
+            font-size: 0.75rem;
+            color: var(--text-mid);
         }
 
         .style-grid {
@@ -631,39 +375,6 @@
         }
 
         .poster-year {
-            font-family: 'Space Grotes rgba(0, 242, 254, 0.3) 0%, transparent 65%);
-            mix-blend-mode: screen;
-            pointer-events: none;
-        }
-
-        .poster-content {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .poster-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .poster-pill {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 6px 14px;
-            border-radius: 99px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        .poster-year {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
@@ -683,7 +394,30 @@
         .poster-title {
             font-size: 2.5rem;
             font-weight: 900;
-            line-height: 1.25000;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 0 35px rgba(0, 242, 254, 0.6);
+        }
+
+        .poster-desc {
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            border-right: 3px solid var(--neon-blue);
+            padding-right: 12px;
+        }
+
+        .poster-footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .poster-cta {
+            background: #ffffff;
+            color: #000000;
             font-weight: 900;
             font-size: 0.85rem;
             padding: 10px 22px;
@@ -738,34 +472,6 @@
     <div class="ambient-canvas">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
-        <div class="blob blob-3">opacity: 0.8;
-            margin-bottom: 4px;
-        }
-
-        .poster-spec {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 1px;
-        }
-
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
-</head>
-<body>
-
-    <div class="ambient-canvas">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
     <div class="grid-overlay"></div>
@@ -779,9 +485,32 @@
         </div>
         <div class="model-indicator">
             <div class="pulsing-dot"></div>
-            <span>موتور رندر زایشی هوش مصنوعی فعال است</span>
+            <span>موتور هوش مصنوعی فعال</span>
         </div>
-    </<div class="style-grid">
+    </header>
+
+    <main>
+        <!-- پنل کنترل و ورودی پرامپت -->
+        <div class="glass-card">
+            <div class="section-label">
+                <i data-lucide="sparkles" style="width: 18px;"></i>
+                <span>پرامپت و سناریوی پوستر</span>
+            </div>
+
+            <!-- باکس نوشتن پرامپت -->
+            <div class="prompt-box">
+                <textarea id="user-prompt" placeholder="موضوع، رویداد یا محصول مورد نظرتان را به فارسی یا انگلیسی اینجا بنویسید... (مثال: افتتاحیه کافه مدرن با فضای نئونی)"></textarea>
+                <div class="prompt-footer">
+                    <span class="prompt-hint">هوش مصنوعی متن و گرافیک را متناسب می‌سازد</span>
+                </div>
+            </div>
+
+            <div class="section-label">
+                <i data-lucide="palette" style="width: 18px;"></i>
+                <span>سبک بصری پوستر</span>
+            </div>
+
+            <div class="style-grid">
                 <button class="style-btn active" onclick="setStyle(this, 'cyberpunk')">سایبرپانک</button>
                 <button class="style-btn" onclick="setStyle(this, 'luxury')">لوکس و طلایی</button>
                 <button class="style-btn" onclick="setStyle(this, 'minimal')">مینیمال سه‌بعدی</button>
@@ -802,7 +531,7 @@
             </button>
         </div>
 
-        <!-- آرت‌بورد پوستر -->
+        <!-- پیش‌نمایش پوستر (Artboard) -->
         <div class="poster-stage">
             <div id="poster-artboard">
                 <img id="poster-image" class="poster-bg" 
@@ -847,11 +576,10 @@
             currentStyle = styleName;
         }
 
-        // پردازشگر معنایی (بدون وابستگی به ارورهای سرور)
+        // تحلیل هوشمند معنایی برای تولید پرامپت بدون خطا
         function analyzePromptSemantics(userText, style) {
             const t = userText.toLowerCase();
 
-            // پایگاه سبک‌ها
             const stylePrompts = {
                 cyberpunk: "cyberpunk neon lighting, glowing holograms, octane render, 8k commercial poster art, hyper-detailed, no text",
                 luxury: "dark luxury black and gold aesthetic, elegant lighting, cinematic studio shot, 8k, no text",
@@ -861,7 +589,6 @@
                 gaming: "esports gaming neon arena, mecha robot, energetic lighting, unreal engine 5, 8k, no text"
             };
 
-            // الگوهای تشخیص تم موضوعی
             if (t.includes('غذا') || t.includes('برگر') || t.includes('رستوران') || t.includes('کافه') || t.includes('نوشیدنی') || t.includes('پیتزا')) {
                 return {
                     title: "طعم اصیل و لذیذ",
@@ -906,7 +633,6 @@
                 };
             }
 
-            // خروجی بر اساس سبک انتخابی
             const baseTitles = {
                 cyberpunk: "انعکاس بی‌نهایت",
                 luxury: "شکوه و اصالت",
@@ -946,7 +672,6 @@
             btnText.innerText = 'هوش مصنوعی در حال خلق پوستر...';
 
             try {
-                // مرحله ۱: تحلیل هوشمند محتوا و تولید متن‌های متناسب
                 const design = analyzePromptSemantics(rawText, currentStyle);
 
                 document.getElementById('poster-title').innerText = design.title;
@@ -954,19 +679,16 @@
                 document.getElementById('poster-category').innerText = design.category;
                 document.getElementById('poster-cta').innerText = design.cta;
 
-                // افکت نوری
                 document.getElementById('poster-title').style.textShadow = `0 4px 20px rgba(0,0,0,0.9), 0 0 35px ${design.accent}99`;
                 document.getElementById('poster-desc').style.borderRightColor = design.accent;
                 document.getElementById('poster-glow').style.background = `radial-gradient(circle at 50% 60%, ${design.accent}44 0%, transparent 65%)`;
 
-                // مرحله ۲: ساخت تصویر امن و ضد فیلتر
                 const seed = Math.floor(Math.random() * 999999);
                 const safePrompt = encodeURIComponent(design.imagePrompt);
                 const imageUrl = `https://image.pollinations.ai/prompt/${safePrompt}?width=470&height=670&nologo=true&seed=${seed}`;
 
                 const img = document.getElementById('poster-image');
 
-                // لود تصویر بدون بلاک شدن
                 const tempImage = new Image();
                 tempImage.crossOrigin = "anonymous";
                 
@@ -979,7 +701,6 @@
                 };
 
                 tempImage.onerror = function() {
-                    // در صورت بروز هرگونه قطعی اینترنت، فال‌بک گرافیکی معتبر لود می‌شود
                     img.src = `https://picsum.photos/470/670?blur=1&random=${seed}`;
                     btn.disabled = false;
                     spinner.style.display = 'none';
@@ -998,7 +719,6 @@
             }
         }
 
-        // ذخیره پوستر با فرمت PNG
         function exportHQPoster() {
             const board = document.getElementById('poster-artboard');
             html2canvas(board, {
@@ -1019,3 +739,4 @@
     </script>
 </body>
 </html>
+
