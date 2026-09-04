@@ -361,7 +361,7 @@
       stroke: rgba(255, 255, 255, 0.2);
     }
 
-    /* انیمیشن لودینگ پیشرفته */
+    /* انیمیشن لودینگ */
     .loading-state {
       display: none;
       width: 100%;
@@ -601,7 +601,7 @@
         <!-- وضعیت در حال لودینگ -->
         <div class="loading-state" id="loadingState">
           <div class="ai-orb"></div>
-          <div class="status-text" id="statusText">در حال پردازش مفاهیم پرامپت...</div>
+          <div class="status-text" id="statusText">در حال برقراری ارتباط با هسته مدل هوش مصنوعی...</div>
           <div class="progress-bar-wrap">
             <div class="progress-bar" id="progressBar"></div>
           </div>
@@ -639,19 +639,28 @@
     const downloadBtn = document.getElementById('downloadBtn');
     const copyPromptBtn = document.getElementById('copyPromptBtn');
 
-    // آرایه مراحل پیشرفت برای شبیه‌سازی دقیق‌تر عملکرد هوش مصنوعی
+    // لغت‌نامه ارتقای پرامپت بر اساس سبک‌های انتخابی
+    const styleModifiers = {
+      'photorealistic': 'ultra-realistic, 8k resolution, cinematic lighting, photorealistic masterpiece, highly detailed, shot on 35mm lens',
+      'cyberpunk': 'cyberpunk style, neon lights, futuristic city vibes, synthwave, high contrast, glowing chromatic details',
+      'minimalist': 'minimalist design, clean background, modern flat vector, aesthetic shapes, soft pastel studio lighting',
+      'anime': 'makoto shinkai aesthetic anime art style, vibrant colors, detailed illustration, digital artwork',
+      '3d-render': 'octane 3d render, unreal engine 5, ray tracing reflections, volumetric soft lighting, smooth glossy textures',
+      'vintage': 'vintage retro poster, 70s aesthetics, grainy texture, classic typography style, nostalgic warm palette'
+    };
+
     const generationSteps = [
-      { text: "در حال پردازش پرامپت و بارگذاری مدل...", progress: 25 },
-      { text: "تولید ماتریس نوری و ترکیب پرتوهای رنگی...", progress: 55 },
-      { text: "افزایش وضوح و رندر جزئیات بافت‌ها...", progress: 85 },
-      { text: "پولیش نهایی تصویر و آماده‌سازی...", progress: 100 }
+      { text: "ارزیابی پرامپت و بهینه‌سازی کلمات کلیدی...", progress: 20 },
+      { text: "اتصال به موتور پردازش عصبی و تولید لایه‌های نوری...", progress: 50 },
+      { text: "رندر و بافت‌دهی با وضوح بالا...", progress: 80 },
+      { text: "پردازش نهایی و بارگذاری تصویر...", progress: 95 }
     ];
 
-    genForm.addEventListener('submit', function(e) {
+    genForm.addEventListener('submit', async function(e) {
       e.preventDefault();
 
       if (credits <= 0) {
-        alert("اعتبار رایگان شما تمام شده است! لطفاً پلن خود را ارتقا دهید.");
+        alert("اعتبار رایگان شما تمام شده است!");
         return;
       }
 
@@ -659,7 +668,7 @@
       const style = document.querySelector('input[name="style"]:checked').value;
       const aspect = document.querySelector('input[name="aspect"]:checked').value;
 
-      // شروع انیمیشن لودینگ
+      // شروع نمایش لودینگ
       emptyState.style.display = 'none';
       resultView.style.display = 'none';
       loadingState.style.display = 'block';
@@ -668,40 +677,61 @@
 
       let stepIndex = 0;
       progressBar.style.width = '10%';
-
       const interval = setInterval(() => {
         if (stepIndex < generationSteps.length) {
           statusText.textContent = generationSteps[stepIndex].text;
           progressBar.style.width = generationSteps[stepIndex].progress + '%';
           stepIndex++;
-        } else {
-          clearInterval(interval);
-          finishGeneration(prompt, style, aspect);
         }
       }, 700);
+
+      // ابعاد تصویر بر اساس انتخاب کاربر
+      let width = 1024, height = 1024;
+      if (aspect === '9:16') { width = 768; height = 1344; }
+      if (aspect === '16:9') { width = 1344; height = 768; }
+
+      // بهینه‌سازی پرامپت انگلیسی برای موتور تصویرسازی
+      const enhancedPrompt = `${prompt}, ${styleModifiers[style] || ''}, high quality poster design`;
+      const encodedPrompt = encodeURIComponent(enhancedPrompt);
+      const seed = Math.floor(Math.random() * 999999);
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&seed=${seed}&nologo=true`;
+
+      try {
+        // بارگذاری و کش تصویر در پشت صحنه
+        await preloadImage(imageUrl);
+        generatedImage.src = imageUrl;
+      } catch (err) {
+        // در صورت عدم برقراری ارتباط اینترنتی، از موتور گرافیکی داخلی استفاده می‌شود
+        generatedImage.src = renderProceduralFallback(prompt, style, aspect);
+      } finally {
+        clearInterval(interval);
+        progressBar.style.width = '100%';
+        setTimeout(() => {
+          loadingState.style.display = 'none';
+          resultView.style.display = 'flex';
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+
+          credits--;
+          creditCount.textContent = credits;
+        }, 300);
+      }
     });
 
-    function finishGeneration(prompt, style, aspect) {
-      // تولید پوستر هنری آزمایشی با رزولوشن بالا در Canvas
-      const imgDataUrl = renderProceduralArt(prompt, style, aspect);
-      generatedImage.src = imgDataUrl;
-
-      // کسر اعتبار
-      credits--;
-      creditCount.textContent = credits;
-
-      // نمایش نتیجه
-      loadingState.style.display = 'none';
-      resultView.style.display = 'flex';
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
+    function preloadImage(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error('Network error'));
+        img.src = url;
+      });
     }
 
-    // طراحی یک تصویر جذاب ساختگی بر پایه Canvas
-    function renderProceduralArt(prompt, style, aspect) {
+    // موتور پشتیبان داخلی (Canvas)
+    function renderProceduralFallback(prompt, style, aspect) {
       const canvas = document.createElement('canvas');
       let w = 800, h = 800;
-
       if (aspect === '9:16') { w = 600; h = 1066; }
       if (aspect === '16:9') { w = 1066; h = 600; }
 
@@ -709,77 +739,45 @@
       canvas.height = h;
       const ctx = canvas.getContext('2d');
 
-      // پالت رنگ بر اساس استایل انتخابی
-      const palettes = {
-        'cyberpunk': ['#0f051d', '#290a59', '#ff007f', '#00f0ff'],
-        'photorealistic': ['#0b1320', '#1c2d42', '#d4af37', '#ffffff'],
-        'minimalist': ['#18181b', '#27272a', '#a1a1aa', '#f4f4f5'],
-        'anime': ['#1a0933', '#491069', '#ff758c', '#ff7eb3'],
-        '3d-render': ['#0c1021', '#1f2951', '#6366f1', '#38bdf8'],
-        'vintage': ['#1f1610', '#3b2f27', '#c2a688', '#e6d5b8']
-      };
-
-      const colors = palettes[style] || palettes['photorealistic'];
-
-      // پس‌زمینه گرادیانتی عمیق
       const bgGrad = ctx.createLinearGradient(0, 0, w, h);
-      bgGrad.addColorStop(0, colors[0]);
-      bgGrad.addColorStop(1, colors[1]);
+      bgGrad.addColorStop(0, '#0c1021');
+      bgGrad.addColorStop(1, '#1f2951');
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, w, h);
 
-      // رسم افکت‌های نوری و دایره‌های نئونی
-      for (let i = 0; i < 7; i++) {
-        const radGrad = ctx.createRadialGradient(
-          w * (0.2 + Math.random() * 0.6),
-          h * (0.2 + Math.random() * 0.6),
-          10,
-          w * 0.5,
-          h * 0.5,
-          w * 0.6
-        );
-        radGrad.addColorStop(0, colors[2]);
-        radGrad.addColorStop(1, 'transparent');
-        ctx.fillStyle = radGrad;
-        ctx.globalAlpha = 0.25;
-        ctx.beginPath();
-        ctx.arc(w * Math.random(), h * Math.random(), w * 0.4, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.globalAlpha = 1.0;
-
-      // قاب مینیمال
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 14;
-      ctx.strokeRect(30, 30, w - 60, h - 60);
+      ctx.lineWidth = 10;
+      ctx.strokeRect(20, 20, w - 40, h - 40);
 
-      // نشانگر هوش مصنوعی
-      ctx.fillStyle = colors[3];
+      ctx.fillStyle = '#6366f1';
       ctx.font = 'bold 24px Vazirmatn, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText("PICFORGE AI • " + style.toUpperCase(), w / 2, 80);
+      ctx.fillText("PICFORGE AI • " + style.toUpperCase(), w / 2, 70);
 
-      // متن پرامپت کاربر روی پوستر
       ctx.fillStyle = '#ffffff';
-      ctx.font = '500 22px Vazirmatn, sans-serif';
+      ctx.font = '20px Vazirmatn, sans-serif';
       const cleanPrompt = prompt.length > 50 ? prompt.substring(0, 48) + '...' : prompt;
       ctx.fillText(`“${cleanPrompt}”`, w / 2, h / 2);
-
-      // واتر‌مارک زیرین
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-      ctx.font = '16px Vazirmatn, sans-serif';
-      ctx.fillText("خلق‌شده توسط نسخه پرمیوم هوش مصنوعی", w / 2, h - 70);
 
       return canvas.toDataURL('image/png');
     }
 
-    // عملکرد دکمه‌ها
-    downloadBtn.addEventListener('click', () => {
-      const a = document.createElement('a');
-      a.href = generatedImage.src;
-      a.download = `PicForge-${Date.now()}.png`;
-      a.click();
+    // دانلود مستقیم فایل بدون مشکل کش مرورگر
+    downloadBtn.addEventListener('click', async () => {
+      try {
+        const response = await fetch(generatedImage.src);
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = `PicForge-${Date.now()}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(blobUrl);
+      } catch (e) {
+        window.open(generatedImage.src, '_blank');
+      }
     });
 
     copyPromptBtn.addEventListener('click', () => {
