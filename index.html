@@ -3,23 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>استودیو طراحی پوستر هوشمند فارسی | PosterCraft AI</title>
+  <title>استودیو طراحی پوستر هوشمند | PicForge</title>
   
-  <!-- فونت وزیرمتن جهت رندر متن‌های فارسی روی پوستر -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #07090e;
-      --panel-bg: rgba(16, 20, 31, 0.75);
-      --border-color: rgba(255, 255, 255, 0.08);
-      --primary: #6366f1;
-      --primary-hover: #4f46e5;
+      --bg: #090d16;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --border: rgba(255, 255, 255, 0.12);
+      --primary: #4f46e5;
       --accent: #ec4899;
-      --accent-glow: rgba(236, 72, 153, 0.35);
-      --text: #f1f5f9;
+      --text: #f8fafc;
       --text-muted: #94a3b8;
     }
 
@@ -31,22 +28,18 @@
     }
 
     body {
-      background-color: var(--bg-dark);
+      background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
       background-image: 
-        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
         radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
     }
 
     .container {
-      max-width: 1280px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 25px 20px;
-      width: 100%;
+      padding: 24px 16px;
     }
 
     header {
@@ -54,93 +47,42 @@
       justify-content: space-between;
       align-items: center;
       padding-bottom: 20px;
-      border-bottom: 1px solid var(--border-color);
-      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
-    }
-
-    .brand-logo svg {
-      width: 24px;
-      height: 24px;
-      color: white;
-    }
-
-    .brand-text h1 {
+    .brand-title h1 {
       font-size: 1.3rem;
       font-weight: 900;
+      background: linear-gradient(90deg, #818cf8, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .brand-text p {
-      font-size: 0.75rem;
+    .brand-title p {
+      font-size: 0.8rem;
       color: var(--text-muted);
     }
 
-    .engine-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      padding: 6px 14px;
-      border-radius: 99px;
-      font-size: 0.8rem;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #34d399;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #34d399;
-    }
-
-    .layout-grid {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1.1fr;
-      gap: 30px;
-      align-items: start;
+      gap: 24px;
     }
 
-    @media (max-width: 968px) {
-      .layout-grid {
+    @media (max-width: 900px) {
+      .grid {
         grid-template-columns: 1fr;
       }
     }
 
     .panel {
-      background: var(--panel-bg);
+      background: var(--card-bg);
       backdrop-filter: blur(16px);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
       padding: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .form-section-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #e2e8f0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .form-group {
@@ -149,27 +91,26 @@
 
     label {
       display: block;
-      margin-bottom: 7px;
       font-size: 0.85rem;
       font-weight: 600;
-      color: #cbd5e1;
+      margin-bottom: 6px;
+      color: #e2e8f0;
     }
 
     input[type="text"], textarea, select {
       width: 100%;
-      background: rgba(10, 12, 18, 0.6);
-      border: 1px solid var(--border-color);
+      background: rgba(10, 14, 23, 0.7);
+      border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 12px 14px;
+      padding: 12px;
       color: white;
       font-size: 0.9rem;
       outline: none;
-      transition: all 0.2s ease;
+      transition: border-color 0.2s;
     }
 
     input[type="text"]:focus, textarea:focus, select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
     }
 
     textarea {
@@ -183,81 +124,65 @@
       gap: 12px;
     }
 
-    .btn-generate {
+    .btn-submit {
       width: 100%;
       padding: 14px;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       background: linear-gradient(135deg, var(--primary), var(--accent));
       color: white;
       font-size: 1rem;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
-      transition: all 0.3s;
       margin-top: 10px;
+      transition: opacity 0.2s, transform 0.1s;
     }
 
-    .btn-generate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px var(--accent-glow);
+    .btn-submit:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
     }
 
-    .btn-generate:disabled {
-      opacity: 0.6;
+    .btn-submit:disabled {
+      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
     }
 
-    /* بخش پیش‌نمایش و بوم نقاشی */
-    .preview-area {
+    .preview-box {
+      min-height: 520px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 520px;
       position: relative;
     }
 
     #posterCanvas {
       max-width: 100%;
-      max-height: 550px;
+      max-height: 540px;
       border-radius: 12px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-      background: #111420;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
       display: none;
     }
 
-    .placeholder-box {
+    .empty-state {
       text-align: center;
       color: var(--text-muted);
-      padding: 40px 20px;
     }
 
-    .placeholder-box svg {
-      width: 60px;
-      height: 60px;
-      stroke: rgba(255, 255, 255, 0.15);
-      margin-bottom: 15px;
-    }
-
-    .loading-box {
+    .loading-state {
       display: none;
       text-align: center;
     }
 
-    .radar-spinner {
-      width: 60px;
-      height: 60px;
-      border: 3px solid transparent;
-      border-top-color: var(--primary);
-      border-right-color: var(--accent);
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top-color: var(--accent);
       border-radius: 50%;
-      margin: 0 auto 20px;
+      margin: 0 auto 16px;
       animation: spin 0.8s linear infinite;
     }
 
@@ -265,45 +190,17 @@
       to { transform: rotate(360deg); }
     }
 
-    .log-terminal {
-      margin-top: 15px;
-      background: rgba(0, 0, 0, 0.4);
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-family: monospace;
-      color: #38bdf8;
-      max-width: 320px;
-      text-align: right;
-      direction: rtl;
-    }
-
-    .export-panel {
+    .download-btn {
       display: none;
       width: 100%;
-      margin-top: 15px;
-      gap: 10px;
-    }
-
-    .btn-action {
-      flex: 1;
+      margin-top: 16px;
       padding: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border-color);
-      background: rgba(255, 255, 255, 0.05);
+      background: #10b981;
+      border: none;
       color: white;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
+      border-radius: 10px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: background 0.2s;
-    }
-
-    .btn-action:hover {
-      background: rgba(255, 255, 255, 0.12);
     }
   </style>
 </head>
@@ -311,357 +208,257 @@
 
   <div class="container">
     <header>
-      <div class="brand">
-        <div class="brand-logo">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-          </svg>
-        </div>
-        <div class="brand-text">
-          <h1>PosterCraft AI</h1>
-          <p>سیستم هوشمند تحلیل زبان فارسی و ترکیب تایپوگرافی زنده</p>
-        </div>
-      </div>
-      <div class="engine-status">
-        <div class="status-dot"></div>
-        <span>هسته عصبی و تحلیل‌گر فارسی آماده است</span>
+      <div class="brand-title">
+        <h1>PicForge Studio</h1>
+        <p>سیستم مستقل طراحی پوستر و تایپوگرافی فارسی</p>
       </div>
     </header>
 
-    <div class="layout-grid">
-      <!-- ستون ورودی‌ها و تنظیمات -->
+    <div class="grid">
+      <!-- پنل تنظیمات -->
       <div class="panel">
-        <div class="form-section-title">
-          <span>⚙️</span> تنظیمات هوشمند پوستر
-        </div>
-
-        <form id="posterForm">
+        <form id="posterForm" onsubmit="return false;">
           <div class="form-group">
-            <label for="prompt">ایده کلی و موضوع پوستر (به فارسی)</label>
-            <textarea id="prompt" placeholder="مثال: آموزشگاه تخصصی کنکور ریاضی و فیزیک با رتبه های برتر" required></textarea>
+            <label for="prompt">توصیف تصویر پس‌زمینه (هر موضوعی: صنعتی، کافه، بوتیک، پزشکی، همایش...)</label>
+            <textarea id="prompt" placeholder="مثال: فضای داخل یک کافه دنج با نورپردازی گرم و فنجان قهوه روی میز چوبی..." required></textarea>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="headline">عنوان اصلی (روی پوستر نوشته می‌شود)</label>
-              <input type="text" id="headline" placeholder="مثال: آموزشگاه ریاضی دانشمندان" required />
+              <label for="headline">عنوان اصلی پوستر (فارسی)</label>
+              <input type="text" id="headline" placeholder="مثال: کافه رستوران کارما" required />
             </div>
             <div class="form-group">
-              <label for="subhead">شعار یا زیرعنوان تبلیغاتی</label>
-              <input type="text" id="subhead" placeholder="مثال: ورود مستقیم به دانشگاه‌های برتر" />
+              <label for="subhead">شعار یا متن کوتاه</label>
+              <input type="text" id="subhead" placeholder="مثال: طعم واقعی قهوه اصیل" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="contactInfo">اطلاعات تماس / تاریخ یا وب‌سایت</label>
-              <input type="text" id="contactInfo" placeholder="مثال: ۰۲۱-۸۸۸۸۸۸۸۸ | ثبت‌نام ترم پاییز" />
+              <label for="badge">برچسب بالای پوستر</label>
+              <input type="text" id="badge" placeholder="مثال: افتتاحیه | پیشنهاد ویژه" />
             </div>
             <div class="form-group">
-              <label for="themeStyle">تم بصری و پالت رنگ</label>
-              <select id="themeStyle">
-                <option value="modern-tech">مدرن / نئونی آموزشی</option>
-                <option value="minimalist">مینیمال و رسمی</option>
-                <option value="luxury-dark">لاکچری و تاریک (Dark Gold)</option>
-                <option value="vibrant">شاداب و پرانرژی</option>
-              </select>
+              <label for="contact">اطلاعات تماس / آدرس / پیج اینستاگرام</label>
+              <input type="text" id="contact" placeholder="مثال: تلفن: ۰۲۱-۸۸۸۸۸۸۸۸ | @Cafe_Karma" />
             </div>
           </div>
 
-          <button type="submit" class="btn-generate" id="genBtn">
-            <span>شروع تحلیل و طراحی پوستر فارسی</span>
-            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
+          <div class="form-group">
+            <label for="mood">سبک نورپردازی و تصویر</label>
+            <select id="mood">
+              <option value="commercial studio lighting, ultra-realistic, highly detailed, clean composition">تبلیغاتی و تمیز (Studio Commercial)</option>
+              <option value="cinematic mood, dramatic shadows, warm ambiance, 8k">سینمایی و گرم (Cinematic Warm)</option>
+              <option value="modern minimalist, clean negative space, sleek design">مینیمال و مدرن (Minimalist)</option>
+              <option value="vibrant colors, cyberpunk neon glow, dynamic">نئونی و پرانرژی (Neon Glow)</option>
+            </select>
+          </div>
+
+          <button type="button" class="btn-submit" id="submitBtn">
+            ساخت پوستر اختصاصی
           </button>
         </form>
       </div>
 
-      <!-- ستون نمایش پوستر -->
-      <div class="panel preview-area">
-        <div class="placeholder-box" id="placeholder">
-          <svg fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <h3>پوستر شما در اینجا طراحی خواهد شد</h3>
-          <p style="font-size: 0.85rem; margin-top: 6px;">هوش مصنوعی ابتدا مفهوم فارسی را تحلیل کرده و پس از ساخت پس‌زمینه، متن‌ها را با چیدمان گرافیکی چاپ می‌کند.</p>
+      <!-- پنل پیش‌نمایش -->
+      <div class="panel preview-box">
+        <div class="empty-state" id="emptyState">
+          <h3>پوستر شما اینجا نمایش داده می‌شود</h3>
+          <p style="font-size: 0.85rem; margin-top: 6px;">اطلاعات فرم را پر کرده و روی دکمه ساخت پوستر کلیک کنید.</p>
         </div>
 
-        <div class="loading-box" id="loading">
-          <div class="radar-spinner"></div>
-          <h4 id="loadingStep">در حال تحلیل واژگان فارسی...</h4>
-          <div class="log-terminal" id="logTerminal">> شروع استخراج کلیدواژه‌های تخصصی...</div>
+        <div class="loading-state" id="loadingState">
+          <div class="spinner"></div>
+          <p id="statusMsg">در حال طراحی پس‌زمینه با هوش مصنوعی...</p>
         </div>
 
         <canvas id="posterCanvas" width="900" height="1200"></canvas>
 
-        <div class="export-panel" id="exportPanel">
-          <button class="btn-action" id="downloadBtn">
-            💾 دانلود مستقیم پوستر (کیفیت اصلی HQ)
-          </button>
-        </div>
+        <button class="download-btn" id="downloadBtn">
+          📥 دانلود پوستر با کیفیت بالا (PNG)
+        </button>
       </div>
     </div>
   </div>
 
   <script>
-    /* 
-      ======================================================
-      موتور تحلیل معنایی و شناختی زبان فارسی (Semantic Parser)
-      این بخش واژگان کاربر را کالبدشکافی کرده و به اِلِمان‌های دقیق تصویری تبدیل می‌کند
-      ======================================================
-    */
-    class PersianConceptAnalyzer {
-      constructor() {
-        this.knowledgeBase = [
-          {
-            keywords: ['ریاضی', 'حساب', 'دیفرانسیل', 'هندسه', 'کنکور ریاضی', 'محاسبات'],
-            visualContext: 'high school classroom, chalkboard full of complex mathematics equations, geometry formulas, glowing chalk lines, compass, protractor, abstract 3D geometrical shapes floating, cinematic study atmosphere',
-            palette: ['#0f172a', '#38bdf8', '#818cf8']
-          },
-          {
-            keywords: ['برنامه نویسی', 'کدنویسی', 'کامپیوتر', 'نرم افزار', 'هوش مصنوعی', 'رباتیک'],
-            visualContext: 'futuristic cyber workspace, multiple screens with clean programming source code, holographic data visualization, subtle blue and purple ambient backlights, sleek workstation',
-            palette: ['#030712', '#06b6d4', '#a855f7']
-          },
-          {
-            keywords: ['پزشکی', 'دندانپزشکی', 'درمان', 'سلامت', 'کلینیک', 'داروسازی'],
-            visualContext: 'clean modern medical laboratory background, subtle molecular structure, stethoscope, soft sterile turquoise and white lighting, depth of field',
-            palette: ['#042f2e', '#14b8a6', '#f0fdfa']
-          },
-          {
-            keywords: ['کافه', 'قهوه', 'اسپرسو', 'رستوران', 'فست فود', 'غذا'],
-            visualContext: 'artisan cafe counter, espresso machine pouring coffee, warm moody Edison bulb lights, aromatic steam rising, rustic dark wood texture',
-            palette: ['#1c1917', '#f59e0b', '#78350f']
-          },
-          {
-            keywords: ['موسیقی', 'کنسرت', 'گیتار', 'پیانو', 'آهنگسازی'],
-            visualContext: 'sound recording studio, acoustic foam panels, vintage microphone, glowing equalizer sound waves, moody magenta stage lights',
-            palette: ['#18181b', '#ec4899', '#8b5cf6']
-          }
-        ];
-      }
+    // سیستم ترکیب تصویر و متون فارسی روی بوم (Canvas)
+    function renderFinalPoster(bgImage, data) {
+      const canvas = document.getElementById('posterCanvas');
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
 
-      analyze(userPrompt) {
-        const text = userPrompt.toLowerCase();
-        let selected = null;
+      // ۱. رسم پس‌زمینه
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(bgImage, 0, 0, w, h);
 
-        for (let item of this.knowledgeBase) {
-          if (item.keywords.some(kw => text.includes(kw))) {
-            selected = item;
-            break;
-          }
-        }
+      // ۲. ایجاد لایه تیره گرادیانت برای خوانایی عالی متن‌ها
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, 'rgba(8, 11, 18, 0.88)');
+      grad.addColorStop(0.3, 'rgba(8, 11, 18, 0.35)');
+      grad.addColorStop(0.7, 'rgba(8, 11, 18, 0.45)');
+      grad.addColorStop(1, 'rgba(8, 11, 18, 0.95)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
 
-        if (!selected) {
-          // فال‌بک عمومی بسیار باکیفیت و انتزاعی
-          return {
-            prompt: `cinematic abstract corporate background, elegant 3d shapes, gradient lighting, smooth volumetric smoke, depth of field, award winning commercial poster layout, no text`,
-            palette: ['#0f172a', '#6366f1', '#ec4899']
-          };
-        }
+      // ۳. کادر شیک بیرونی
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(30, 30, w - 60, h - 60);
 
-        return {
-          prompt: `commercial advertisement poster background for ${selected.visualContext}, aesthetic composition, 8k resolution, photorealistic, cinematic volumetric lighting, high end photography, clean negative space for typography, strictly no text or letters`,
-          palette: selected.palette
-        };
-      }
-    }
+      // ۴. برچسب بالا (Badge)
+      if (data.badge) {
+        ctx.font = '700 20px "Vazirmatn"';
+        const badgeWidth = ctx.measureText(data.badge).width + 40;
+        const badgeHeight = 42;
+        const badgeX = (w - badgeWidth) / 2;
+        const badgeY = 70;
 
-    /* 
-      ======================================================
-      موتور ترکیب گرافیکی پوستر (Poster Typography & Canvas Compositor)
-      چاپ متون فارسی با سایه، کادر شیشه‌ای و چیدمان استاندارد
-      ======================================================
-    */
-    class PosterCompositor {
-      constructor(canvasId) {
-        this.canvas = document.getElementById(canvasId);
-        this.ctx = this.canvas.getContext('2d');
-      }
-
-      async renderPoster(bgImage, data) {
-        const ctx = this.ctx;
-        const w = this.canvas.width;
-        const h = this.canvas.height;
-
-        // ۱. رسم پس‌زمینه
-        ctx.drawImage(bgImage, 0, 0, w, h);
-
-        // ۲. اضافه کردن افکت تاریک‌کننده هوشمند (Gradient Overlay) برای خوانایی کامل متن
-        const grad = ctx.createLinearGradient(0, 0, 0, h);
-        grad.addColorStop(0, 'rgba(7, 9, 14, 0.75)');
-        grad.addColorStop(0.3, 'rgba(7, 9, 14, 0.2)');
-        grad.addColorStop(0.7, 'rgba(7, 9, 14, 0.4)');
-        grad.addColorStop(1, 'rgba(7, 9, 14, 0.9)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-
-        // ۳. کادربندی شیک و مدرن دور پوستر (Border Frame)
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-        ctx.lineWidth = 4;
-        ctx.strokeRect(35, 35, w - 70, h - 70);
-
-        // ۴. برچسب نشانگر در بالای پوستر
-        this.drawBadge(ctx, "🎯 مرکز تخصصی و معتبر", w / 2, 90);
-
-        // ۵. تیتر اصلی (Headline)
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '900 52px "Vazirmatn"';
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-        ctx.shadowBlur = 20;
-        ctx.shadowOffsetXکننده هوشمند (Gradient Overlay) برای خوانایی کامل متن
-        const grad = ctx.createLinearGradient(0, 0, 0, h);
-        grad.addColorStop(0, 'rgba(7, 9, 14, 0.75)');
-        grad.addColorStop(0.3, 'rgba(7, 9, 14, 0.2)');
-        grad.addColorStop(0.7, 'rgba(7, 9, 14, 0.4)');
-        grad.addColorStop(1, 'rgba(7, 9, 14, 0.9)');
-        ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, w, h);
-
-        // ۳. کادربندی شیک و مدرن دور پوستر (Border Frame)
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
-        ctx.lineWidth = 4;
-        ctx.strokeRect(35, 35, w - 70, h - 70);
-
-        // ۴. برچسب نشانگر در بالای پوستر
-        this.drawBadge(ctx, "🎯 مرکز تخصصی و معتبر", w / 2, 90);
-
-        // ۵. تیتر اصلی (Headline)
-        ctx.textAlign = 'center';
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '900 52px "Vazirmatn"';
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
-        ctx.shadowBlur = 20;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 4;
-        ctx.fillText(data.headline, w / 2, 175);
-
-        // ۶. زیرعنوان / شعار
-        if (data.subhead) {
-          ctx.font = '600 28px "Vazirmatn"';
-          ctx.fillStyle = '#38bdf8';
-          ctx.shadowBlur = 10;
-          ctx.fillText(data.subhead, w / 2, 230);
-        }ctx.stroke();
-
-        ctx.fillStyle = '#e0e7ff';
-        ctx.textAlign = 'center';
-        ctx.fillText(text, x, y + 6);
-      }
-
-      drawNeonLine(ctx, x, y, len) {
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + len, y);
-        ctx.strokeStyle = 'rgba(236, 72, 153, 0.8)';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-      }
-
-      drawGlassFooter(ctx, x, y, w, h) {
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.75)';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.fillStyle = 'rgba(79, 70, 229, 0.45)';
+        ctx.strokeStyle = '#818cf8';
         ctx.lineWidth = 1.5;
-
         ctx.beginPath();
-        ctx.roundRect(x, y, w, h, 14);
+        ctx.roundRect(badgeX, badgeY, badgeWidth, badgeHeight, 99);
         ctx.fill();
         ctx.stroke();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText(data.badge, w / 2, badgeY + 28);
+      }
+
+      // ۵. عنوان اصلی (Headline)
+      if (data.headline) {
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 52px "Vazirmatn"';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 18;
+        ctx.fillText(data.headline, w / 2, 175);
+
+        // خط تزیینی زیر عنوان
+        ctx.shadowBlur = 0;
+        const lineGrad = ctx.createLinearGradient(w / 2 - 120, 0, w / 2 + 120, 0);
+        lineGrad.addColorStop(0, 'transparent');
+        lineGrad.addColorStop(0.5, '#ec4899');
+        lineGrad.addColorStop(1, 'transparent');
+        ctx.fillStyle = lineGrad;
+        ctx.fillRect(w / 2 - 120, 195, 240, 3);
+      }
+
+      // ۶. زیرعنوان / شعار
+      if (data.subhead) {
+        ctx.font = '600 28px "Vazirmatn"';
+        ctx.fillStyle = '#38bdf8';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 12;
+        ctx.fillText(data.subhead, w / 2, 245);
+      }
+
+      // ۷. اطلاعات تماس در کادر پایین
+      if (data.contact) {
+        const footW = w - 120;
+        const footH = 65;
+        const footX = 60;
+        const footY = h - 130;
+
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.8)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(footX, footY, footW, footH, 12);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#f8fafc';
+        ctx.font = '700 22px "Vazirmatn"';
+        ctx.shadowBlur = 6;
+        ctx.fillText(data.contact, w / 2, footY + 41);
       }
     }
 
-    // کنترلرهای برنامه
-    const analyzer = new PersianConceptAnalyzer();
-    const compositor = new PosterCompositor('posterCanvas');
+    // دکمه شروع ساخت
+    document.getElementById('submitBtn').addEventListener('click', async () => {
+      const promptVal = document.getElementById('prompt').value.trim();
+      const headline = document.getElementById('headline').value.trim();
+      const subhead = document.getElementById('subhead').value.trim();
+      const badge = document.getElementById('badge').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const mood = document.getElementById('mood').value;
 
-    const form = document.getElementById('posterForm');
-    const placeholder = document.getElementById('placeholder');
-    const loading = document.getElementById('loading');
-    const canvas = document.getElementById('posterCanvas');
-    const exportPanel = document.getElementById('exportPanel');
-    const logTerminal = document.getElementById('logTerminal');
-    const loadingStep = document.getElementById('loadingStep');
-    const genBtn = document.getElementById('genBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
+      if (!promptVal || !headline) {
+        alert("لطفاً حداقل توصیف تصویر و عنوان اصلی را بنویسید.");
+        return;
+      }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+      const emptyState = document.getElementById('emptyState');
+      const loadingState = document.getElementById('loadingState');
+      const canvas = document.getElementById('posterCanvas');
+      const downloadBtn = document.getElementById('downloadBtn');
+      const submitBtn = document.getElementById('submitBtn');
 
-      const promptVal = document.getElementById('prompt').value;
-      const headline = document.getElementById('headline').value;
-      const subhead = document.getElementById('subhead').value;
-      const contact = document.getElementById('contactInfo').value;
-
-      // وضعیت UI
-      placeholder.style.display = 'none';
+      emptyState.style.display = 'none';
       canvas.style.display = 'none';
-      exportPanel.style.display = 'none';
-      loading.style.display = 'block';
-      genBtn.disabled = true;
+      downloadBtn.style.display = 'none';
+      loadingState.style.display = 'block';
+      submitBtn.disabled = true;
 
       try {
-        // فاز ۱: پردازش زبان فارسی
-        loadingStep.textContent = "آنالیز تخصصی زبان فارسی...";
-        logTerminal.textContent = "> استخراج مفاهیم مفهومی برای: " + promptVal.slice(0, 25) + "...";
-        await new Promise(r => setTimeout(r, 600));
+        // ۱. ترجمه خودکار متن ورودی به انگلیسی بدون ارور
+        let englishPrompt = promptVal;
+        try {
+          const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&dt=t&q=${encodeURIComponent(promptVal)}`);
+          const json = await res.json();
+          if (json && json[0]) {
+            englishPrompt = json[0].map(item => item[0]).join(' ');
+          }
+        } catch (e) {
+          console.log("استفاده مستقیم از پرامپت ورودی");
+        }
 
-        const analysisResult = analyzer.analyze(promptVal);
-        
-        // فاز ۲: رندر پس‌زمینه گرافیکی متناسب
-        loadingStep.textContent = "خلق پس‌زمینه گرافیکی با هوش مصنوعی...";
-        logTerminal.textContent = "> ارسال پرامپت استخراج‌شده به موتور بصری...";
-        
+        // ۲. بهینه‌سازی پرامپت با تاکید اکید بر نبودن متن در پس‌زمینه
+        const finalPrompt = `${englishPrompt}, poster background backdrop, ${mood}, clean empty space for typography, strictly no text, no words, no letters, no watermark, 8k`;
+
+        // ۳. ساخت پس‌زمینه
         const seed = Math.floor(Math.random() * 999999);
-        const encoded = encodeURIComponent(analysisResult.prompt);
-        // ابعاد 900x1200 مخصوص پوستر عمودی استاندارد
-        const bgUrl = `https://image.pollinations.ai/prompt/${encoded}?width=900&height=1200&seed=${seed}&nologo=true&model=flux`;
+        const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?width=900&height=1200&seed=${seed}&nologo=true&model=flux`;
 
-        // لود تصویر
-        const bgImage = await loadImage(bgUrl);
+        const bgImg = new Image();
+        bgImg.crossOrigin = 'anonymous';
+        bgImg.src = imgUrl;
 
-        // فاز ۳: ترکیب متن و لایه‌بندی گرافیکی فارسی
-        loadingStep.textContent = "چاپ تایپوگرافی و افکت‌های فارسی روی پوستر...";
-        logTerminal.textContent = "> رندر فونت‌های فارسی و کادربندی شیشه‌ای...";
-        await new Promise(r => setTimeout(r, 400));
-
-        await compositor.renderPoster(bgImage, {
-          headline,
-          subhead,
-          contact
+        await new Promise((resolve, reject) => {
+          bgImg.onload = resolve;
+          bgImg.onerror = () => reject(new Error("خطا در دریافت تصویر از سرور"));
         });
 
-        // نمایش خروجی نهایی
-        loading.style.display = 'none';
+        // ۴. چاپ متون فارسی و نمایش پوستر نهایی
+        renderFinalPoster(bgImg, { headline, subhead, badge, contact });
+
+        loadingState.style.display = 'none';
         canvas.style.display = 'block';
-        exportPanel.style.display = 'flex';
+        downloadBtn.style.display = 'block';
+
       } catch (err) {
-        alert("خطا در ارتباط با موتور هوش مصنوعی. لطفاً مجدداً امتحان کنید.");
+        alert("ارتباط با هوش مصنوعی با خطا مواجه شد. لطفاً اتصال اینترنت خود را بررسی و دوباره تلاش کنید.");
         console.error(err);
-        placeholder.style.display = 'block';
-        loading.style.display = 'none';
+        emptyState.style.display = 'block';
+        loadingState.style.display = 'none';
       } finally {
-        genBtn.disabled = false;
+        submitBtn.disabled = false;
       }
     });
 
-    function loadImage(url) {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error("خطا در بارگذاری تصویر"));
-        img.src = url;
-      });
-    }
-
-    // دانلود مستقیم فایل بدون افت کیفیت
-    downloadBtn.addEventListener('click', () => {
-      const link = document.createElement('a');
-      link.download = `Poster-${Date.now()}.png`;
-      link.href = canvas.toDataURL('image/png', 1.0);
-      link.click();
+    // دکمه دانلود
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const canvas = document.getElementById('posterCanvas');
+      const a = document.createElement('a');
+      a.download = `Poster-${Date.now()}.png`;
+      a.href = canvas.toDataURL('image/png', 1.0);
+      a.click();
     });
   </script>
 </body>
