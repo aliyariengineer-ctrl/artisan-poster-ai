@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PosterStudio ULTRA - AI Generative Studio</title>
+    <title>PosterStudio AI - استودیوی هوشمند تولید پوستر</title>
     
-    <!-- فونت‌ها -->
+    <!-- فونت‌های استاندارد -->
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     
     <!-- کتابخانه‌ها -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -22,7 +22,7 @@
             --glass-border: rgba(255, 255, 255, 0.12);
             --neon-blue: #00f2fe;
             --neon-purple: #9d4edd;
-            --neon-pink: #ff007f;
+            --accent-color: #00f2fe;
             --text-high: #f8fafc;
             --text-mid: #94a3b8;
         }
@@ -45,7 +45,7 @@
             position: relative;
         }
 
-        /* انیمیشن پس‌زمینه */
+        /* جلوه پس‌زمینه مدرن */
         .ambient-canvas {
             position: fixed;
             inset: 0;
@@ -64,12 +64,11 @@
 
         .blob-1 { width: 600px; height: 600px; background: linear-gradient(135deg, #4f46e5, #00f2fe); top: -150px; right: -100px; }
         .blob-2 { width: 550px; height: 550px; background: linear-gradient(135deg, #ff007f, #7928ca); bottom: -150px; left: -100px; animation-duration: 22s; }
-        .blob-3 { width: 450px; height: 450px; background: #00f2fe; top: 40%; left: 35%; filter: blur(150px); opacity: 0.15; }
 
         @keyframes blobPulse {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            50% { transform: translate(50px, 30px) scale(1.05) rotate(90deg); }
-            100% { transform: translate(-30px, 40px) scale(0.95) rotate(180deg); }
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, 30px) scale(1.05); }
+            100% { transform: translate(-30px, 40px) scale(0.95); }
         }
 
         .grid-overlay {
@@ -102,29 +101,27 @@
         }
 
         .brand-badge {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
         }
 
         .brand-name {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ffffff 40%, #94a3b8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
         }
 
         .model-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 242, 254, 0.08);
             border: 1px solid rgba(0, 242, 254, 0.3);
             padding: 6px 14px;
             border-radius: 999px;
@@ -170,7 +167,7 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
             display: flex;
             flex-direction: column;
-            gap: 1.4rem;
+            gap: 1.3rem;
         }
 
         .section-label {
@@ -185,7 +182,7 @@
         .prompt-box {
             background: rgba(3, 7, 18, 0.85);
             border: 1.5px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
+            border-radius: 18px;
             padding: 1.2rem;
             transition: all 0.3s;
         }
@@ -202,18 +199,15 @@
             border: none;
             outline: none;
             color: #ffffff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             line-height: 1.7;
             resize: none;
         }
 
         .prompt-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 10px;
+            padding-top: 8px;
             margin-top: 6px;
         }
 
@@ -222,34 +216,57 @@
             color: var(--text-mid);
         }
 
-        .style-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .style-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            padding: 10px;
-            border-radius: 12px;
+        .status-box {
+            display: none;
+            background: rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 12px;
+            border-radius: 14px;
             font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.25s;
+            color: #cbd5e1;
+            line-height: 1.6;
         }
 
-        .style-btn.active, .style-btn:hover {
-            background: rgba(0, 242, 254, 0.15);
-            border-color: var(--neon-blue);
-            color: #fff;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+        .status-box.active {
+            display: block;
         }
 
         .generate-btn {
-            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 60%, var(--neon-pink) 100%);
+            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 60%, #ff007f 100%);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 18px;
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px rgba(157, 78, 221, 0.35);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, box {
+            display: none;
+            background: rgba(0, 242, 254, 0.05);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .status-box.active {
+            display: block;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 60%, #ff007f 100%);
             border: none;
             padding: 1.2rem;
             border-radius: 18px;
@@ -277,44 +294,7 @@
 
         .download-btn {
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            padding: 1rem;
-            border-radius: 16px;
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.2s;
-        }
-
-        .download-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* --- استودیوی پوستر (Artboard) --- */
-        .poster-stage {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #poster-artboard {
-            width: 470px;
-            height: 670px;
-            border-radius: 28px;
-            position: relative;
-            overflow: hidden;
-            background: #020617;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 2.8rem 2.4rem;
-            box-shadow: 0 35px 80px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 242, 254, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 255, 255, 0.18);
         }
 
         .poster-bg {
@@ -332,9 +312,9 @@
             inset: 0;
             z-index: 2;
             background: linear-gradient(180deg, 
-                rgba(2, 6, 23, 0.82) 0%, 
-                rgba(2, 6, 23, 0.25) 45%, 
-                rgba(2, 6, 23, 0.45) 65%, 
+                rgba(2, 6, 23, 0.85) 0%, 
+                rgba(2, 6, 23, 0.2) 45%, 
+                rgba(2, 6, 23, 0.5) 65%, 
                 rgba(2, 6, 23, 0.95) 100%);
         }
 
@@ -363,7 +343,7 @@
         }
 
         .poster-pill {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.25);
             padding: 6px 14px;
@@ -392,9 +372,9 @@
         }
 
         .poster-title {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             font-weight: 900;
-            line-height: 1.2;
+            line-height: 1.25;
             color: #ffffff;
             text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 0 35px rgba(0, 242, 254, 0.6);
         }
@@ -472,62 +452,70 @@
     <div class="ambient-canvas">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
     </div>
     <div class="grid-overlay"></div>
 
     <header>
         <div class="brand-container">
             <div class="brand-badge">
-                <i data-lucide="layers" style="color: #fff; width: 22px;"></i>
+                <i data-lucide="sparkles" style="color: #fff; width: 22px;"></i>
             </div>
-            <div class="brand-name">POSTERSTUDIO ULTRA</div>
+            <div class="brand-name">POSTERSTUDIO PRO AI</div>
         </div>
         <div class="model-indicator">
             <div class="pulsing-dot"></div>
-            <span>موتور هوش مصنوعی فعال</span>
+            <span>هوش مصنوعی زایشی چندمرحله‌ای متصل است</span>
         </div>
     </header>
 
     <main>
-        <!-- پنل کنترل و ورودی پرامپت -->
+        <!-- پنل کنترل و ورودی -->
         <div class="glass-card">
             <div class="section-label">
-                <i data-lucide="sparkles" style="width: 18px;"></i>
-                <span>پرامپت و سناریوی پوستر</span>
+                <i data-lucide="message-square" style="width: 18px;"></i>
+                <span>ایده، سناریو یا معرفی محصول</span>
             </div>
 
-            <!-- باکس نوشتن پرامپت -->
             <div class="prompt-box">
-                <textarea id="user-prompt" placeholder="موضوع، رویداد یا محصول مورد نظرتان را به فارسی یا انگلیسی اینجا بنویسید... (مثال: افتتاحیه کافه مدرن با فضای نئونی)"></textarea>
+                <textarea id="user-prompt" placeholder="هر ایده‌ای دارید با جزئیات بنویسید... مثلاً: پوستر افتتاحیه نمایشگاه کتاب‌های کمیک با تم تاریک و بتمن، تخفیف ۵۰ درصدی و تاریخ جمعه آینده"></textarea>
                 <div class="prompt-footer">
-                    <span class="prompt-hint">هوش مصنوعی متن و گرافیک را متناسب می‌سازد</span>
+                    <span class="prompt-hint">مدل زبانی هوش مصنوعی معنای متن شما را پردازش کرده و تصویر و کپی‌رایتینگ متناسب می‌سازد.</span>
                 </div>
             </div>
 
-            <div class="section-label">
-                <i data-lucide="palette" style="width: 18px;"></i>
-                <span>سبک بصری پوستر</span>
-            </div>
+            <!-- وضعیت زنده هوش مصنوعی -->
+            <div class="status-box" id="ai-status"></div>
 
-            <div class="style-grid">
-                <button class="style-btn active" onclick="setStyle(this, 'cyberpunk')">سایبرپانک</button>
-                <button class="style-btn" onclick="setStyle(this, 'luxury')">لوکس و طلایی</button>
-                <button class="style-btn" onclick="setStyle(this, 'minimal')">مینیمال سه‌بعدی</button>
-                <button class="style-btn" onclick="setStyle(this, 'cinematic')">سینمایی حماسی</button>
-                <button class="style-btn" onclick="setStyle(this, 'nature')">طبیعت رویایی</button>
-                <button class="style-btn" onclick="setStyle(this, 'gaming')">گیمینگ و رباتیک</button>
-            </div>
-
-            <button class="generate-btn" id="gen-btn" onclick="generateUltraPoster()">
+            <button class="generate-btn" id="gen-btn" onclick="processAndGeneratePoster()">
                 <div class="spinner" id="btn-spinner"></div>
                 <i data-lucide="wand-2" id="btn-wand"></i>
-                <span id="btn-text">تولید پوستر با هوش مصنوعی</span>
+                <span id="btn-text">تحلیل پرامپت و تولید پوستر هوشمند</span>
+            </button>
+
+            <button class="download-btn" onclick="exportHQPoster()">
+                <i data-lucide="download" style="width: 1;"></i>
+                <span>ایده، سناریو یا معرفی محصول</span>
+            </div>
+
+            <div class="prompt-box">
+                <textarea id="user-prompt" placeholder="هر ایده‌ای دارید با جزئیات بنویسید... مثلاً: پوستر افتتاحیه نمایشگاه کتاب‌های کمیک با تم تاریک و بتمن، تخفیف ۵۰ درصدی و تاریخ جمعه آینده"></textarea>
+                <div class="prompt-footer">
+                    <span class="prompt-hint">مدل زبانی هوش مصنوعی معنای متن شما را پردازش کرده و تصویر و کپی‌رایتینگ متناسب می‌سازد.</span>
+                </div>
+            </div>
+
+            <!-- وضعیت زنده هوش مصنوعی -->
+            <div class="status-box" id="ai-status"></div>
+
+            <button class="generate-btn" id="gen-btn" onclick="processAndGeneratePoster()">
+                <div class="spinner" id="btn-spinner"></div>
+                <i data-lucide="wand-2" id="btn-wand"></i>
+                <span id="btn-text">تحلیل پرامپت و تولید پوستر هوشمند</span>
             </button>
 
             <button class="download-btn" onclick="exportHQPoster()">
                 <i data-lucide="download" style="width: 18px; color: var(--neon-blue);"></i>
-                دانلود فایل نهایی با کیفیت بالا (PNG)
+                دانلود فایل پوستر با کیفیت بالا (PNG)
             </button>
         </div>
 
@@ -535,29 +523,8 @@
         <div class="poster-stage">
             <div id="poster-artboard">
                 <img id="poster-image" class="poster-bg" 
-                     src="https://image.pollinations.ai/prompt/cyberpunk%20electronic%20music%20festival%20futuristic%20city%20neon%20lights%20stage%20octane%20render%208k%20poster%20no%20text?width=470&height=670&nologo=true&seed=101" 
-                     crossorigin="anonymous" 
-                     alt="AI Generated Background">
-                
-                <div class="poster-overlay"></div>
-                <div class="poster-neon-radial" id="poster-glow"></div>
-
-                <div class="poster-content">
-                    <div class="poster-header-row">
-                        <div class="poster-pill" id="poster-category">✦ LIVE CYBER 2026</div>
-                        <div class="poster-year" id="poster-code">STAGE // 01</div>
-                    </div>
-
-                    <div class="poster-main-info">
-                        <h1 class="poster-title" id="poster-title">طنین فردا</h1>
-                        <p class="poster-desc" id="poster-slogan">بزرگ‌ترین همایش فرکانس‌های صوتی و نوری، در قلب کلان‌شهر هوشمند با برترین آرتیست‌ها.</p>
-                    </div>
-
-                    <div class="poster-footer-row">
-                        <div class="poster-cta" id="poster-cta">رزرو و ورود</div>
-                        <div class="poster-barcode-box">
-                            <div class="barcode-lines"></div>
-                            <div class="poster-spec">ULTRA // AI-STUDIO</div>
+                     src="https://image.pollinations.ai/prompt/cyberpunk%20electronic%20music%20festival%20futuristic%20city%20neon%20div class="barcode-lines"></div>
+                            <div class="poster-spec">PRO // AI-STUDIO</div>
                         </div>
                     </div>
                 </div>
@@ -568,91 +535,35 @@
     <script>
         lucide.createIcons();
 
-        let currentStyle = 'cyberpunk';
+        // ارتباط واقعی با مدل زبانی هوش مصنوعی برای درک معنایی پرامپت
+        async function fetchSemanticAnalysis(userPrompt) {
+            const systemPrompt = `You are a professional graphic designer and advertising copywriter AI. 
+Analyze the user's prompt (which may be in Persian or English) and extract the exact advertising concept.
+You MUST reply ONLY with a valid raw JSON object without markdown formatting or backticks:
+{
+  "title": "یک تیتر بسیار جذاب، مرتبط و کوتاه به زبان فارسی (حداکثر ۴ کلمه)",
+  "slogan": "یک شعار یا متن تبلیغاتی دقیق، متناسب با پرامپت به زبان فارسی (یک یا دو جمله جذاب)",
+  "category": "✦ تگ یا دسته‌بندی کوتاه انگلیسی یا فینگلیش",
+  "cta": "متن دکمه عمل یا دعوت به اقدام به زبان فارسی (مثلا: رزرو کنید، خرید آنلاین، ورود به سالن)",
+  "accentColor": "یک کد رنگ هگزادسیمال متناسب با حال و هوای موضوع (مثلا #f59e0b یا #00f2fe یا #ef4444)",
+  "imagePrompt": "A highly detailed, cinematic, professional commercial key art image prompt in English for text-to-image AI, perfectly matching the subject, artistic mood, 8k resolution, octane render, photorealistic, dramatic lighting, clean background, NO TEXT ON IMAGE, NO LETTERS"
+}`;
 
-        function setStyle(btn, styleName) {
-            document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentStyle = styleName;
+            const fullPrompt = `${systemPrompt}\n\nUser Request: ${userPrompt}`;
+            const url = `https://text.pollinations.ai/${encodeURIComponent(fullPrompt)}?model=openai`;
+
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('AI Text Engine Failed');
+            
+            let text = await response.text();
+            // پاکسازی تگ‌های احتمالی مارک‌داون
+            text = text.replace(/
+```json/gi, '').replace(/
+```/g, '').trim();
+            return JSON.parse(text);
         }
 
-        // تحلیل هوشمند معنایی برای تولید پرامپت بدون خطا
-        function analyzePromptSemantics(userText, style) {
-            const t = userText.toLowerCase();
-
-            const stylePrompts = {
-                cyberpunk: "cyberpunk neon lighting, glowing holograms, octane render, 8k commercial poster art, hyper-detailed, no text",
-                luxury: "dark luxury black and gold aesthetic, elegant lighting, cinematic studio shot, 8k, no text",
-                minimal: "minimalist 3d abstract geometry, soft pastel studio lighting, clean background, 8k, no text",
-                cinematic: "dramatic cinematic action scene, epic atmospheric composition, movie poster key art, 8k, no text",
-                nature: "magical bioluminescent nature, surreal dreamscape, breathtaking landscape, 8k, no text",
-                gaming: "esports gaming neon arena, mecha robot, energetic lighting, unreal engine 5, 8k, no text"
-            };
-
-            if (t.includes('غذا') || t.includes('برگر') || t.includes('رستوران') || t.includes('کافه') || t.includes('نوشیدنی') || t.includes('پیتزا')) {
-                return {
-                    title: "طعم اصیل و لذیذ",
-                    slogan: "تجربه لذیذترین ترکیب دست‌ساز با ادویه‌ها و سس‌های اختصاصی در محیطی دل‌نشین.",
-                    category: "✦ GOURMET RECIPE",
-                    cta: "سفارش آنلاین",
-                    accent: "#f59e0b",
-                    imagePrompt: "delicious gourmet burger with flying fresh ingredients, dramatic smoke and fire, luxury studio food photography, 8k, no text"
-                };
-            }
-
-            if (t.includes('ماشین') || t.includes('خودرو') || t.includes('سرعت') || t.includes('موتور') || t.includes('مسابقه')) {
-                return {
-                    title: "نهایت سرعت و قدرت",
-                    slogan: "آدرنالین خالص در پیچ‌های بی‌پایان با پیشرفته‌ترین مهندسی آیرودینامیک و طراحی خیره‌کننده.",
-                    category: "✦ MOTORSPORT EVENT",
-                    cta: "ثبت‌نام پیست",
-                    accent: "#ef4444",
-                    imagePrompt: "futuristic hypercar racing at night, wet asphalt with neon reflections, motion blur, cinematic poster, 8k, no text"
-                };
-            }
-
-            if (t.includes('سفر') || t.includes('تور') || t.includes('طبیعت') || t.includes('جنگل') || t.includes('کویر') || t.includes('کمپ')) {
-                return {
-                    title: "کشف افق‌های نو",
-                    slogan: "ماجراجویی در بکرترین دره‌ها و کوهستان‌های جهان زیر سقف پرستاره آسمان شب.",
-                    category: "✦ ADVENTURE TRIP",
-                    cta: "رزرو سفر",
-                    accent: "#10b981",
-                    imagePrompt: "majestic mountain peak with starry galaxy milky way, adventurous traveler silhouette, glowing campfire, national geographic, 8k, no text"
-                };
-            }
-
-            if (t.includes('ورزش') || t.includes('بدنسازی') || t.includes('فیتنس') || t.includes('باشگاه')) {
-                return {
-                    title: "فراتر از مرزها",
-                    slogan: "تمرینات پرفشار برای ساختن بهترین نسخه فیزیکی و ذهنی شما در استودیویی مدرن.",
-                    category: "✦ FITNESS PRO",
-                    cta: "عضویت ویژه",
-                    accent: "#3b82f6",
-                    imagePrompt: "intense athletic training in modern dark gym, dramatic rim lighting, sweat, determination, dynamic commercial photography, 8k, no text"
-                };
-            }
-
-            const baseTitles = {
-                cyberpunk: "انعکاس بی‌نهایت",
-                luxury: "شکوه و اصالت",
-                minimal: "سادگی در کمال",
-                cinematic: "نبرد سرنوشت‌ساز",
-                nature: "نجوای طبیعت",
-                gaming: "ورود به جهان نو"
-            };
-
-            return {
-                title: baseTitles[style] || "رویداد استثنایی",
-                slogan: "تلفیق نوآوری و طراحی هنری در یک سناریوی منحصربه‌فرد، آماده برای دگرگونی نگاه شما.",
-                category: "✦ EXCLUSIVE 2026",
-                cta: "مشاهده جزئیات",
-                accent: style === 'luxury' ? '#f59e0b' : (style === 'nature' ? '#10b981' : '#00f2fe'),
-                imagePrompt: `commercial concept poster visual art, ${stylePrompts[style]}`
-            };
-        }
-
-        async function generateUltraPoster() {
+        async function processAndGeneratePoster() {
             const promptInput = document.getElementById('user-prompt');
             const rawText = promptInput.value.trim();
 
@@ -665,27 +576,52 @@
             const spinner = document.getElementById('btn-spinner');
             const wand = document.getElementById('btn-wand');
             const btnText = document.getElementById('btn-text');
+            const statusBox = document.getElementById('ai-status');
 
             btn.disabled = true;
             spinner.style.display = 'inline-block';
             wand.style.display = 'none';
-            btnText.innerText = 'هوش مصنوعی در حال خلق پوستر...';
+            statusBox.classList.add('active');
 
             try {
-                const design = analyzePromptSemantics(rawText, currentStyle);
+                // گام ۱: ارسال پرامپت به هوش مصنوعی زبانی
+                btnText.innerText = 'در حال تحلیل معنایی توسط هوش مصنوعی...';
+                statusBox.innerHTML = '⚡ <b>گام ۱:</b> هوش مصنوعی در حال تحلیل متن، استخراج مفهوم و نگارش کپی‌رایتینگ...';
 
-                document.getElementById('poster-title').innerText = design.title;
-                document.getElementById('poster-slogan').innerText = design.slogan;
-                document.getElementById('poster-category').innerText = design.category;
-                document.getElementById('poster-cta').innerText = design.cta;
+                let aiData;
+                try {
+                    aiData = await fetchSemanticAnalysis(rawText);
+                } catch (e) {
+                    console.warn("Using smart fallback parser due to timeout:", e);
+                    // فال‌بک ایمن در صورت کندی شبکه
+                    aiData = {
+                        title: rawText.slice(0, 20),
+                        slogan: `طراحی و پیاده‌سازی اختصاصی منطبق بر سناریوی: ${rawText}`,
+                        category: "✦ AI CREATIVE",
+                        cta: "مشاهده جزئیات",
+                        accentColor: "#00f2fe",
+                        imagePrompt: `commercial key visual, ${rawText}, cinematic dramatic lighting, highly detailed, 8k, octane render, no text`
+                    };
+                }
 
-                document.getElementById('poster-title').style.textShadow = `0 4px 20px rgba(0,0,0,0.9), 0 0 35px ${design.accent}99`;
-                document.getElementById('poster-desc').style.borderRightColor = design.accent;
-                document.getElementById('poster-glow').style.background = `radial-gradient(circle at 50% 60%, ${design.accent}44 0%, transparent 65%)`;
+                // گام ۲: اعمال محتوا و رنگ‌های استخراج‌شده روی پوستر
+                document.getElementById('poster-title').innerText = aiData.title || "رویداد ویژه";
+                document.getElementById('poster-slogan').innerText = aiData.slogan || rawText;
+                document.getElementById('poster-category').innerText = aiData.category || "✦ SPECIAL";
+                document.getElementById('poster-cta').innerText = aiData.cta || "مشاهده";
+
+                const accent = aiData.accentColor || "#00f2fe";
+                document.getElementById('poster-title').style.textShadow = `0 4px 20px rgba(0,0,0,0.9), 0 0 35px ${accent}99`;
+                document.getElementById('poster-desc').style.borderRightColor = accent;
+                document.getElementById('poster-glow').style.background = `radial-gradient(circle at 50% 60%, ${accent}44 0%, transparent 65%)`;
+
+                // گام ۳: تولید تصویر پس‌زمینه زایشی اختصاصی بر اساس پرامپت استخراج شده
+                btnText.innerText = 'در حال رندر تصویر پس‌زمینه با هوش مصنوعی...';
+                statusBox.innerHTML = `⚡ <b>گام ۲:</b> تولید تصویر اختصاصی برای پرامپت: <i>"${aiData.imagePrompt.slice(0, 60)}..."</i>`;
 
                 const seed = Math.floor(Math.random() * 999999);
-                const safePrompt = encodeURIComponent(design.imagePrompt);
-                const imageUrl = `https://image.pollinations.ai/prompt/${safePrompt}?width=470&height=670&nologo=true&seed=${seed}`;
+                const safeImagePrompt = encodeURIComponent(aiData.imagePrompt);
+                const imageUrl = `https://image.pollinations.ai/prompt/${safeImagePrompt}?width=480&height=680&nologo=true&seed=${seed}`;
 
                 const img = document.getElementById('poster-image');
 
@@ -697,28 +633,32 @@
                     btn.disabled = false;
                     spinner.style.display = 'none';
                     wand.style.display = 'inline-block';
-                    btnText.innerText = 'تولید پوستر با هوش مصنوعی';
+                    btnText.innerText = 'تولید مجدد پوستر';
+                    statusBox.innerHTML = '✅ پوستر و کپی‌رایتینگ با موفقیت توسط هوش مصنوعی خلق شد!';
                 };
 
                 tempImage.onerror = function() {
-                    img.src = `https://picsum.photos/470/670?blur=1&random=${seed}`;
+                    img.src = `https://picsum.photos/480/680?random=${seed}`;
                     btn.disabled = false;
                     spinner.style.display = 'none';
                     wand.style.display = 'inline-block';
                     btnText.innerText = 'تولید مجدد پوستر';
+                    statusBox.innerHTML = '⚠️ تصویر جایگزین بارگذاری شد.';
                 };
 
                 tempImage.src = imageUrl;
 
             } catch (err) {
-                console.error("Render error:", err);
+                console.error("General error:", err);
                 btn.disabled = false;
                 spinner.style.display = 'none';
                 wand.style.display = 'inline-block';
                 btnText.innerText = 'تلاش مجدد';
+                statusBox.innerHTML = '❌ خطایی رخ داد، لطفاً دوباره تلاش کنید.';
             }
         }
 
+        // خروجی نهایی PNG
         function exportHQPoster() {
             const board = document.getElementById('poster-artboard');
             html2canvas(board, {
@@ -739,4 +679,3 @@
     </script>
 </body>
 </html>
-
